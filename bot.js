@@ -21,6 +21,7 @@ client.on('ready', function (evt) {
     logger.info('Connected');
     logger.info('Logged in as: ');
     logger.info(client.username + ' - (' + client.id + ')');
+    client.setPresence( {game: {name:"with bitches"}} );
 });
 client.on('message', function (user, userID, channelID, message, evt) {
     // Our bot needs to know if it will execute a command
@@ -31,14 +32,6 @@ client.on('message', function (user, userID, channelID, message, evt) {
        
         //args = args.splice(1);
         switch(cmd) {
-            // .ping
-            case 'ping':
-                client.sendMessage({
-                    to: channelID,
-                    message: 'Pong!'
-                });
-            break;
-
             // .rape
             case 'rape':
                 var rapee = args[1];
