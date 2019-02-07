@@ -51,6 +51,13 @@ client.on('message', function (user, userID, channelID, message, evt) {
                             message: "It's not a good idea to fuck a bot."
                         });
                     }
+                    //if the tag is the user themselves
+                    else if (rapee == '<@' + userID + '>') {
+                        client.sendMessage({
+                            to: channelID,
+                            message: "ya nasty"
+                        });                        
+                    }
                     //if tag is a valid user
                     else {
                         client.sendMessage({
