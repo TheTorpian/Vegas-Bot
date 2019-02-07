@@ -75,7 +75,7 @@ client.on('message', function (user, userID, channelID, message, evt) {
                 }
             break;
 
-            //multiple tags rape
+            //rape for multiple user tags
             case 'gangrape':
                 var rapee1 = args[1];
                 var rapee2 = args[2];
