@@ -37,17 +37,27 @@ client.on('message', function (user, userID, channelID, message, evt) {
                 var rapee = args[1];
                 //if args[1] is a user tag
                 if (rapee.substring(0, 2) == '<@'){
-                    client.sendMessage({
-                        to: channelID,
-                        message: rapee + ', ' + '<@' + userID + '>' + ' raped you!'
-                    });
-                }
-                //if tag is vegas bot (doesn't work)
-                else if (rapee == '<@542697185339375616>' || rapee == '@Vegas'){
-                    client.sendMessage({
-                        to: channelID,
-                        message: 'You cannot rape the Vegas Bot.'
-                    });
+                    //if tag is vegas bot
+                    if (rapee == '<@542697185339375616>'){
+                        client.sendMessage({
+                            to: channelID,
+                            message: 'You cannot rape the Vegas Bot.'
+                        });
+                    }
+                    //if tags are other bots
+                    else if (rapee == '<@367835200916291586>' || rapee == '<@389937555853934593>'){
+                        client.sendMessage({
+                            to: channelID,
+                            message: "It's not a good idea to fuck a bot."
+                        });
+                    }
+                    //if tag is a valid user
+                    else {
+                        client.sendMessage({
+                            to: channelID,
+                            message: rapee + ', ' + '<@' + userID + '>' + ' raped you!'
+                        });
+                    }
                 }
                 //not a user tag
                 else {
@@ -57,6 +67,15 @@ client.on('message', function (user, userID, channelID, message, evt) {
                     });
                 }
             break;
+            //test function to display args
+            case 'rapeTest':
+                var rapee = args[1];
+                if (rapee.substring(0, 2) == '<@'){
+                    client.sendMessage({
+                        to: channelID,
+                        message: 'user tag: `' + rapee + '`, ' + 'sender: `' + userID + '`'
+                    });
+                }
         }
     }
 });
