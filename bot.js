@@ -67,15 +67,48 @@ client.on('message', function (user, userID, channelID, message, evt) {
                     });
                 }
             break;
-            //test function to display args
-            case 'rapeTest':
-                var rapee = args[1];
-                if (rapee.substring(0, 2) == '<@'){
+
+            //multiple tags rape
+            case 'gangrape':
+                var rapee1 = args[1];
+                var rapee2 = args[2];
+                if (args[1].substring(0, 2) == '<@' && rapee2 == null) {
                     client.sendMessage({
                         to: channelID,
-                        message: 'user tag: `' + rapee + '`, ' + 'sender: `' + userID + '`'
+                        message: 'You need at least 2 people to gangrape, bud.'
                     });
                 }
+                else if (args[3] != null) {
+                    client.sendMessage({
+                        to: channelID,
+                        message: 'You really think you can rape more than 2 people?'
+                    });                    
+                }
+                else if (rapee1.substring(0, 2) == '<@' && rapee2.substring(0, 2) == '<@') {
+                    client.sendMessage({
+                        to: channelID,
+                        message: '<@' + userID  + '>' + ' just gangraped ' + rapee1 + ' and ' + rapee2 + '!'
+                    });
+                }
+                else {
+                    client.sendMessage({
+                        to: channelID,
+                        message: 'Something went wrong.'
+                    });
+                }
+            break;
+
+            //function to test outcomes
+            case 'rapeTest':
+                var rapee = args[1];
+                var rapee2 = args[2];
+                if (args[1].substring(0, 2) == '<@' && rapee2 != null){
+                    client.sendMessage({
+                        to: channelID,
+                        message: 'rapee 1: `' + args[1] + '`, ' + 'rapee 2: `' + args[2] + '`'
+                    });
+                }
+            break;
         }
     }
 });
