@@ -6,13 +6,13 @@ from discord import Game
 from discord.ext.commands import Bot
 
 BOT_PREFIX = (".", "$") #currently useless
-TOKEN = 'NTQzNDYxMDUxNzE1Mjg5MDg5.Dz85EQ.Dpp-mrqOeg3GCtOXlu6pyNfM058'  # Get at discordapp.com/developers/applications/me
+TOKEN = 'NTQyNjk3MTg1MzM5Mzc1NjE2.Dz-SCg._sflidalhgN-_Upl6W9OPX1w1o4'  # Get at discordapp.com/developers/applications/me
 
 client = Bot(command_prefix=BOT_PREFIX)
 
 @client.event
 async def on_message(message):
-    if message.content.startswith('$'): #actual working prefix
+    if message.content.startswith('.'): #actual working prefix
         if message.author.bot: return # blocks bots from using commands
 
         usrTag = 0
