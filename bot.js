@@ -105,6 +105,14 @@ client.on('message', function (user, userID, channelID, message, evt) {
                 }
             break;
 
+            //ping
+            case 'ping':
+                client.sendMessage({
+                    to: channelID,
+                    message: 'stop pinging you fuck'
+                });
+            break;   
+
             //function to test outcomes
             case 'rapeTest':
                 var rapee = args[1];
