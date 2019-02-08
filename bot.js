@@ -105,6 +105,21 @@ client.on('message', function (user, userID, channelID, message, evt) {
                 }
             break;
 
+            case 'whosGayest':
+                client.sendMessage({
+                    to: channelID,
+                    message: 'Salty is, of course'
+                });
+            break;
+
+            case 'whosGotTheBiggestDick':
+                 client.sendMessage({
+                    to: channelID,
+                    message: 'Torp'
+                });
+            break;
+
+
             //ping
             case 'ping':
                 client.sendMessage({
