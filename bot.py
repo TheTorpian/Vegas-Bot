@@ -20,7 +20,7 @@ async def on_message(message):
         args = message.content.split(' ')[1:] #split the rest of the message
 
         #rape command
-        if cmd == 'rape' or cmd == 'molest' or cmd == 'touch':
+        if cmd == 'rape':
             possible_responses = [
             ' raped ',
             ' went to town with ',
@@ -53,7 +53,7 @@ async def on_message(message):
             await client.send_message(message.channel, message.author.mention + ' touched ' + ' '.join(args))
 
         if cmd == 'fill':
-            await client.send_message(message.channel, message.author.mention + ' filled '+ ' '.join(args) +
+            await client.send_message(message.channel, message.author.mention + ' filled ' + ' '.join(args) +
             ' all the way up ;))')
 
         #rape for 2 tags
@@ -71,7 +71,7 @@ async def on_message(message):
             await client.send_message(message.channel, message.author.mention + 
             random.choice(possible_responses) + args[0] + ' and ' + args[1])
 
-        if cmd == 'getid':           
+        if cmd == 'getid':        
             await client.send_message(message.channel, '`' + message.author.mention + '`')
             await client.send_message(message.channel, '`' + args[0] + '`')
 
