@@ -22,14 +22,11 @@ async def on_message(message):
         #rape command
         if cmd == 'rape' or cmd == 'molest' or cmd == 'touch':
             possible_responses = [
-            'raped ',
-            'touched ',
-            'molested ',
-            'went to town with ',
-            "creepy uncle'd ",
-            'filled the holes of ',
-            'priested ',
-            'step dadded '
+            ' raped ',
+            ' went to town with ',
+            " creepy uncle'd ",
+            ' priested ',
+            ' step dadded '
             ]
             # while args[usrTag] == ' ':
             #     usrTag += 1
@@ -44,7 +41,16 @@ async def on_message(message):
                 await client.send_message(message.channel, "Not a good idea to fuck a bot.")
             #all other rapes
             else:
-                await client.send_message(message.channel, message.author.mention + ' ' + random.choice(possible_responses) + ' '.join(args))
+                await client.send_message(message.channel, message.author.mention + random.choice(possible_responses) + ' '.join(args))
+
+        if cmd == 'molest':
+            await client.send_message(message.channel, message.author.mention + ' molested ' + ' '.join(args))
+
+        if cmd == 'touch':
+            await client.send_message(message.channel, message.author.mention + ' touched ' + ' '.join(args))
+
+        if cmd == 'fill':
+            await client.send_message(message.channel, message.author.mention + ' filled '+ ' '.join(args) + ' all the way up ;))')
 
         #rape for 2 tags
         if cmd == 'gangrape':
