@@ -31,15 +31,13 @@ async def on_message(message):
             # while args[usrTag] == ' ':
             #     usrTag += 1
             #self rape
-            if args[usrTag].replace('!', '') == message.author.mention.replace('!', '') or
-            args[usrTag] == message.author.mention.replace('!', ''):
+            if args[usrTag].replace('!', '') == message.author.mention.replace('!', '') or args[usrTag] == message.author.mention.replace('!', ''):
                 await client.send_message(message.channel, 'ya nasty')
             #Vegas Bot rape
             elif args[usrTag].replace('!', '') == '<@542697185339375616>':
                 await client.send_message(message.channel, "Don't try to rape the Vegas Bot.")
             #other bots rape
-            elif args[usrTag].replace('!', '') == '<@367835200916291586>' or
-            args[usrTag].replace('!', '') == '<@389937555853934593>':
+            elif args[usrTag].replace('!', '') == '<@367835200916291586>' or args[usrTag].replace('!', '') == '<@389937555853934593>':
                 await client.send_message(message.channel, "Not a good idea to fuck a bot.")
             #all other rapes
             else:
