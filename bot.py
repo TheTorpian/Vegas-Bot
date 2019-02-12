@@ -28,11 +28,18 @@ async def on_message(message):
             ' priested ',
             ' step dadded '
             ]
+            possible_responses_self = [
+            'ya nasty',
+            'ya nasty, but still raped yourself',
+            'future you came to, well, cum.',
+            'you went in the past to rape yourself',
+            'you went to the future, to come back in the present to fuck yourself.'
+            ]
             # while args[usrTag] == ' ':
             #     usrTag += 1
             #self rape
             if args[usrTag].replace('!', '') == message.author.mention.replace('!', '') or args[usrTag] == message.author.mention.replace('!', ''):
-                await client.send_message(message.channel, 'ya nasty')
+                await client.send_message(message.channel, random.choice(possible_responses_self))
             #Vegas Bot rape
             elif args[usrTag].replace('!', '') == '<@542697185339375616>':
                 await client.send_message(message.channel, "Don't try to rape the Vegas Bot.")
@@ -41,8 +48,7 @@ async def on_message(message):
                 await client.send_message(message.channel, "Not a good idea to fuck a bot.")
             #all other rapes
             else:
-                await client.send_message(message.channel, message.author.mention + random.choice(possible_responses) +
-                ' '.join(args))
+                await client.send_message(message.channel, message.author.mention + random.choice(possible_responses) + ' '.join(args))
 
         if cmd == 'molest':
             await client.send_message(message.channel, message.author.mention + ' molested ' + ' '.join(args))
@@ -51,8 +57,7 @@ async def on_message(message):
             await client.send_message(message.channel, message.author.mention + ' touched ' + ' '.join(args))
 
         if cmd == 'fill':
-            await client.send_message(message.channel, message.author.mention + ' filled ' + ' '.join(args) +
-            ' all the way up ;))')
+            await client.send_message(message.channel, message.author.mention + ' filled ' + ' '.join(args) + ' all the way up ;))')
 
         #rape for 2 tags
         if cmd == 'gangrape':
