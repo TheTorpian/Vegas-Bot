@@ -76,6 +76,7 @@ async def on_message(message):
             await client.send_message(message.channel, message.author.mention + 
             random.choice(possible_responses) + args[0] + ' and ' + args[1])
 
+        #posts a random ricardo gif
         if cmd == 'ricardo':
             possible_ricardos = [
             'ricardo.gif',
