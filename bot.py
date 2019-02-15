@@ -35,10 +35,6 @@ async def on_message(message):
             'you went in the past to rape yourself',
             'you went to the future, to come back in the present to fuck yourself.'
             ]
-
-            # while args[usrTag] == ' ':
-            #     usrTag += 1
-
             #self rape
             if args[usrTag].replace('!', '') == message.author.mention.replace('!', '') or args[usrTag] == message.author.mention.replace('!', ''):
                 await client.send_message(message.channel, random.choice(possible_responses_self))
@@ -79,20 +75,17 @@ async def on_message(message):
         #posts a random ricardo gif
         if cmd == 'ricardo':
             possible_ricardos = [
-            'ricardo.gif',
-            'ricardoFlick.gif',
-            'ricardoPls.gif'
+            'https://tenor.com/2Aql.gif',
+            'https://tenor.com/4f6F.gif',
+            'https://tenor.com/3KGw.gif',
+            'https://tenor.com/3WCg.gif',
+            'https://tenor.com/3oVt.gif'
             ]
-            await client.send_file(message.channel, random.choice(possible_ricardos))
-
-        #command for testing
-        if cmd == 'getid':        
-            await client.send_message(message.channel, '`' + message.author.mention + '`')
-            await client.send_message(message.channel, '`' + args[0] + '`')
+            await client.send_message(message.channel, random.choice(possible_ricardos))
 
 @client.event
 async def on_ready():
-    await client.change_presence(game=Game(name="con la mamma di Fedro"))
+    await client.change_presence(game=Game(name="blackjack"))
     print("Logged in as " + client.user.name)
 
 async def list_servers():
