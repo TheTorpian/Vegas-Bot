@@ -44,7 +44,7 @@ async def on_message(message):
                 await client.send_message(message.channel, random.choice(possible_responses_self))
             #Vegas Bot rape
             elif args[usrTag].replace('!', '') == '<@542697185339375616>':
-                await client.send_message(message.channel, "Don't try to rape the Vegas Bot.")
+                await client.send_message(message.channel, "You can't rape the Vegas Bot.")
             #other bots rape
             elif args[usrTag].replace('!', '') == '<@367835200916291586>' or args[usrTag].replace('!', '') == '<@389937555853934593>':
                 await client.send_message(message.channel, "Not a good idea to fuck a bot.")
@@ -92,7 +92,7 @@ async def on_message(message):
 
 @client.event
 async def on_ready():
-    await client.change_presence(game=Game(name="with more bitches"))
+    await client.change_presence(game=Game(name="con la mamma di Fedro"))
     print("Logged in as " + client.user.name)
 
 async def list_servers():
