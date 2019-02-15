@@ -69,8 +69,12 @@ async def on_message(message):
             ' priested ',
             ' step dadded '
             ]
-            await client.send_message(message.channel, message.author.mention + 
-            random.choice(possible_responses) + args[0] + ' and ' + args[1])
+            argCounter = 1
+            msg = message.author.mention + random.choice(possible_responses) + args[0]
+            for argCounter in range(1, len(args)):
+                msg += ' and ' + args[argCounter]
+
+            await client.send_message(message.channel, msg)
 
         #posts a random ricardo gif
         if cmd == 'ricardo':
