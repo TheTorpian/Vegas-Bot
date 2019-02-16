@@ -93,6 +93,9 @@ async def on_message(message):
             else:
                 await client.send_message(message.channel, message.author.mention + ' gave ' + ' '.join(args) + ' dat good succ')
 
+        if cmd == 'banana':
+            await client.send_message(message.channel, ':banana: <:devinisdaddy:509088268420251650>')
+
         #rape for 2 tags
         if cmd == 'gangrape':
             possible_responses = [
@@ -127,10 +130,14 @@ async def on_message(message):
             for argCounter in range(0, len(args)):
                 await client.send_message(message.channel, '`' + args[argCounter] + '`')
 
+        #test command for emotes
+        if cmd =='testemote':
+            await client.send_message(message.channel, ':banana:')
+
 
 @client.event
 async def on_ready():
-    await client.change_presence(game=Game(name="blackjack"))
+    await client.change_presence(game=Game(name="with torp's ass"))
     print("Logged in as " + client.user.name)
     print("Current servers:")
     for server in client.servers:
