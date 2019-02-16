@@ -83,6 +83,16 @@ async def on_message(message):
             else:
                 await client.send_message(message.channel, message.author.mention + ' filled ' + ' '.join(args) + ' all the way up ;))')
 
+        if cmd == 'succ':
+            #tag self
+            if args[0].replace('!', '') == message.author.mention.replace('!', '') or args[0] == message.author.mention.replace('!', ''):
+                await client.send_message(message.channel, message.author.mention + ' got their own succ')
+            #tag vegas bot
+            elif args[0].replace('!', '') == '<@542697185339375616>':
+                await client.send_message(message.channel, 'The Vegas Bot gave you the succ.')
+            else:
+                await client.send_message(message.channel, message.author.mention + ' gave ' + ' '.join(args) + ' dat good succ')
+
         #rape for 2 tags
         if cmd == 'gangrape':
             possible_responses = [
