@@ -132,8 +132,11 @@ async def on_message(message):
 
         #test command for emotes
         if cmd =='testemote':
-            await client.send_message(message.channel, ':banana:')
+            await client.send_message(message.channel, ':jewslover:')
 
+        #invite link
+        if cmd == 'invite':
+            await client.send_message(message.channel, 'https://discordapp.com/api/oauth2/authorize?client_id=542697185339375616&permissions=379968&scope=bot')
 
 @client.event
 async def on_ready():
