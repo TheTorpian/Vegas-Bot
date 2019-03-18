@@ -122,6 +122,7 @@ async def on_message(message):
             'https://tenor.com/3KGw.gif',
             'https://tenor.com/3WCg.gif',
             'https://tenor.com/3oVt.gif',
+            'https://imgur.com/a/pM5R4UM',
             '<a:ricardoBear:547813324079759360>'
             ]
             await client.send_message(message.channel, random.choice(possible_ricardos))
@@ -133,7 +134,7 @@ async def on_message(message):
 
         #test command for emotes
         if cmd =='testemote':
-            await client.send_message(message.channel, '<a:ricardoBear:547813324079759360>')
+            await client.send_message(message.channel, 'https://imgur.com/a/pM5R4UM')
 
         #invite link
         if cmd == 'invite':
