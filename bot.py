@@ -111,8 +111,18 @@ async def on_message(message):
             msg = message.author.mention + random.choice(possible_responses) + args[0]
             for argCounter in range(1, len(args)):
                 msg += ' and ' + args[argCounter]
-
             await client.send_message(message.channel, msg)
+
+        if cmd == 'bitchslap':
+            #tag self
+            if args[0].replace('!', '') == message.author.mention.replace('!', '') or args[0] == message.author.mention.replace('!', ''):
+                await client.send_message(message.channel, message.author.mention + ' bitchslapped themselves')
+            #tag vegas bot
+            elif args[0].replace('!', '') == '<@542697185339375616>':
+                await client.send_message(message.channel, 'You cannot bitchslap the Vegas Bot.')
+            else:
+                msg = message.author.mention + ' bitchslapped ' + ' '.join(args)
+                await client.send_message(message.channel, msg)
 
         #posts a random ricardo gif
         if cmd == 'ricardo':
