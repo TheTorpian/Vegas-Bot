@@ -51,55 +51,71 @@ async def on_message(message):
             'you went in the past to rape yourself',
             'you went to the future, to come back in the present to fuck yourself.'
             ]
-            # self rape
-            if tag == authorTag:
-                await client.send_message(message.channel, random.choice(possible_responses_self))
-            # Vegas Bot rape
-            elif tag == vegasBotTag:
-                await client.send_message(message.channel, "You can't rape the Vegas Bot.")
-            # all other rapes
+
+            if not args:
+                await client.send_message(message.channel, 'command usage: `.rape [arg]`') # command usage
             else:
-                await client.send_message(message.channel, message.author.mention + random.choice(possible_responses) + ' '.join(args))
+                # self rape
+                if tag == authorTag:
+                    await client.send_message(message.channel, random.choice(possible_responses_self))
+                # Vegas Bot rape
+                elif tag == vegasBotTag:
+                    await client.send_message(message.channel, "You can't rape the Vegas Bot.")
+                # all other rapes
+                else:
+                    await client.send_message(message.channel, message.author.mention + random.choice(possible_responses) + ' '.join(args))
 
         if cmd == 'molest':
-            # tag self
-            if tag == authorTag:
-                await client.send_message(message.channel, message.author.mention + ' tried to molest themselves.')
-            # tag vegas bot
-            elif tag == vegasBotTag:
-                await client.send_message(message.channel, 'You cannot molest the Vegas Bot.')
+            if not args:
+                await client.send_message(message.channel, 'command usage: `.molest [arg]`') # command usage
             else:
-                await client.send_message(message.channel, message.author.mention + ' molested ' + ' '.join(args))
+                # tag self
+                if tag == authorTag:
+                    await client.send_message(message.channel, message.author.mention + ' tried to molest themselves.')
+                # tag vegas bot
+                elif tag == vegasBotTag:
+                    await client.send_message(message.channel, 'You cannot molest the Vegas Bot.')
+                else:
+                    await client.send_message(message.channel, message.author.mention + ' molested ' + ' '.join(args))
 
         if cmd == 'touch':
-            # tag self
-            if tag == authorTag:
-                await client.send_message(message.channel, message.author.mention + ' touched themselves reaaaaaal good.')
-            # tag vegas bot
-            elif tag == vegasBotTag:
-                await client.send_message(message.channel, 'You may touch the Vegas Bot.')
+            if not args:
+                await client.send_message(message.channel, 'command usage: `.touch [arg]`') # command usage
             else:
-                await client.send_message(message.channel, message.author.mention + ' touched ' + ' '.join(args))
+                # tag self
+                if tag == authorTag:
+                    await client.send_message(message.channel, message.author.mention + ' touched themselves reaaaaaal good.')
+                # tag vegas bot
+                elif tag == vegasBotTag:
+                    await client.send_message(message.channel, 'You may touch the Vegas Bot.')
+                else:
+                    await client.send_message(message.channel, message.author.mention + ' touched ' + ' '.join(args))
 
         if cmd == 'fill':
-            # tag self
-            if tag == authorTag:
-                await client.send_message(message.channel, message.author.mention + ' filled... themselves up?')
-            # tag vegas bot
-            elif tag == vegasBotTag:
-                await client.send_message(message.channel, 'You cannot fill the Vegas Bot.')
+            if not args:
+                await client.send_message(message.channel, 'command usage: `.fill [arg]`') # command usage
             else:
-                await client.send_message(message.channel, message.author.mention + ' filled ' + ' '.join(args) + ' all the way up ;))')
+                # tag self
+                if tag == authorTag:
+                    await client.send_message(message.channel, message.author.mention + ' filled... themselves up?')
+                # tag vegas bot
+                elif tag == vegasBotTag:
+                    await client.send_message(message.channel, 'You cannot fill the Vegas Bot.')
+                else:
+                    await client.send_message(message.channel, message.author.mention + ' filled ' + ' '.join(args) + ' all the way up ;))')
 
         if cmd == 'succ':
-            # tag self
-            if tag == authorTag:
-                await client.send_message(message.channel, message.author.mention + ' got their own succ')
-            # tag vegas bot
-            elif tag == vegasBotTag:
-                await client.send_message(message.channel, 'The Vegas Bot gave you the succ.')
+            if not args:
+                await client.send_message(message.channel, 'command usage: `.succ [arg]`') # command usage
             else:
-                await client.send_message(message.channel, message.author.mention + ' gave ' + ' '.join(args) + ' dat good succ')
+                # tag self
+                if tag == authorTag:
+                    await client.send_message(message.channel, message.author.mention + ' got their own succ')
+                # tag vegas bot
+                elif tag == vegasBotTag:
+                    await client.send_message(message.channel, 'The Vegas Bot gave you the succ.')
+                else:
+                    await client.send_message(message.channel, message.author.mention + ' gave ' + ' '.join(args) + ' dat good succ')
 
         if cmd == 'banana':
             await client.send_message(message.channel, ':banana: <:devinisdaddy:509088268420251650>')
@@ -116,10 +132,13 @@ async def on_message(message):
             ' priested ',
             ' step dadded '
             ]
-            msg = message.author.mention + random.choice(possible_responses) + args[0]
-            for argCounter in range(1, len(args)):
-                msg += ' and ' + args[argCounter]
-            await client.send_message(message.channel, msg)
+            if not args:
+                await client.send_message(message.channel, 'command usage: `.gangrape [args] [args]`') # command usage
+            else:
+                msg = message.author.mention + random.choice(possible_responses) + args[0]
+                for argCounter in range(1, len(args)):
+                    msg += ' and ' + args[argCounter]
+                await client.send_message(message.channel, msg)
 
         # random ricardo gif or meme
         if cmd == 'ricardo':
@@ -142,15 +161,18 @@ async def on_message(message):
 
         # bitchslaps the tagged user
         if cmd == 'bitchslap':
-            #tag self
-            if tag == authorTag:
-                await client.send_message(message.channel, message.author.mention + ' bitchslapped themselves')
-            #tag vegas bot
-            elif tag == vegasBotTag:
-                await client.send_message(message.channel, 'You cannot bitchslap the Vegas Bot.')
+            if not args:
+                await client.send_message(message.channel, 'command usage: `.bitchslap [arg]`') # command usage
             else:
-                msg = message.author.mention + ' bitchslapped ' + ' '.join(args)
-                await client.send_message(message.channel, msg)
+                #tag self
+                if tag == authorTag:
+                    await client.send_message(message.channel, message.author.mention + ' bitchslapped themselves')
+                #tag vegas bot
+                elif tag == vegasBotTag:
+                    await client.send_message(message.channel, 'You cannot bitchslap the Vegas Bot.')
+                else:
+                    msg = message.author.mention + ' bitchslapped ' + ' '.join(args)
+                    await client.send_message(message.channel, msg)
 
         # fuck off meme
         if cmd == 'fuckoff':
@@ -166,24 +188,27 @@ async def on_message(message):
 
             outcome = random.choice(possible_outcomes)
 
-            if tag == vegasBotTag:
-                await client.send_message(message.channel, "You always lose against Vegas Bot.")
+            if not args:
+                await client.send_message(message.channel, 'command usage: `.challenge [arg]`') # command usage
             else:
-                if outcome == 'tagged':
-                    if tag == authorTag:
-                        await client.send_message(message.channel, 'You lost against... yourself?')
-                    else:
-                        await client.send_message(message.channel, tag + ' won!')
-                if outcome == 'tagger':
-                    if tag == authorTag:
-                        await client.send_message(message.channel, 'You won! But also lost...?')
-                    else:
-                        await client.send_message(message.channel, message.author.mention + ' won!')
-                if outcome == 'no one':
-                    if tag == authorTag:
-                        await client.send_message(message.channel, 'You REALLY lost against yourself')
-                    else:
-                        await client.send_message(message.channel, 'You both lost!')
+                if tag == vegasBotTag:
+                    await client.send_message(message.channel, "You always lose against Vegas Bot.")
+                else:
+                    if outcome == 'tagged':
+                        if tag == authorTag:
+                            await client.send_message(message.channel, 'You lost against... yourself?')
+                        else:
+                            await client.send_message(message.channel, tag + ' won!')
+                    if outcome == 'tagger':
+                        if tag == authorTag:
+                            await client.send_message(message.channel, 'You won! But also lost...?')
+                        else:
+                            await client.send_message(message.channel, message.author.mention + ' won!')
+                    if outcome == 'no one':
+                        if tag == authorTag:
+                            await client.send_message(message.channel, 'You REALLY lost against yourself')
+                        else:
+                            await client.send_message(message.channel, 'You both lost!')
 
         # invite link
         if cmd == 'invite':
