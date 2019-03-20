@@ -154,7 +154,6 @@ async def on_message(message):
             'tagged',
             'tagger',
             'no one',
-            'both'
             ]
 
             outcome = random.choice(possible_outcomes)
@@ -180,11 +179,6 @@ async def on_message(message):
                         await client.send_message(message.channel, 'You lost twice!')
                     else:
                         await client.send_message(message.channel, 'You both lost!')
-                if outcome == 'both':
-                    if tagged == tagger:
-                        await client.send_message(message.channel, 'You won twice!')
-                    else:
-                        await client.send_message(message.channel, 'Both won!')
 
         # invite link
         if cmd == 'invite':
@@ -192,16 +186,22 @@ async def on_message(message):
 
         # debug command to print all message args
         if cmd == 'getargs':
-            for argCounter in range(0, len(args)):
-                await client.send_message(message.channel, '`' + args[argCounter] + '`')
+            for arg in args:
+                await client.send_message(message.channel, '`' + arg + '`')
 
         # debug command for emotes
         if cmd == 'testemote':
-            await client.send_message(message.channel, '<a:ricardoBear:547813324079759360>')
+            await client.send_message(message.channel, '<a:Nig:557976066828926986>')
 
         # get the message sender ID
         if cmd == 'testsender':
             await client.send_message(message.channel, '`' + message.author.mention + '`')
+
+        # for lil gay boy arassii
+        if cmd == 'ass':
+            await client.send_message(message.channel, '<@162966505430974464>')
+            await client.send_message(message.channel, '<@162966505430974464>')
+            await client.send_message(message.channel, '<@162966505430974464>')
 
         # embed with all the commands available
         if cmd == 'help':
