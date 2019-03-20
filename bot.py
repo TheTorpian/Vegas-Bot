@@ -2,11 +2,12 @@ import random
 import asyncio
 import aiohttp
 import json
+import discord
 from discord import Game
 from discord.ext.commands import Bot
 
-BOT_PREFIX = ('.', '$') #currently useless
-TOKEN = 'NTQyNjk3MTg1MzM5Mzc1NjE2.Dz-SCg._sflidalhgN-_Upl6W9OPX1w1o4'  # Get at discordapp.com/developers/applications/me
+BOT_PREFIX = ('.', '$') # currently useless
+TOKEN = 'NTQyNjk3MTg1MzM5Mzc1NjE2.Dz-SCg._sflidalhgN-_Upl6W9OPX1w1o4' # Get at discordapp.com/developers/applications/me
 
 client = Bot(command_prefix=BOT_PREFIX)
 
@@ -156,6 +157,7 @@ async def on_message(message):
         if cmd == 'testemote':
             await client.send_message(message.channel, '<a:ricardoBear:547813324079759360>')
 
+        # get the message sender ID
         if cmd == 'testsender':
             await client.send_message(message.channel, '`' + message.author.mention + '`')
 
@@ -165,7 +167,24 @@ async def on_message(message):
 
         # help message with all the commands available
         if cmd == 'help':
-            msg = '``` ```'
+            commands={}
+            commands['.rape'] = "Non consensual sex with your preferred person/object (no judgin')"
+            commands['.molest'] = 'Same as .rape, but different reply'
+            commands['.touch'] = 'Same as .rape, but different reply'
+            commands['.fill'] = ';))'
+            commands['.succ'] = 'Give someone of your choosing dat good succ'
+            commands['.banana'] = 'If you really need potassium'
+            commands['.gangrape'] = 'When one is not enough'
+            commands['.bitchslap'] = 'Exactly what it sounds like'
+            commands['.fuckoff'] = 'Just fuck off mate'
+            commands['.ricardo'] = 'Posts a random ricardo gif'
+            commands['.ricardobear'] = 'Posts the mighty ricardo bear'
+            commands['.invite'] = 'Get the invite link'
+
+            msg = discord.Embed(title = 'Vegas Bot commands:', description = '', color = 0x0000ff)
+            for command, descr in commands.items():
+                msg.add_field(name = command, value = descr, inline = False)
+            await client.send_message(message.channel, embed = msg)
 
 @client.event
 async def on_ready():
