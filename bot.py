@@ -114,17 +114,6 @@ async def on_message(message):
                 msg += ' and ' + args[argCounter]
             await client.send_message(message.channel, msg)
 
-        if cmd == 'bitchslap':
-            #tag self
-            if args[0].replace('!', '') == message.author.mention.replace('!', '') or args[0] == message.author.mention.replace('!', ''):
-                await client.send_message(message.channel, message.author.mention + ' bitchslapped themselves')
-            #tag vegas bot
-            elif args[0].replace('!', '') == '<@542697185339375616>':
-                await client.send_message(message.channel, 'You cannot bitchslap the Vegas Bot.')
-            else:
-                msg = message.author.mention + ' bitchslapped ' + ' '.join(args)
-                await client.send_message(message.channel, msg)
-
         # random ricardo gif or meme
         if cmd == 'ricardo':
             possible_ricardos = [
@@ -144,9 +133,62 @@ async def on_message(message):
         if cmd == 'ricardobear':
             await client.send_message(message.channel, '<a:ricardoBear:547813324079759360>')
 
+        # bitchslaps the tagged user
+        if cmd == 'bitchslap':
+            #tag self
+            if args[0].replace('!', '') == message.author.mention.replace('!', '') or args[0] == message.author.mention.replace('!', ''):
+                await client.send_message(message.channel, message.author.mention + ' bitchslapped themselves')
+            #tag vegas bot
+            elif args[0].replace('!', '') == '<@542697185339375616>':
+                await client.send_message(message.channel, 'You cannot bitchslap the Vegas Bot.')
+            else:
+                msg = message.author.mention + ' bitchslapped ' + ' '.join(args)
+                await client.send_message(message.channel, msg)
         # fuck off meme
         if cmd == 'fuckoff':
-            await client.send_message(message.channel, 'https://imgur.com/a/RMXA4xP')            
+            await client.send_message(message.channel, 'https://imgur.com/a/RMXA4xP')
+
+        # challenge the tagged user
+        if cmd == 'challenge':
+            possible_outcomes = [
+            'tagged',
+            'tagger',
+            'no one',
+            'both'
+            ]
+
+            outcome = random.choice(possible_outcomes)
+
+            tagger = message.author.mention.replace('!', '')
+            tagged = args[0].replace('!', '')
+
+            if tagged == '<@542697185339375616>':
+                await client.send_message(message.channel, "You always lose against Vegas Bot.")
+            else:
+                if outcome == 'tagged':
+                    if tagged == tagger:
+                        await client.send_message(message.channel, 'You lost against... yourself?')
+                    else:
+                        await client.send_message(message.channel, tagged + ' won!')
+                if outcome == 'tagger':
+                    if tagged == tagger:
+                        await client.send_message(message.channel, 'You won! But also lost...?')
+                    else:
+                        await client.send_message(message.channel, tagger + ' won!')
+                if outcome == 'no one':
+                    if tagged == tagger:
+                        await client.send_message(message.channel, 'You lost twice!')
+                    else:
+                        await client.send_message(message.channel, 'You both lost!')
+                if outcome == 'both':
+                    if tagged == tagger:
+                        await client.send_message(message.channel, 'You won twice!')
+                    else:
+                        await client.send_message(message.channel, 'Both won!')
+
+        # invite link
+        if cmd == 'invite':
+            await client.send_message(message.channel, 'https://discordapp.com/api/oauth2/authorize?client_id=542697185339375616&permissions=379968&scope=bot')
 
         # debug command to print all message args
         if cmd == 'getargs':
@@ -161,13 +203,9 @@ async def on_message(message):
         if cmd == 'testsender':
             await client.send_message(message.channel, '`' + message.author.mention + '`')
 
-        # invite link
-        if cmd == 'invite':
-            await client.send_message(message.channel, 'https://discordapp.com/api/oauth2/authorize?client_id=542697185339375616&permissions=379968&scope=bot')
-
-        # help message with all the commands available
+        # embed with all the commands available
         if cmd == 'help':
-            commands={}
+            commands = {}
             commands['.rape'] = "Non consensual sex with your preferred person/object (no judgin')"
             commands['.molest'] = 'Same as .rape, but different reply'
             commands['.touch'] = 'Same as .rape, but different reply'
@@ -175,16 +213,30 @@ async def on_message(message):
             commands['.succ'] = 'Give someone of your choosing dat good succ'
             commands['.banana'] = 'If you really need potassium'
             commands['.gangrape'] = 'When one is not enough'
-            commands['.bitchslap'] = 'Exactly what it sounds like'
-            commands['.fuckoff'] = 'Just fuck off mate'
             commands['.ricardo'] = 'Posts a random ricardo gif'
             commands['.ricardobear'] = 'Posts the mighty ricardo bear'
+            commands['.bitchslap'] = 'Exactly what it sounds like'
+            commands['.fuckoff'] = 'Just fuck off mate'
+            commands['.challenge'] = 'Challenge another user'
             commands['.invite'] = 'Get the invite link'
+            commands['.help'] = "It's this command you dummy"
+            commands['.newcommands'] = 'See if any new commands have been added'
 
             msg = discord.Embed(title = 'Vegas Bot commands:', description = '', color = 0x0000ff)
             for command, descr in commands.items():
                 msg.add_field(name = command, value = descr, inline = False)
             await client.send_message(message.channel, embed = msg)
+
+        # embed with the latest commands added
+        if cmd == 'newcommands':
+            commands = {}
+            commands['.help'] = 'Now you can finally see all of the available commands!'
+            commands['.challenge'] = 'Challenge another user'
+            msg = discord.Embed(title = 'New commands:', description = '', color = 0x0000ff)
+            for command, descr in commands.items():
+                msg.add_field(name = command, value = descr, inline = False)
+            await client.send_message(message.channel, embed = msg)
+
 
 @client.event
 async def on_ready():
