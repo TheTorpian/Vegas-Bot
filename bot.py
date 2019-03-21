@@ -202,17 +202,19 @@ async def on_message(message):
                         if tag == authorTag:
                             await client.send_message(message.channel, 'You lost against... yourself?')
                         else:
-                            await client.send_message(message.channel, tag + ' won!')
+                            await client.send_message(message.channel, ' '.join(args) + ' won!')
+                            await client.send_message(message.channel, message.author.mention + ' lost!')
                     if outcome == 'tagger':
                         if tag == authorTag:
                             await client.send_message(message.channel, 'You won! But also lost...?')
                         else:
                             await client.send_message(message.channel, message.author.mention + ' won!')
+                            await client.send_message(message.channel, ' '.join(args) + ' lost!')
                     if outcome == 'no one':
                         if tag == authorTag:
-                            await client.send_message(message.channel, 'You REALLY lost against yourself')
+                            await client.send_message(message.channel, "You're such a failure smh")
                         else:
-                            await client.send_message(message.channel, 'You both lost!')
+                            await client.send_message(message.channel, 'Both ' + message.author.mention + ' and ' + ' '.join(args) + ' lost!')
 
         # invite link
         if cmd == 'invite':
