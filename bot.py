@@ -178,6 +178,10 @@ async def on_message(message):
         if cmd == 'fuckoff':
             await client.send_message(message.channel, 'https://imgur.com/a/RMXA4xP')
 
+        # professional have standards meme
+        if cmd == 'pro':
+            await client.send_message(message.channel, 'https://imgur.com/a/TE06C5s')
+
         # challenge the tagged user
         if cmd == 'challenge':
             possible_outcomes = [
@@ -247,6 +251,7 @@ async def on_message(message):
             commands['.ricardobear'] = 'Posts the mighty ricardo bear'
             commands['.bitchslap'] = 'Exactly what it sounds like'
             commands['.fuckoff'] = 'Just fuck off mate'
+            commands['.pro'] = 'Professionals have standards mate'
             commands['.challenge'] = 'Challenge another user'
             commands['.invite'] = 'Get the invite link'
             commands['.help'] = "It's this command you dummy"
@@ -260,8 +265,7 @@ async def on_message(message):
         # embed with the latest commands added
         if cmd == 'newcommands':
             commands = {}
-            commands['.help'] = 'Now you can finally see all of the available commands!'
-            commands['.challenge'] = 'Challenge another user'
+            commands['.pro'] = 'Standards mate'
             msg = discord.Embed(title = 'New commands:', description = '', color = 0x0000ff)
             for command, descr in commands.items():
                 msg.add_field(name = command, value = descr, inline = False)
