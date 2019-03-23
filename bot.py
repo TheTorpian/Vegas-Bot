@@ -87,7 +87,10 @@ async def on_message(message):
                     await client.send_message(message.channel, message.author.mention + ' touched themselves reaaaaaal good.')
                 # tag vegas bot
                 elif tag == vegasBotTag:
-                    await client.send_message(message.channel, 'You may touch the Vegas Bot.')
+                    if authorTag == '<@249550049564950530>':
+                        await client.send_message(message.channel, 'mmm yes daddy')
+                    else:
+                        await client.send_message(message.channel, 'Only Torp can touch the Vegas Bot.')
                 else:
                     await client.send_message(message.channel, message.author.mention + ' touched ' + ' '.join(args))
 
@@ -182,6 +185,10 @@ async def on_message(message):
         if cmd == 'pro':
             await client.send_message(message.channel, 'https://imgur.com/a/TE06C5s')
 
+        # reeeeeeee
+        if cmd == 'reee':
+            await client.send_message(message.channel, 'https://imgur.com/a/0QeJEHa')
+
         # challenge the tagged user
         if cmd == 'challenge':
             possible_outcomes = [
@@ -253,7 +260,8 @@ async def on_message(message):
             commands['.ricardobear'] = 'Posts the mighty ricardo bear'
             commands['.bitchslap'] = 'Exactly what it sounds like'
             commands['.fuckoff'] = 'Just fuck off mate'
-            commands['.pro'] = 'Professionals have standards mate'
+            commands['.pro'] = 'Professionals have standards'
+            commands['.reee'] = 'Autistic screeching of the highest quality'
             commands['.challenge'] = 'Challenge another user'
             commands['.invite'] = 'Get the invite link'
             commands['.help'] = "It's this command you dummy"
@@ -268,6 +276,7 @@ async def on_message(message):
         if cmd == 'newcommands':
             commands = {}
             commands['.pro'] = 'Standards mate'
+            commands['.reee'] = 'reeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee'
             msg = discord.Embed(title = 'New commands:', description = '', color = 0x0000ff)
             for command, descr in commands.items():
                 msg.add_field(name = command, value = descr, inline = False)
