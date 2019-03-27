@@ -16,7 +16,7 @@ bot = commands.Bot(command_prefix = BOT_PREFIX)
 # bot.remove_command("help")
 
 @bot.command()
-async def rape(ctx, tag):
+async def rape(ctx, *args):
     '''
     Non consensual sex with your preferred person/object (no judgin')
     '''
@@ -34,75 +34,91 @@ async def rape(ctx, tag):
     'you went in the past to rape yourself',
     'you went to the future, to come back in the present to fuck yourself.'
     ]
-
     # self rape
-    if tag == ctx.author.mention:
+    if args[0] == ctx.author.mention:
         await ctx.send(random.choice(possible_responses_self))
     # Vegas Bot rape
-    elif tag == vegasBotTag:
+    elif args[0] == vegasBotTag:
         await ctx.send("You can't rape the Vegas Bot.")
     # all other rapes
     else:
-        await ctx.send(ctx.author.mention + random.choice(possible_responses) + tag)
+        msg = ctx.author.mention + random.choice(possible_responses)
+        for arg in args:
+            msg += arg + ' '   
+        await ctx.send(msg)
 
 @bot.command()
-async def molest(ctx, tag):
+async def molest(ctx, *args):
     '''
     Same as .rape, but different reply
     '''
     # tag self
-    if tag == ctx.author.mention:
+    if args[0] == ctx.author.mention:
         await ctx.send(ctx.author.mention + ' tried to molest themselves.')
     # tag vegas bot
-    elif tag == vegasBotTag:
+    elif args[0] == vegasBotTag:
         await ctx.send('You cannot molest the Vegas Bot.')
     else:
-        await ctx.send(ctx.author.mention + ' molested ' + tag)
+        msg = ctx.author.mention + ' molested '
+        for arg in args:
+            msg += arg + ' '  
+        await ctx.send(msg)
 
 @bot.command()
-async def touch(ctx, tag):
+async def touch(ctx, *args):
     '''
     Same as .rape, but different reply
     '''
     # tag self
-    if tag == ctx.author.mention:
+    if args[0] == ctx.author.mention:
         await ctx.send(ctx.author.mention + ' touched themselves reaaaaaal good.')
     # tag vegas bot
-    elif tag == vegasBotTag:
+    elif args[0] == vegasBotTag:
         if ctx.author.mention == '<@249550049564950530>': # torp tag
             await ctx.send('mmm yes daddy')
         else: # non-torp tags
             await ctx.send('Only Torp can touch the Vegas Bot.')
     else:
-        await ctx.send(ctx.author.mention + ' touched ' + tag)
+        msg = ctx.author.mention + ' touched '
+        for arg in args:
+            msg += arg + ' '  
+        await ctx.send(msg)
 
 @bot.command()
-async def fill(ctx, tag):
+async def fill(ctx, *args):
     '''
     ;))
     '''
     # tag self
-    if tag == ctx.author.mention:
+    if args[0] == ctx.author.mention:
         await ctx.send(ctx.author.mention + ' filled... themselves up?')
     # tag vegas bot
-    elif tag == vegasBotTag:
+    elif args[0] == vegasBotTag:
         await ctx.send('You cannot fill the Vegas Bot.')
     else:
-        await ctx.send(ctx.author.mention + ' filled ' + tag + ' all the way up ;))')
+        msg = ctx.author.mention + ' filled '
+        for arg in args:
+            msg += arg + ' '
+        msg += ' all the way up ;))'
+        await ctx.send(msg)
 
 @bot.command()
-async def succ(ctx, tag):
+async def succ(ctx, *args):
     '''
     Give someone of your choosing dat good succ
     '''
     # tag self
-    if tag == ctx.author.mention:
+    if args[0] == ctx.author.mention:
         await ctx.send(ctx.author.mention + ' got their own succ')
     # tag vegas bot
-    elif tag == vegasBotTag:
+    elif args[0] == vegasBotTag:
         await ctx.send('The Vegas Bot gave you the succ.')
     else:
-        await ctx.send(ctx.author.mention + ' gave ' + tag + ' dat good succ')
+        msg = ctx.author.mention + ' gave '
+        for arg in args:
+            msg += arg + ' '
+        msg += ' dat good succ'
+        await ctx.send(msg)
 
 @bot.command()
 async def banana(ctx):
@@ -113,27 +129,33 @@ async def banana(ctx):
 
 # rape for 2 tags
 @bot.command()
-async def gangrape(ctx, arg1, arg2):
+async def gangrape(ctx, *args):
     '''
-    When one is not enough
+    Currently reworking
     '''
-    possible_responses = [
-    ' raped ',
-    ' touched ',
-    ' molested ',
-    ' went to town with ',
-    " creepy uncle'd ",
-    ' filled the holes of ',
-    ' priested ',
-    ' step dadded '
-    ]
+    # possible_responses = [
+    # ' raped ',
+    # ' touched ',
+    # ' molested ',
+    # ' went to town with ',
+    # " creepy uncle'd ",
+    # ' filled the holes of ',
+    # ' priested ',
+    # ' step dadded '
+    # ]
+    # msg = ctx.author.mention + random.choice(possible_responses) + args[0]
+    # for arg in args[1:]:
+    #     msg += ' and ' + arg
+    # await ctx.send(msg)
 
     ### legacy code for variable number of args ###
 
     # msg = ctx.author.mention + random.choice(possible_responses) + arg1
     # for argCounter in range(1, len(args)):
     #     msg += ' and ' + args[argCounter]
-    await ctx.send(ctx.author.mention + random.choice(possible_responses) + arg1 + ' and ' + arg2)
+    # await ctx.send(ctx.author.mention + random.choice(possible_responses) + arg1 + ' and ' + arg2)
+
+    await ctx.send('nah')
 
 # random ricardo gif or meme
 @bot.command()
@@ -166,18 +188,20 @@ async def ricardobear(ctx):
 
 # bitchslaps the tagged user
 @bot.command()
-async def bitchslap(ctx, tag):
+async def bitchslap(ctx, *args):
     '''
     Exactly what it sounds like
     '''
     #tag self
-    if tag == ctx.author.mention:
+    if arg[0] == ctx.author.mention or arg[0] == 'myself':
         await ctx.send(ctx.author.mention + ' bitchslapped themselves')
     #tag vegas bot
-    elif tag == vegasBotTag:
+    elif arg[0] == vegasBotTag:
         await ctx.send('You cannot bitchslap the Vegas Bot.')
     else:
-        msg = ctx.author.mention + ' bitchslapped ' + tag
+        msg = ctx.author.mention + ' bitchslapped '
+        for arg in args:
+            msg += arg + ' '
         await ctx.send(msg)
 
 # fuck off meme
@@ -282,14 +306,6 @@ async def invite(ctx):
 #     '''
 #     await ctx.send('<a:Nig:557976066828926986>')
 
-# # get the message sender ID
-# @bot.command()
-# async def testsender(ctx, tag):
-#     '''
-#     debug command, go away
-#     '''
-#     await ctx.send('`' + ctx.author.mention + '`')
-
 
 
 ### legacy help commands ###
@@ -333,7 +349,7 @@ async def invite(ctx):
 @bot.event
 async def on_ready():
     game = discord.Game("dm for feedback")
-    await bot.change_presence(status=discord.Status.dnd, activity=game)
+    await bot.change_presence(status=discord.Status.online, activity=game)
     print("Logged in as " + bot.user.name)
     print("Current servers:")
     for server in bot.guilds:
