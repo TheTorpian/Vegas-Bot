@@ -12,7 +12,7 @@ TOKEN = 'NTQyNjk3MTg1MzM5Mzc1NjE2.D3pP8Q.drE_pnxP5brFR_JIDvDY-IjvTWw' # Get at d
 INVITE = 'https://discordapp.com/api/oauth2/authorize?client_id=542697185339375616&permissions=379968&scope=bot' # bot invite link
 vegasBotTag = '<@542697185339375616>'
 
-bot = commands.Bot(command_prefix=BOT_PREFIX)
+bot = commands.Bot(command_prefix = BOT_PREFIX)
 # bot.remove_command("help")
 
 @bot.command()
@@ -20,7 +20,6 @@ async def rape(ctx, tag):
     '''
     Non consensual sex with your preferred person/object (no judgin')
     '''
-
     possible_responses = [
     ' raped ',
     ' went to town with ',
@@ -51,7 +50,6 @@ async def molest(ctx, tag):
     '''
     Same as .rape, but different reply
     '''
-
     # tag self
     if tag == ctx.author.mention:
         await ctx.send(ctx.author.mention + ' tried to molest themselves.')
@@ -66,7 +64,6 @@ async def touch(ctx, tag):
     '''
     Same as .rape, but different reply
     '''
-
     # tag self
     if tag == ctx.author.mention:
         await ctx.send(ctx.author.mention + ' touched themselves reaaaaaal good.')
@@ -84,7 +81,6 @@ async def fill(ctx, tag):
     '''
     ;))
     '''
-
     # tag self
     if tag == ctx.author.mention:
         await ctx.send(ctx.author.mention + ' filled... themselves up?')
@@ -99,7 +95,6 @@ async def succ(ctx, tag):
     '''
     Give someone of your choosing dat good succ
     '''
-
     # tag self
     if tag == ctx.author.mention:
         await ctx.send(ctx.author.mention + ' got their own succ')
@@ -122,7 +117,6 @@ async def gangrape(ctx, arg1, arg2):
     '''
     When one is not enough
     '''
-
     possible_responses = [
     ' raped ',
     ' touched ',
@@ -147,7 +141,6 @@ async def ricardo(ctx):
     '''
     Posts a random ricardo gif
     '''
-
     possible_ricardos = [
     'https://tenor.com/2Aql.gif',
     'https://tenor.com/4f6F.gif',
@@ -168,7 +161,8 @@ async def ricardobear(ctx):
     '''
     Summons the mighty ricardo bear
     '''
-    await ctx.send('<a:ricardoBear:547813324079759360>')
+    # await ctx.send('<a:ricardoBear:547813324079759360>')
+    await ctx.send('Mighty ricardo bear cannot be summoned at the moment :(')
 
 # bitchslaps the tagged user
 @bot.command()
@@ -176,7 +170,6 @@ async def bitchslap(ctx, tag):
     '''
     Exactly what it sounds like
     '''
-
     #tag self
     if tag == ctx.author.mention:
         await ctx.send(ctx.author.mention + ' bitchslapped themselves')
@@ -217,11 +210,10 @@ async def challenge(ctx, tag):
     '''
     Challenge another user
     '''
-
     possible_outcomes = [
     'tagged',
     'tagger',
-    'no one',
+    'no one'
     ]
 
     outcome = random.choice(possible_outcomes)
@@ -340,7 +332,7 @@ async def invite(ctx):
 
 @bot.event
 async def on_ready():
-    game = discord.Game("WIP, no spammerino pls")
+    game = discord.Game("dm for feedback")
     await bot.change_presence(status=discord.Status.dnd, activity=game)
     print("Logged in as " + bot.user.name)
     print("Current servers:")
