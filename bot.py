@@ -1,11 +1,8 @@
-import random
-# import asyncio
-# import aiohttp
-# import json
-import discord
 from discord import Game
 from discord.ext import commands
-# from discord.ext.commands import Bot
+import discord
+import random
+
 
 BOT_PREFIX = ('.', '$') # not useless anymore
 TOKEN = 'NTQyNjk3MTg1MzM5Mzc1NjE2.D3pP8Q.drE_pnxP5brFR_JIDvDY-IjvTWw' # Get at discordapp.com/developers/applications/me
@@ -15,6 +12,7 @@ vegasBotTag = '<@542697185339375616>'
 bot = commands.Bot(command_prefix = BOT_PREFIX)
 # bot.remove_command("help")
 
+# rapes the tagged user or whatever gets typed
 @bot.command()
 async def rape(ctx, *args):
     '''
@@ -35,7 +33,7 @@ async def rape(ctx, *args):
     'you went to the future, to come back in the present to fuck yourself.'
     ]
     # self rape
-    if args[0] == ctx.author.mention:
+    if args[0] == ctx.author.mention or args[0] == 'myself':
         await ctx.send(random.choice(possible_responses_self))
     # Vegas Bot rape
     elif args[0] == vegasBotTag:
@@ -44,16 +42,17 @@ async def rape(ctx, *args):
     else:
         msg = ctx.author.mention + random.choice(possible_responses)
         for arg in args:
-            msg += arg + ' '   
+            msg += arg + ' '
         await ctx.send(msg)
 
+# rape command clone
 @bot.command()
 async def molest(ctx, *args):
     '''
     Same as .rape, but different reply
     '''
     # tag self
-    if args[0] == ctx.author.mention:
+    if args[0] == ctx.author.mention or args[0] == 'myself':
         await ctx.send(ctx.author.mention + ' tried to molest themselves.')
     # tag vegas bot
     elif args[0] == vegasBotTag:
@@ -61,16 +60,17 @@ async def molest(ctx, *args):
     else:
         msg = ctx.author.mention + ' molested '
         for arg in args:
-            msg += arg + ' '  
+            msg += arg + ' '
         await ctx.send(msg)
 
+# rape command clone
 @bot.command()
 async def touch(ctx, *args):
     '''
     Same as .rape, but different reply
     '''
     # tag self
-    if args[0] == ctx.author.mention:
+    if args[0] == ctx.author.mention or args[0] == 'myself':
         await ctx.send(ctx.author.mention + ' touched themselves reaaaaaal good.')
     # tag vegas bot
     elif args[0] == vegasBotTag:
@@ -81,16 +81,17 @@ async def touch(ctx, *args):
     else:
         msg = ctx.author.mention + ' touched '
         for arg in args:
-            msg += arg + ' '  
+            msg += arg + ' '
         await ctx.send(msg)
 
+# rape command clone
 @bot.command()
 async def fill(ctx, *args):
     '''
     ;))
     '''
     # tag self
-    if args[0] == ctx.author.mention:
+    if args[0] == ctx.author.mention or args[0] == 'myself':
         await ctx.send(ctx.author.mention + ' filled... themselves up?')
     # tag vegas bot
     elif args[0] == vegasBotTag:
@@ -102,13 +103,14 @@ async def fill(ctx, *args):
         msg += ' all the way up ;))'
         await ctx.send(msg)
 
+# rape command clone
 @bot.command()
 async def succ(ctx, *args):
     '''
     Give someone of your choosing dat good succ
     '''
     # tag self
-    if args[0] == ctx.author.mention:
+    if args[0] == ctx.author.mention or args[0] == 'myself':
         await ctx.send(ctx.author.mention + ' got their own succ')
     # tag vegas bot
     elif args[0] == vegasBotTag:
@@ -120,6 +122,7 @@ async def succ(ctx, *args):
         msg += ' dat good succ'
         await ctx.send(msg)
 
+# banan
 @bot.command()
 async def banana(ctx):
     '''
@@ -186,7 +189,7 @@ async def ricardobear(ctx):
     # await ctx.send('<a:ricardoBear:547813324079759360>')
     await ctx.send('Mighty ricardo bear cannot be summoned at the moment :(')
 
-# bitchslaps the tagged user
+# bitchslaps the tagged user or whatever gets typed
 @bot.command()
 async def bitchslap(ctx, *args):
     '''
@@ -261,6 +264,7 @@ async def challenge(ctx, tag):
             if tag == ctx.author.mention:
                 await ctx.send('Both ' + ctx.author.mention + ' and ' + tag + ' lost!')
 
+# for lil gay boy arassii
 @bot.command()
 async def assi(ctx):
     '''
@@ -270,13 +274,21 @@ async def assi(ctx):
     await ctx.send('<@162966505430974464>')
     await ctx.send('<@162966505430974464>')
 
-#wrong bot
+# wrong bot
 @bot.command()
 async def fish(ctx):
     '''
     use t!fish next time
     '''
-    await ctx.send('Wrong bot, kiddo')            
+    await ctx.send('Wrong bot, kiddo')
+
+# wrong bot again
+@bot.command()
+async def pepo(ctx):
+    '''
+    use !pepo next time
+    '''
+    await ctx.send('Wrong bot, kiddo')
 
 # invite link
 @bot.command()
