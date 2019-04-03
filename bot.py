@@ -269,9 +269,7 @@ async def assi(ctx):
     '''
     for lil gay boy arassii
     '''
-    await ctx.send('<@162966505430974464>')
-    await ctx.send('<@162966505430974464>')
-    await ctx.send('<@162966505430974464>')
+    await ctx.send('fak u <@162966505430974464>')
 
 
 @bot.command()  # wrong bot
@@ -315,6 +313,19 @@ async def invite(ctx):
 #     debug command, go away
 #     '''
 #     await ctx.send('<a:Nig:557976066828926986>')
+
+# @bot.command()
+# async def test(ctx, *args):
+#     '''
+#     debug command, go away
+#     '''
+#     msg = ''
+#     if len(args) == 0:
+#         await ctx.send('no args')
+#     else:
+#         for arg in args:
+#             msg += arg
+#         await ctx.send(msg)
 
 
 ### legacy help commands ###
