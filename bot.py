@@ -172,6 +172,7 @@ async def ricardo(ctx):
         'https://tenor.com/3WCg.gif',
         'https://tenor.com/3oVt.gif',
         'https://imgur.com/a/pM5R4UM',
+        'https://imgur.com/a/3qtdO1e'
     ]
 
     # if ctx.author.mention == '<@162966505430974464>':
@@ -298,16 +299,15 @@ async def invite(ctx):
 
 ### debug commands ###
 
-# # debug command to print all message args
-# @bot.command()
+# @bot.command()  # debug command to print all message args
 # async def getargs(ctx, tag):
 #     '''
 #     debug command, go away
 #     '''
 #     await ctx.send('`' + tag + '`')
 
-# # debug command for emotes
-# @bot.command()
+
+# @bot.command()  # debug command for emotes
 # async def testemote(ctx, tag):
 #     '''
 #     debug command, go away
@@ -315,23 +315,26 @@ async def invite(ctx):
 #     await ctx.send('<a:Nig:557976066828926986>')
 
 # @bot.command()
-# async def test(ctx, *args):
+# async def getProfile(ctx):
 #     '''
 #     debug command, go away
 #     '''
-#     msg = ''
-#     if len(args) == 0:
-#         await ctx.send('no args')
-#     else:
-#         for arg in args:
-#             msg += arg
-#         await ctx.send(msg)
+#     accounts = ctx.author.profile.connected_accounts
+#     msg = discord.Embed(title='Connected accounts', description='', color=0x0000ff)
+#     for acc in accounts:
+#         msg.add_field(name='Type', value=acc['type'], inline=True)
+#         msg.add_field(name='ID', value=acc['id'], inline=True)
+#         msg.add_field(name='Name', value=acc['name'], inline=True)
+#     await ctx.send(embed=msg)
 
 
 ### legacy help commands ###
 
-# # embed with all the commands available
-# if cmd == 'commands':
+# @bot.command()
+# async def commands(ctx):
+#     '''
+#     It's this command you dummy
+#     '''
 #     commands = {}
 #     commands['.rape'] = "Non consensual sex with your preferred person/object (no judgin')"
 #     commands['.molest'] = 'Same as .rape, but different reply'
@@ -351,20 +354,11 @@ async def invite(ctx):
 #     commands['.help'] = "It's this command you dummy"
 #     commands['.newcommands'] = 'See if any new commands have been added'
 
-#     msg = discord.Embed(title = 'Vegas Bot commands:', description = '', color = 0x0000ff)
+#     msg = discord.Embed(title='Vegas Bot commands:', description='', color=0x0000ff)
 #     for command, descr in commands.items():
-#         msg.add_field(name = command, value = descr, inline = False)
-#     await ctx.send(embed = msg)
+#         msg.add_field(name=command, value=descr, inline=False)
+#     await ctx.send(embed=msg)
 
-# # embed with the latest commands added
-# if cmd == 'newcommands':
-#     commands = {}
-#     commands['.pro'] = 'Standards mate'
-#     commands['.reee'] = 'reeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee'
-#     msg = discord.Embed(title = 'New commands:', description = '', color = 0x0000ff)
-#     for command, descr in commands.items():
-#         msg.add_field(name = command, value = descr, inline = False)
-#     await ctx.send(embed = msg)
 
 @bot.event
 async def on_ready():
