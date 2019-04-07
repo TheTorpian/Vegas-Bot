@@ -299,33 +299,34 @@ async def invite(ctx):
 
 ### debug commands ###
 
-# @bot.command()  # debug command to print all message args
-# async def getargs(ctx, tag):
-#     '''
-#     debug command, go away
-#     '''
-#     await ctx.send('`' + tag + '`')
+@bot.command()  # debug command to print all message args
+async def getargs(ctx, tag):
+    '''
+    debug command, go away
+    '''
+    await ctx.send('`' + tag + '`')
 
 
-# @bot.command()  # debug command for emotes
-# async def testemote(ctx, tag):
-#     '''
-#     debug command, go away
-#     '''
-#     await ctx.send('<a:Nig:557976066828926986>')
+@bot.command()  # debug command for emotes
+async def testemote(ctx, tag):
+    '''
+    debug command, go away
+    '''
+    await ctx.send('<a:Nig:557976066828926986>')
 
-# @bot.command()
-# async def getProfile(ctx):
-#     '''
-#     debug command, go away
-#     '''
-#     accounts = ctx.author.profile.connected_accounts
-#     msg = discord.Embed(title='Connected accounts', description='', color=0x0000ff)
-#     for acc in accounts:
-#         msg.add_field(name='Type', value=acc['type'], inline=True)
-#         msg.add_field(name='ID', value=acc['id'], inline=True)
-#         msg.add_field(name='Name', value=acc['name'], inline=True)
-#     await ctx.send(embed=msg)
+
+@bot.command()  # WIP
+async def getProfile(ctx):
+    '''
+    debug command, go away
+    '''
+    accounts = ctx.author.profile.connected_accounts
+    msg = discord.Embed(title='Connected accounts', description='', color=0x0000ff)
+    for acc in accounts:
+        msg.add_field(name='Type', value=acc['type'], inline=True)
+        msg.add_field(name='ID', value=acc['id'], inline=True)
+        msg.add_field(name='Name', value=acc['name'], inline=True)
+    await ctx.send(embed=msg)
 
 
 ### legacy help commands ###
