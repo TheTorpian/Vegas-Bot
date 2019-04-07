@@ -1,3 +1,4 @@
+from collections import OrderedDict
 from discord.ext import commands
 import discord
 import random
@@ -9,14 +10,11 @@ INVITE = 'https://discordapp.com/api/oauth2/authorize?client_id=5426971853393756
 vegasBotTag = '<@542697185339375616>'
 
 bot = commands.Bot(command_prefix=BOT_PREFIX)
-# bot.remove_command("help")
+bot.remove_command("help")  # removes default help command
 
 
 @bot.command()  # rapes the tagged user or whatever gets typed
 async def rape(ctx, *args):
-    '''
-    Non consensual sex with your preferred person/object (no judgin')
-    '''
     possible_responses = [
         ' raped ',
         ' went to town with ',
@@ -41,36 +39,30 @@ async def rape(ctx, *args):
     else:
         msg = ctx.author.mention + random.choice(possible_responses)
         for arg in args:
-            msg += arg + ' '
+            msg += '{0} '.format(arg)
         await ctx.send(msg)
 
 
 @bot.command()  # rape command clone
 async def molest(ctx, *args):
-    '''
-    Same as .rape, but different reply
-    '''
     # tag self
     if args[0] == ctx.author.mention or args[0] == 'myself':
-        await ctx.send(ctx.author.mention + ' tried to molest themselves.')
+        await ctx.send('{0} tried to molest themselves.'.format(ctx.author.mention))
     # tag vegas bot
     elif args[0] == vegasBotTag:
         await ctx.send('You cannot molest the Vegas Bot.')
     else:
-        msg = ctx.author.mention + ' molested '
+        msg = '{0} molested '.format(ctx.author.mention)
         for arg in args:
-            msg += arg + ' '
+            msg += '{0} '.format(arg)
         await ctx.send(msg)
 
 
 @bot.command()  # rape command clone
 async def touch(ctx, *args):
-    '''
-    Same as .rape, but different reply
-    '''
     # tag self
     if args[0] == ctx.author.mention or args[0] == 'myself':
-        await ctx.send(ctx.author.mention + ' touched themselves reaaaaaal good.')
+        await ctx.send('{0} touched themselves reaaaaaal good.'.format(ctx.author.mention))
     # tag vegas bot
     elif args[0] == vegasBotTag:
         if ctx.author.mention == '<@249550049564950530>':  # torp tag
@@ -78,63 +70,51 @@ async def touch(ctx, *args):
         else:  # non-torp tags
             await ctx.send('Only Torp can touch the Vegas Bot.')
     else:
-        msg = ctx.author.mention + ' touched '
+        msg = '{0} touched '.format(ctx.author.mention)
         for arg in args:
-            msg += arg + ' '
+            msg += '{0} '.format(arg)
         await ctx.send(msg)
 
 
 @bot.command()  # rape command clone
 async def fill(ctx, *args):
-    '''
-    ;))
-    '''
     # tag self
     if args[0] == ctx.author.mention or args[0] == 'myself':
-        await ctx.send(ctx.author.mention + ' filled... themselves up?')
+        await ctx.send('{0} filled... themselves up?'.format(ctx.author.mention))
     # tag vegas bot
     elif args[0] == vegasBotTag:
         await ctx.send('You cannot fill the Vegas Bot.')
     else:
-        msg = ctx.author.mention + ' filled '
+        msg = '{0} filled '.format(ctx.author.mention)
         for arg in args:
-            msg += arg + ' '
+            msg += '{0} '.format(arg)
         msg += ' all the way up ;))'
         await ctx.send(msg)
 
 
 @bot.command()  # rape command clone
 async def succ(ctx, *args):
-    '''
-    Give someone of your choosing dat good succ
-    '''
     # tag self
     if args[0] == ctx.author.mention or args[0] == 'myself':
-        await ctx.send(ctx.author.mention + ' got their own succ')
+        await ctx.send('{0} got their own succ'.format(ctx.author.mention))
     # tag vegas bot
     elif args[0] == vegasBotTag:
         await ctx.send('The Vegas Bot gave you the succ.')
     else:
-        msg = ctx.author.mention + ' gave '
+        msg = '{0} gave '.format(ctx.author.mention)
         for arg in args:
-            msg += arg + ' '
+            msg += '{0} '.format(arg)
         msg += ' dat good succ'
         await ctx.send(msg)
 
 
 @bot.command()  # banan
 async def banana(ctx):
-    '''
-    If you really need some potassium
-    '''
     await ctx.send(':banana: <:devinisdaddy:509088268420251650>')
 
 
 @bot.command()  # rape for 2 tags
 async def gangrape(ctx, *args):
-    '''
-    Currently reworking
-    '''
     # possible_responses = [
     # ' raped ',
     # ' touched ',
@@ -162,9 +142,6 @@ async def gangrape(ctx, *args):
 
 @bot.command()  # random ricardo gif or meme
 async def ricardo(ctx):
-    '''
-    Posts a random ricardo gif
-    '''
     possible_ricardos = [
         'https://tenor.com/2Aql.gif',
         'https://tenor.com/4f6F.gif',
@@ -183,60 +160,42 @@ async def ricardo(ctx):
 
 @bot.command()  # ricardo bear
 async def ricardobear(ctx):
-    '''
-    Summons the mighty ricardo bear
-    '''
     # await ctx.send('<a:ricardoBear:547813324079759360>')
     await ctx.send('Mighty ricardo bear cannot be summoned at the moment :(')
 
 
 @bot.command()  # bitchslaps the tagged user or whatever gets typed
 async def bitchslap(ctx, *args):
-    '''
-    Exactly what it sounds like
-    '''
     # tag self
     if args[0] == ctx.author.mention or args[0] == 'myself':
-        await ctx.send(ctx.author.mention + ' bitchslapped themselves')
+        await ctx.send('{0} bitchslapped themselves'.format(ctx.author.mention))
     # tag vegas bot
     elif args[0] == vegasBotTag:
         await ctx.send('You cannot bitchslap the Vegas Bot.')
     else:
-        msg = ctx.author.mention + ' bitchslapped '
+        msg = '{0} bitchslapped '.format(ctx.author.mention)
         for arg in args:
-            msg += arg + ' '
+            msg += '{0} '.format(ctx.author.mention)
         await ctx.send(msg)
 
 
 @bot.command()  # fuck off meme
 async def fuckoff(ctx):
-    '''
-    Just fuck off mate
-    '''
     await ctx.send('https://imgur.com/a/RMXA4xP')
 
 
 @bot.command()  # professional have standards meme
 async def pro(ctx):
-    '''
-    Professionals have standards
-    '''
     await ctx.send('https://imgur.com/a/TE06C5s')
 
 
 @bot.command()  # reeeeeeee
 async def reee(ctx):
-    '''
-    Autistic screeching of the highest quality
-    '''
     await ctx.send('https://imgur.com/a/0QeJEHa')
 
 
 @bot.command()  # challenge the tagged user
 async def challenge(ctx, tag):
-    '''
-    Challenge another user
-    '''
     possible_outcomes = [
         'tagged',
         'tagger',
@@ -252,74 +211,53 @@ async def challenge(ctx, tag):
             if tag == ctx.author.mention:
                 await ctx.send('You lost against... yourself?')
             else:
-                await ctx.send(tag + ' won!')
-                await ctx.send(ctx.author.mention + ' lost!')
+                await ctx.send('{0} won!'.format(tag))
+                await ctx.send('{0} lost!'.format(ctx.author.mention))
         if outcome == 'tagger':
             if tag == ctx.author.mention:
                 await ctx.send('You won! But also lost...?')
             else:
-                await ctx.send(ctx.author.mention + ' won!')
-                await ctx.send(tag + ' lost!')
+                await ctx.send('{0} won!'.format(ctx.author.mention))
+                await ctx.send('{0} lost!'.format(tag))
         if outcome == 'no one':
             if tag == ctx.author.mention:
-                await ctx.send('Both ' + ctx.author.mention + ' and ' + tag + ' lost!')
+                await ctx.send('Both {0} and {1} lost!'.format(ctx.author.mention, tag))
+
+
+@bot.command()  # invite link
+async def invite(ctx):
+    await ctx.send(INVITE)
 
 
 @bot.command()  # for lil gay boy arassii
 async def assi(ctx):
-    '''
-    for lil gay boy arassii
-    '''
     await ctx.send('fak u <@162966505430974464>')
 
 
 @bot.command()  # wrong bot
 async def fish(ctx):
-    '''
-    use t!fish next time
-    '''
     await ctx.send('Wrong bot, kiddo')
 
 
 @bot.command()  # wrong bot again
 async def pepo(ctx):
-    '''
-    use !pepo next time
-    '''
     await ctx.send('Wrong bot, kiddo')
-
-
-@bot.command()  # invite link
-async def invite(ctx):
-    '''
-    Get the invite link for this bot
-    '''
-    await ctx.send(INVITE)
 
 
 ### debug commands ###
 
 @bot.command()  # debug command to print all message args
 async def getargs(ctx, tag):
-    '''
-    debug command, go away
-    '''
-    await ctx.send('`' + tag + '`')
+    await ctx.send('`{0}`'.format(tag))
 
 
 @bot.command()  # debug command for emotes
 async def testemote(ctx, tag):
-    '''
-    debug command, go away
-    '''
     await ctx.send('<a:Nig:557976066828926986>')
 
 
 @bot.command()  # WIP
 async def getProfile(ctx):
-    '''
-    debug command, go away
-    '''
     accounts = ctx.author.profile.connected_accounts
     msg = discord.Embed(title='Connected accounts', description='', color=0x0000ff)
     for acc in accounts:
@@ -329,43 +267,76 @@ async def getProfile(ctx):
     await ctx.send(embed=msg)
 
 
-### legacy help commands ###
+@bot.command()
+async def help(ctx, *args):
+    commands = OrderedDict()
+    commands['rape'] = "Non consensual sex with your preferred person/object (no judgin')"
+    commands['molest'] = 'Same as .rape, but different reply'
+    commands['touch'] = 'Same as .rape, but different reply'
+    commands['fill'] = ';))'
+    commands['succ'] = 'Give someone of your choosing dat good succ'
+    commands['banana'] = 'If you really need potassium'
+    commands['gangrape'] = 'Reworking'
+    commands['ricardo'] = 'Posts a random ricardo gif'
+    commands['ricardobear'] = 'Posts the mighty ricardo bear'
+    commands['bitchslap'] = 'Exactly what it sounds like'
+    commands['fuckoff'] = 'Just fuck off mate'
+    commands['pro'] = 'Professionals have standards'
+    commands['reee'] = 'Autistic screeching of the highest quality'
+    commands['challenge'] = 'Challenge another user'
+    commands['invite'] = 'Get the invite link'
+    commands['help'] = "It's this command you dummy"
 
-# @bot.command()
-# async def commands(ctx):
-#     '''
-#     It's this command you dummy
-#     '''
-#     commands = {}
-#     commands['.rape'] = "Non consensual sex with your preferred person/object (no judgin')"
-#     commands['.molest'] = 'Same as .rape, but different reply'
-#     commands['.touch'] = 'Same as .rape, but different reply'
-#     commands['.fill'] = ';))'
-#     commands['.succ'] = 'Give someone of your choosing dat good succ'
-#     commands['.banana'] = 'If you really need potassium'
-#     commands['.gangrape'] = 'When one is not enough'
-#     commands['.ricardo'] = 'Posts a random ricardo gif'
-#     commands['.ricardobear'] = 'Posts the mighty ricardo bear'
-#     commands['.bitchslap'] = 'Exactly what it sounds like'
-#     commands['.fuckoff'] = 'Just fuck off mate'
-#     commands['.pro'] = 'Professionals have standards'
-#     commands['.reee'] = 'Autistic screeching of the highest quality'
-#     commands['.challenge'] = 'Challenge another user'
-#     commands['.invite'] = 'Get the invite link'
-#     commands['.help'] = "It's this command you dummy"
-#     commands['.newcommands'] = 'See if any new commands have been added'
+    cmd_args = OrderedDict()
+    cmd_args['rape'] = '[arg]'
+    cmd_args['molest'] = '[arg]'
+    cmd_args['touch'] = '[arg]'
+    cmd_args['fill'] = '[arg]'
+    cmd_args['succ'] = '[arg]'
+    cmd_args['banana'] = ''
+    cmd_args['gangrape'] = '[args...]'
+    cmd_args['ricardo'] = ''
+    cmd_args['ricardobear'] = ''
+    cmd_args['bitchslap'] = ''
+    cmd_args['fuckoff'] = ''
+    cmd_args['pro'] = ''
+    cmd_args['reee'] = ''
+    cmd_args['challenge'] = '[arg]'
+    cmd_args['invite'] = ''
+    cmd_args['help'] = ''
 
-#     msg = discord.Embed(title='Vegas Bot commands:', description='', color=0x0000ff)
-#     for command, descr in commands.items():
-#         msg.add_field(name=command, value=descr, inline=False)
-#     await ctx.send(embed=msg)
+    if len(args) == 0:
+        max_len = 0  # get longest command name, to have evenly spaced help message
+        for cmd in commands:
+            if len(cmd) > max_len:
+                max_len = len(cmd)
+
+        msg = '```'
+        for command, desc in commands.items():  # for every command in the commands dict
+            msg += '.{0} '.format(command)  # command name
+            for a in range(len(command), max_len):  # extra spaces
+                msg += ' '
+            msg += '{0}\n'.format(desc)  # add the description
+        msg += '\n\nType .help [command] for more info on a command.```'
+
+    elif args[0] in commands:
+        msg = '```.{0} {1}\n\n'.format(args[0], cmd_args[args[0]])  # command name and arguments (if needed)
+        msg += '{0}```'.format(commands[args[0]])  # description of the command
+
+    else:
+        msg = 'No command called "'
+        for arg in args:  # add all *args items in a string format
+            msg += '{0} '.format(arg)
+        msg = msg[:-1]  # remove the last space
+        msg += '" found.'
+    await ctx.send(msg)
 
 
 @bot.event
 async def on_ready():
     game = discord.Game("with Ricardo's schlong")
     await bot.change_presence(status=discord.Status.online, activity=game)
-    print("Logged in as " + bot.user.name)
+    print("Logged in as {0}".format(bot.user.name))
     print("Current servers:")
     for server in bot.guilds:
         print(server.name)
