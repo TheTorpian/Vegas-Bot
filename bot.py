@@ -6,7 +6,7 @@ import random
 
 BOT_PREFIX = ('.', '$')  # not useless anymore
 TOKEN = 'NTQyNjk3MTg1MzM5Mzc1NjE2.D3pP8Q.drE_pnxP5brFR_JIDvDY-IjvTWw'  # Get at discordapp.com/developers/applications/me
-INVITE = 'https://discordapp.com/api/oauth2/authorize?client_id=542697185339375616&permissions=379968&scope=bot'  # bot invite link
+INVITE = 'https://discordapp.com/api/oauth2/authorize?client_id=542697185339375616&permissions=67619904&scope=bot'  # bot invite link
 vegasBotTag = '<@542697185339375616>'
 
 bot = commands.Bot(command_prefix=BOT_PREFIX)
@@ -115,29 +115,23 @@ async def banana(ctx):
 
 @bot.command()  # rape for 2 tags
 async def gangrape(ctx, *args):
-    # possible_responses = [
-    # ' raped ',
-    # ' touched ',
-    # ' molested ',
-    # ' went to town with ',
-    # " creepy uncle'd ",
-    # ' filled the holes of ',
-    # ' priested ',
-    # ' step dadded '
-    # ]
-    # msg = ctx.author.mention + random.choice(possible_responses) + args[0]
-    # for arg in args[1:]:
-    #     msg += ' and ' + arg
-    # await ctx.send(msg)
-
-    # legacy code for variable number of args #
-
-    # msg = ctx.author.mention + random.choice(possible_responses) + arg1
-    # for argCounter in range(1, len(args)):
-    #     msg += ' and ' + args[argCounter]
-    # await ctx.send(ctx.author.mention + random.choice(possible_responses) + arg1 + ' and ' + arg2)
-
-    await ctx.send('nah')
+    possible_responses = [
+        ' raped ',
+        ' touched ',
+        ' molested ',
+        ' went to town with ',
+        " creepy uncle'd ",
+        ' filled the holes of ',
+        ' priested ',
+        ' step dadded '
+    ]
+    msg = ctx.author.mention + random.choice(possible_responses) + args[0]
+    for arg in args[1:]:
+        if arg == ' ':  # removes blank spaces
+            break
+        else:
+            msg += ' and {0}'.format(arg)
+    await ctx.send(msg)
 
 
 @bot.command()  # random ricardo gif or meme
@@ -244,27 +238,11 @@ async def pepo(ctx):
     await ctx.send('Wrong bot, kiddo')
 
 
-### debug commands ###
-
-@bot.command()  # debug command to print all message args
-async def getargs(ctx, tag):
-    await ctx.send('`{0}`'.format(tag))
-
-
-@bot.command()  # debug command for emotes
-async def testemote(ctx, tag):
-    await ctx.send('<a:Nig:557976066828926986>')
-
-
-@bot.command()  # WIP
-async def getProfile(ctx):
-    accounts = ctx.author.profile.connected_accounts
-    msg = discord.Embed(title='Connected accounts', description='', color=0x0000ff)
-    for acc in accounts:
-        msg.add_field(name='Type', value=acc['type'], inline=True)
-        msg.add_field(name='ID', value=acc['id'], inline=True)
-        msg.add_field(name='Name', value=acc['name'], inline=True)
-    await ctx.send(embed=msg)
+@bot.command()  # leaves server in arg
+async def leave(ctx, arg):
+    for g in bot.guilds:
+        if str(g.id) == str(arg):
+            await g.leave()
 
 
 @bot.command()
@@ -276,7 +254,7 @@ async def help(ctx, *args):
     commands['fill'] = [';))', '[arg]']
     commands['succ'] = ['Give someone of your choosing dat good succ', '[arg]']
     commands['banana'] = ['If you really need potassium', '']
-    commands['gangrape'] = ['Reworking', '[args...]']
+    commands['gangrape'] = ['When one is not enough', '[args...]']
     commands['ricardo'] = ['Posts a random ricardo gif', '']
     commands['ricardobear'] = ['Posts the mighty ricardo bear', '']
     commands['bitchslap'] = ['Exactly what it sounds like', '']
@@ -313,6 +291,34 @@ async def help(ctx, *args):
     await ctx.send(msg)
 
 
+### debug commands ###
+
+@bot.command()  # debug command to print all message args
+async def getargs(ctx, tag):
+    await ctx.send('`{0}`'.format(tag))
+
+
+@bot.command()  # get current server id
+async def getguild(ctx):
+    await ctx.send(ctx.guild.id)
+
+
+@bot.command()  # debug command for emotes
+async def testemote(ctx, tag):
+    await ctx.send('<a:Nig:557976066828926986>')
+
+
+@bot.command()  # WIP
+async def getProfile(ctx):
+    accounts = ctx.author.profile.connected_accounts
+    msg = discord.Embed(title='Connected accounts', description='', color=0x0000ff)
+    for acc in accounts:
+        msg.add_field(name='Type', value=acc['type'], inline=True)
+        msg.add_field(name='ID', value=acc['id'], inline=True)
+        msg.add_field(name='Name', value=acc['name'], inline=True)
+    await ctx.send(embed=msg)
+
+
 @bot.event
 async def on_ready():
     game = discord.Game("with Ricardo's schlong")
@@ -321,5 +327,6 @@ async def on_ready():
     print("Current servers:")
     for server in bot.guilds:
         print(server.name)
+    print('\n')
 
 bot.run(TOKEN)
