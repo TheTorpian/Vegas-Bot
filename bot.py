@@ -270,40 +270,22 @@ async def getProfile(ctx):
 @bot.command()
 async def help(ctx, *args):
     commands = OrderedDict()
-    commands['rape'] = "Non consensual sex with your preferred person/object (no judgin')"
-    commands['molest'] = 'Same as .rape, but different reply'
-    commands['touch'] = 'Same as .rape, but different reply'
-    commands['fill'] = ';))'
-    commands['succ'] = 'Give someone of your choosing dat good succ'
-    commands['banana'] = 'If you really need potassium'
-    commands['gangrape'] = 'Reworking'
-    commands['ricardo'] = 'Posts a random ricardo gif'
-    commands['ricardobear'] = 'Posts the mighty ricardo bear'
-    commands['bitchslap'] = 'Exactly what it sounds like'
-    commands['fuckoff'] = 'Just fuck off mate'
-    commands['pro'] = 'Professionals have standards'
-    commands['reee'] = 'Autistic screeching of the highest quality'
-    commands['challenge'] = 'Challenge another user'
-    commands['invite'] = 'Get the invite link'
-    commands['help'] = "It's this command you dummy"
-
-    cmd_args = OrderedDict()
-    cmd_args['rape'] = '[arg]'
-    cmd_args['molest'] = '[arg]'
-    cmd_args['touch'] = '[arg]'
-    cmd_args['fill'] = '[arg]'
-    cmd_args['succ'] = '[arg]'
-    cmd_args['banana'] = ''
-    cmd_args['gangrape'] = '[args...]'
-    cmd_args['ricardo'] = ''
-    cmd_args['ricardobear'] = ''
-    cmd_args['bitchslap'] = ''
-    cmd_args['fuckoff'] = ''
-    cmd_args['pro'] = ''
-    cmd_args['reee'] = ''
-    cmd_args['challenge'] = '[arg]'
-    cmd_args['invite'] = ''
-    cmd_args['help'] = ''
+    commands['rape'] = ["Non consensual sex with your preferred person/object (no judgin')", '[arg]']
+    commands['molest'] = ['Same as .rape, but different reply', '[arg]']
+    commands['touch'] = ['Same as .rape, but different reply', '[arg]']
+    commands['fill'] = [';))', '[arg]']
+    commands['succ'] = ['Give someone of your choosing dat good succ', '[arg]']
+    commands['banana'] = ['If you really need potassium', '']
+    commands['gangrape'] = ['Reworking', '[args...]']
+    commands['ricardo'] = ['Posts a random ricardo gif', '']
+    commands['ricardobear'] = ['Posts the mighty ricardo bear', '']
+    commands['bitchslap'] = ['Exactly what it sounds like', '']
+    commands['fuckoff'] = ['Just fuck off mate', '']
+    commands['pro'] = ['Professionals have standards', '']
+    commands['reee'] = ['Autistic screeching of the highest quality', '']
+    commands['challenge'] = ['Challenge another user', '[arg]']
+    commands['invite'] = ['Get the invite link', '']
+    commands['help'] = ["It's this command you dummy", '']
 
     if len(args) == 0:
         max_len = 0  # get longest command name, to have evenly spaced help message
@@ -316,12 +298,11 @@ async def help(ctx, *args):
             msg += '.{0} '.format(command)  # command name
             for a in range(len(command), max_len):  # extra spaces
                 msg += ' '
-            msg += '{0}\n'.format(desc)  # add the description
+            msg += '{0}\n'.format(desc[0])  # add the description
         msg += '\n\nType .help [command] for more info on a command.```'
 
     elif args[0] in commands:
-        msg = '```.{0} {1}\n\n'.format(args[0], cmd_args[args[0]])  # command name and arguments (if needed)
-        msg += '{0}```'.format(commands[args[0]])  # description of the command
+        msg = '```.{0} {1}\n\n{2}```'.format(args[0], commands[args[0]][1], commands[args[0]][0])  # command name and arguments (if needed)
 
     else:
         msg = 'No command called "'
