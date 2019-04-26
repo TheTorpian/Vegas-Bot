@@ -110,7 +110,7 @@ async def succ(ctx, *args):
 
 @bot.command()  # banan
 async def banana(ctx):
-    await ctx.send(':banana: <:devinisdaddy:509088268420251650>')
+    await ctx.send(':banana: <:medaddy:564806501215240192>')
 
 
 @bot.command()  # rape for 2 tags
@@ -143,7 +143,8 @@ async def ricardo(ctx):
         'https://tenor.com/3WCg.gif',
         'https://tenor.com/3oVt.gif',
         'https://imgur.com/a/pM5R4UM',
-        'https://imgur.com/a/3qtdO1e'
+        'https://imgur.com/a/3qtdO1e',
+        '<a:ricardoBear:564806311791820810>'
     ]
 
     # if ctx.author.mention == '<@162966505430974464>':
@@ -154,8 +155,7 @@ async def ricardo(ctx):
 
 @bot.command()  # ricardo bear
 async def ricardobear(ctx):
-    # await ctx.send('<a:ricardoBear:547813324079759360>')
-    await ctx.send('Mighty ricardo bear cannot be summoned at the moment :(')
+    await ctx.send('<a:ricardoBear:564806311791820810>')
 
 
 @bot.command()  # bitchslaps the tagged user or whatever gets typed
@@ -240,9 +240,13 @@ async def pepo(ctx):
 
 @bot.command()  # leaves server in arg
 async def leave(ctx, arg):
-    for g in bot.guilds:
-        if str(g.id) == str(arg):
-            await g.leave()
+    if ctx.author.mention == '<@249550049564950530>':
+        for server in bot.guilds:
+            if str(server.id) == str(arg):
+                await server.leave()
+                await ctx.send('Left {0}'.format(server.name))
+    else:
+        await ctx.send('You do not have permission to use this command.')
 
 
 @bot.command()
@@ -293,6 +297,11 @@ async def help(ctx, *args):
 
 ### debug commands ###
 
+@bot.command()  # ping command
+async def ping(ctx):
+    await ctx.send("pong")
+
+
 @bot.command()  # debug command to print all message args
 async def getargs(ctx, tag):
     await ctx.send('`{0}`'.format(tag))
@@ -326,7 +335,7 @@ async def on_ready():
     print("Logged in as {0}".format(bot.user.name))
     print("Current servers:")
     for server in bot.guilds:
-        print(server.name)
+        print('{0}: {1}'.format(server.name, server.id))
     print('\n')
 
 bot.run(TOKEN)
