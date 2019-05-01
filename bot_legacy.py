@@ -1,30 +1,30 @@
 import random
-import asyncio
-import aiohttp
-import json
 import discord
 from discord import Game
 from discord.ext.commands import Bot
 
-BOT_PREFIX = ('.', '$') # currently useless
-TOKEN = 'NTQyNjk3MTg1MzM5Mzc1NjE2.D3pP8Q.drE_pnxP5brFR_JIDvDY-IjvTWw' # Get at discordapp.com/developers/applications/me
-INVITE = 'https://discordapp.com/api/oauth2/authorize?client_id=542697185339375616&permissions=379968&scope=bot' # bot invite link
+from token import TOKEN
+
+BOT_PREFIX = ('.', '$')  # currently useless
+INVITE = 'https://discordapp.com/api/oauth2/authorize?client_id=542697185339375616&permissions=379968&scope=bot'  # bot invite link
 
 client = Bot(command_prefix=BOT_PREFIX)
 
+
 @client.event
 async def on_message(message):
-    if message.content.startswith('.'): # actual working prefix
-        if message.author.bot: return # blocks bots from using commands
+    if message.content.startswith('.'):  # actual working prefix
+        if message.author.bot:
+            return  # blocks bots from using commands
 
-        cmd = message.content.split()[0].lower()[1:] # get the command from user message
-        args = message.content.split(' ')[1:] # split the rest of the message
+        cmd = message.content.split()[0].lower()[1:]  # get the command from user message
+        args = message.content.split(' ')[1:]  # split the rest of the message
 
         authorTag = message.author.mention.replace('!', '')
         vegasBotTag = '<@542697185339375616>'
         tag = ' '
         try:
-            if args[0][:1] == '<': # if first arg is a tag, make it a variable
+            if args[0][:1] == '<':  # if first arg is a tag, make it a variable
                 tag = args[0].replace('!', '')
         except Exception:
             pass
@@ -38,22 +38,22 @@ async def on_message(message):
         # rape command
         if cmd == 'rape':
             possible_responses = [
-            ' raped ',
-            ' went to town with ',
-            " creepy uncle'd ",
-            ' priested ',
-            ' step dadded '
+                ' raped ',
+                ' went to town with ',
+                " creepy uncle'd ",
+                ' priested ',
+                ' step dadded '
             ]
             possible_responses_self = [
-            'ya nasty',
-            'ya nasty, but still raped yourself',
-            'future you came to, well, cum.',
-            'you went in the past to rape yourself',
-            'you went to the future, to come back in the present to fuck yourself.'
+                'ya nasty',
+                'ya nasty, but still raped yourself',
+                'future you came to, well, cum.',
+                'you went in the past to rape yourself',
+                'you went to the future, to come back in the present to fuck yourself.'
             ]
 
             if not args:
-                await client.send_message(message.channel, 'command usage: `.rape [arg]`') # command usage
+                await client.send_message(message.channel, 'command usage: `.rape [arg]`')  # command usage
             else:
                 # self rape
                 if tag == authorTag:
@@ -67,7 +67,7 @@ async def on_message(message):
 
         if cmd == 'molest':
             if not args:
-                await client.send_message(message.channel, 'command usage: `.molest [arg]`') # command usage
+                await client.send_message(message.channel, 'command usage: `.molest [arg]`')  # command usage
             else:
                 # tag self
                 if tag == authorTag:
@@ -80,7 +80,7 @@ async def on_message(message):
 
         if cmd == 'touch':
             if not args:
-                await client.send_message(message.channel, 'command usage: `.touch [arg]`') # command usage
+                await client.send_message(message.channel, 'command usage: `.touch [arg]`')  # command usage
             else:
                 # tag self
                 if tag == authorTag:
@@ -96,7 +96,7 @@ async def on_message(message):
 
         if cmd == 'fill':
             if not args:
-                await client.send_message(message.channel, 'command usage: `.fill [arg]`') # command usage
+                await client.send_message(message.channel, 'command usage: `.fill [arg]`')  # command usage
             else:
                 # tag self
                 if tag == authorTag:
@@ -109,7 +109,7 @@ async def on_message(message):
 
         if cmd == 'succ':
             if not args:
-                await client.send_message(message.channel, 'command usage: `.succ [arg]`') # command usage
+                await client.send_message(message.channel, 'command usage: `.succ [arg]`')  # command usage
             else:
                 # tag self
                 if tag == authorTag:
@@ -126,17 +126,17 @@ async def on_message(message):
         # rape for 2 tags or more
         if cmd == 'gangrape':
             possible_responses = [
-            ' raped ',
-            ' touched ',
-            ' molested ',
-            ' went to town with ',
-            " creepy uncle'd ",
-            ' filled the holes of ',
-            ' priested ',
-            ' step dadded '
+                ' raped ',
+                ' touched ',
+                ' molested ',
+                ' went to town with ',
+                " creepy uncle'd ",
+                ' filled the holes of ',
+                ' priested ',
+                ' step dadded '
             ]
             if not args:
-                await client.send_message(message.channel, 'command usage: `.gangrape [args] [args]`') # command usage
+                await client.send_message(message.channel, 'command usage: `.gangrape [args] [args]`')  # command usage
             else:
                 msg = message.author.mention + random.choice(possible_responses) + args[0]
                 for argCounter in range(1, len(args)):
@@ -146,12 +146,12 @@ async def on_message(message):
         # random ricardo gif or meme
         if cmd == 'ricardo':
             possible_ricardos = [
-            'https://tenor.com/2Aql.gif',
-            'https://tenor.com/4f6F.gif',
-            'https://tenor.com/3KGw.gif',
-            'https://tenor.com/3WCg.gif',
-            'https://tenor.com/3oVt.gif',
-            'https://imgur.com/a/pM5R4UM',
+                'https://tenor.com/2Aql.gif',
+                'https://tenor.com/4f6F.gif',
+                'https://tenor.com/3KGw.gif',
+                'https://tenor.com/3WCg.gif',
+                'https://tenor.com/3oVt.gif',
+                'https://imgur.com/a/pM5R4UM',
             ]
             # if authorTag == '<@162966505430974464>':
             #     await client.send_message(message.channel, 'bad Arassii')
@@ -165,12 +165,12 @@ async def on_message(message):
         # bitchslaps the tagged user
         if cmd == 'bitchslap':
             if not args:
-                await client.send_message(message.channel, 'command usage: `.bitchslap [arg]`') # command usage
+                await client.send_message(message.channel, 'command usage: `.bitchslap [arg]`')  # command usage
             else:
-                #tag self
+                # tag self
                 if tag == authorTag:
                     await client.send_message(message.channel, message.author.mention + ' bitchslapped themselves')
-                #tag vegas bot
+                # tag vegas bot
                 elif tag == vegasBotTag:
                     await client.send_message(message.channel, 'You cannot bitchslap the Vegas Bot.')
                 else:
@@ -192,15 +192,15 @@ async def on_message(message):
         # challenge the tagged user
         if cmd == 'challenge':
             possible_outcomes = [
-            'tagged',
-            'tagger',
-            'no one',
+                'tagged',
+                'tagger',
+                'no one',
             ]
 
             outcome = random.choice(possible_outcomes)
 
             if not args:
-                await client.send_message(message.channel, 'command usage: `.challenge [arg]`') # command usage
+                await client.send_message(message.channel, 'command usage: `.challenge [arg]`')  # command usage
             else:
                 if tag == vegasBotTag:
                     await client.send_message(message.channel, "You always lose against Vegas Bot.")
@@ -221,9 +221,9 @@ async def on_message(message):
                         if tag == authorTag:
                             await client.send_message(message.channel, 'Both ' + message.author.mention + ' and ' + ' '.join(args) + ' lost!')
 
-        #wrong bot
+        # wrong bot
         if cmd == 'fish':
-            await client.send_message(message.channel, 'Wrong bot, kiddo')            
+            await client.send_message(message.channel, 'Wrong bot, kiddo')
 
         # invite link
         if cmd == 'invite':
@@ -269,20 +269,20 @@ async def on_message(message):
             commands['.help'] = "It's this command you dummy"
             commands['.newcommands'] = 'See if any new commands have been added'
 
-            msg = discord.Embed(title = 'Vegas Bot commands:', description = '', color = 0x0000ff)
+            msg = discord.Embed(title='Vegas Bot commands:', description='', color=0x0000ff)
             for command, descr in commands.items():
-                msg.add_field(name = command, value = descr, inline = False)
-            await client.send_message(message.channel, embed = msg)
+                msg.add_field(name=command, value=descr, inline=False)
+            await client.send_message(message.channel, embed=msg)
 
         # embed with the latest commands added
         if cmd == 'newcommands':
             commands = {}
             commands['.pro'] = 'Standards mate'
             commands['.reee'] = 'reeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee'
-            msg = discord.Embed(title = 'New commands:', description = '', color = 0x0000ff)
+            msg = discord.Embed(title='New commands:', description='', color=0x0000ff)
             for command, descr in commands.items():
-                msg.add_field(name = command, value = descr, inline = False)
-            await client.send_message(message.channel, embed = msg)
+                msg.add_field(name=command, value=descr, inline=False)
+            await client.send_message(message.channel, embed=msg)
 
 
 @client.event
