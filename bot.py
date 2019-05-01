@@ -3,9 +3,10 @@ from discord.ext import commands
 import discord
 import random
 
+from token import TOKEN
+
 
 BOT_PREFIX = ('.', '$')  # not useless anymore
-TOKEN = 'NTQyNjk3MTg1MzM5Mzc1NjE2.D3pP8Q.drE_pnxP5brFR_JIDvDY-IjvTWw'  # Get at discordapp.com/developers/applications/me
 INVITE = 'https://discordapp.com/api/oauth2/authorize?client_id=542697185339375616&permissions=67619904&scope=bot'  # bot invite link
 vegasBotTag = '<@542697185339375616>'
 bigric = '''<a:Milosdance01:573166902159998996><a:Milosdance02:573166910460395522><a:Milosdance03:573166914629795840><a:Milosdance04:573166915498016778><a:Milosdance05:573166913589477419><a:Milosdance06:573166904500551720><a:Milosdance07:573166903934320666>
