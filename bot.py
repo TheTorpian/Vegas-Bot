@@ -3,7 +3,7 @@ from discord.ext import commands
 import discord
 import random
 
-from token import TOKEN
+from tokenfile import TOKEN
 
 
 BOT_PREFIX = ('.', '$')  # not useless anymore
@@ -252,17 +252,6 @@ async def pepo(ctx):
     await ctx.send('Wrong bot, kiddo')
 
 
-@bot.command()  # leaves server in arg
-async def leave(ctx, arg):
-    if ctx.author.mention == '<@249550049564950530>':
-        for server in bot.guilds:
-            if str(server.id) == str(arg):
-                await server.leave()
-                await ctx.send('Left {0}'.format(server.name))
-    else:
-        await ctx.send('You do not have permission to use this command.')
-
-
 @bot.command()
 async def help(ctx, *args):
     commands = OrderedDict()
@@ -313,30 +302,42 @@ async def help(ctx, *args):
 
 @bot.command()  # ping command
 async def ping(ctx):
-    await ctx.send("pong")
+    await ctx.send("why")
 
 
-@bot.command()  # say arg
+@bot.command()  # say args
 async def say(ctx, *args):
-    msg = ''
-    for x in args:
-        msg += ' {0}'.format(x)
-    await ctx.send(msg)
+    if ctx.author.mention == '<@249550049564950530>':
+        msg = ''
+        for x in args:
+            msg += ' {0}'.format(x)
+        await ctx.send(msg)
+    else:
+        await ctx.send('You do not have permission to use this command.')
 
 
-@bot.command()  # debug command to print all message args
+@bot.command()  # sends first word from message
 async def getargs(ctx, tag):
-    await ctx.send('`{0}`'.format(tag))
+    if ctx.author.mention == '<@249550049564950530>':
+        await ctx.send('`{0}`'.format(tag))
+    else:
+        await ctx.send('You do not have permission to use this command.')
 
 
 @bot.command()  # get current server id
 async def getguild(ctx):
-    await ctx.send(ctx.guild.id)
+    if ctx.author.mention == '<@249550049564950530>':
+        await ctx.send(ctx.guild.id)
+    else:
+        await ctx.send('You do not have permission to use this command.')
 
 
-@bot.command()  # debug command for emotes
+@bot.command()  # emote testing
 async def testemote(ctx, tag):
-    await ctx.send('<a:Nig:557976066828926986>')
+    if ctx.author.mention == '<@249550049564950530>':
+        await ctx.send('<a:Nig:557976066828926986>')
+    else:
+        await ctx.send('You do not have permission to use this command.')
 
 
 @bot.command()  # WIP
@@ -348,6 +349,22 @@ async def getProfile(ctx):
         msg.add_field(name='ID', value=acc['id'], inline=True)
         msg.add_field(name='Name', value=acc['name'], inline=True)
     await ctx.send(embed=msg)
+
+
+@bot.command()  # leaves guild specified and prints in console
+async def leave(ctx, arg):
+    if ctx.author.mention == '<@249550049564950530>':
+        for server in bot.guilds:
+            if str(server.id) == str(arg):
+                await server.leave()
+                print('Left "{0}": {1}'.format(server.name, server.id))
+    else:
+        await ctx.send('You do not have permission to use this command.')
+
+
+@bot.event  # prints message in console with name and id of guild joined
+async def on_guild_join(guild):
+    print('Joined "{0}": {1}'.format(guild.name, guild.id))
 
 
 @bot.event
