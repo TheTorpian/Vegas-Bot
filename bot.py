@@ -2,13 +2,14 @@ from collections import OrderedDict
 from discord.ext import commands
 import discord
 import random
-
 from tokenfile import TOKEN
+import db_queries
 
 
 BOT_PREFIX = ('.', '$')  # not useless anymore
 INVITE = 'https://discordapp.com/api/oauth2/authorize?client_id=542697185339375616&permissions=67619904&scope=bot'  # bot invite link
-vegasBotTag = '<@542697185339375616>'
+vegas_bot_tag = '<@542697185339375616>'
+torp_tag = '<@249550049564950530>'
 bigric = '''<a:Milosdance01:573166902159998996><a:Milosdance02:573166910460395522><a:Milosdance03:573166914629795840><a:Milosdance04:573166915498016778><a:Milosdance05:573166913589477419><a:Milosdance06:573166904500551720><a:Milosdance07:573166903934320666>
 <a:Milosdance08:573166906601635840><a:Milosdance09:573166914629533715><a:Milosdance10:573166918006210560><a:Milosdance11:573166918580699158><a:Milosdance12:573166915862659082><a:Milosdance13:573166913660780544><a:Milosdance14:573166905737871371>
 <a:Milosdance15:573166914105245717><a:Milosdance16:573166915413868564><a:Milosdance17:573166918333366275><a:Milosdance18:573166918815711252><a:Milosdance19:573166918136233993><a:Milosdance20:573166915376119838><a:Milosdance21:573166906387857415>
@@ -23,47 +24,55 @@ bot.remove_command("help")  # removes default help command
 
 @bot.command()  # rapes the tagged user or whatever gets typed
 async def rape(ctx, *args):
-    possible_responses = [
-        ' raped ',
-        ' went to town with ',
-        " creepy uncle'd ",
-        ' priested ',
-        ' step dadded '
-    ]
-    possible_responses_self = [
-        'ya nasty',
-        'ya nasty, but still raped yourself',
-        'future you came to, well, cum.',
-        'you went in the past to rape yourself',
-        'you went to the future, to come back in the present to fuck yourself.'
-    ]
-    # self rape
-    if args[0] == ctx.author.mention or args[0] == 'myself':
-        await ctx.send(random.choice(possible_responses_self))
-    # Vegas Bot rape
-    elif args[0] == vegasBotTag:
-        await ctx.send("You can't rape the Vegas Bot.")
-    # all other rapes
+    mode = db_queries.check_mode(sv=ctx.guild.id)[0][0]   # returns dict of tuples, use double index to get actual values
+    if mode == 'sfw':
+        await ctx.send("You're not supposed to use this command.")
     else:
-        msg = ctx.author.mention + random.choice(possible_responses)
-        for arg in args:
-            msg += '{0} '.format(arg)
-        await ctx.send(msg)
+        possible_responses = [
+            ' raped ',
+            ' went to town with ',
+            " creepy uncle'd ",
+            ' priested ',
+            ' step dadded '
+        ]
+        possible_responses_self = [
+            'ya nasty',
+            'ya nasty, but still raped yourself',
+            'future you came to, well, cum.',
+            'you went in the past to rape yourself',
+            'you went to the future, to come back in the present to fuck yourself.'
+        ]
+        # self rape
+        if args[0] == ctx.author.mention or args[0] == 'myself':
+            await ctx.send(random.choice(possible_responses_self))
+        # Vegas Bot rape
+        elif args[0] == vegas_bot_tag:
+            await ctx.send("You can't rape the Vegas Bot.")
+        # all other rapes
+        else:
+            msg = ctx.author.mention + random.choice(possible_responses)
+            for arg in args:
+                msg += '{0} '.format(arg)
+            await ctx.send(msg)
 
 
 @bot.command()  # rape command clone
 async def molest(ctx, *args):
-    # tag self
-    if args[0] == ctx.author.mention or args[0] == 'myself':
-        await ctx.send('{0} tried to molest themselves.'.format(ctx.author.mention))
-    # tag vegas bot
-    elif args[0] == vegasBotTag:
-        await ctx.send('You cannot molest the Vegas Bot.')
+    mode = db_queries.check_mode(sv=ctx.guild.id)[0][0]   # returns dict of tuples, use double index to get actual values
+    if mode == 'sfw':
+        await ctx.send("You're not supposed to use this command.")
     else:
-        msg = '{0} molested '.format(ctx.author.mention)
-        for arg in args:
-            msg += '{0} '.format(arg)
-        await ctx.send(msg)
+        # tag self
+        if args[0] == ctx.author.mention or args[0] == 'myself':
+            await ctx.send('{0} tried to molest themselves.'.format(ctx.author.mention))
+        # tag vegas bot
+        elif args[0] == vegas_bot_tag:
+            await ctx.send('You cannot molest the Vegas Bot.')
+        else:
+            msg = '{0} molested '.format(ctx.author.mention)
+            for arg in args:
+                msg += '{0} '.format(arg)
+            await ctx.send(msg)
 
 
 @bot.command()  # rape command clone
@@ -72,8 +81,8 @@ async def touch(ctx, *args):
     if args[0] == ctx.author.mention or args[0] == 'myself':
         await ctx.send('{0} touched themselves reaaaaaal good.'.format(ctx.author.mention))
     # tag vegas bot
-    elif args[0] == vegasBotTag:
-        if ctx.author.mention == '<@249550049564950530>':  # torp tag
+    elif args[0] == vegas_bot_tag:
+        if ctx.author.mention == torp_tag:  # torp tag
             await ctx.send('mmm yes daddy')
         else:  # non-torp tags
             await ctx.send('Only Torp can touch the Vegas Bot.')
@@ -90,7 +99,7 @@ async def fill(ctx, *args):
     if args[0] == ctx.author.mention or args[0] == 'myself':
         await ctx.send('{0} filled... themselves up?'.format(ctx.author.mention))
     # tag vegas bot
-    elif args[0] == vegasBotTag:
+    elif args[0] == vegas_bot_tag:
         await ctx.send('You cannot fill the Vegas Bot.')
     else:
         msg = '{0} filled '.format(ctx.author.mention)
@@ -106,7 +115,7 @@ async def succ(ctx, *args):
     if args[0] == ctx.author.mention or args[0] == 'myself':
         await ctx.send('{0} got their own succ'.format(ctx.author.mention))
     # tag vegas bot
-    elif args[0] == vegasBotTag:
+    elif args[0] == vegas_bot_tag:
         await ctx.send('The Vegas Bot gave you the succ.')
     else:
         msg = '{0} gave '.format(ctx.author.mention)
@@ -123,23 +132,27 @@ async def banana(ctx):
 
 @bot.command()  # rape for 2 tags
 async def gangrape(ctx, *args):
-    possible_responses = [
-        ' raped ',
-        ' touched ',
-        ' molested ',
-        ' went to town with ',
-        " creepy uncle'd ",
-        ' filled the holes of ',
-        ' priested ',
-        ' step dadded '
-    ]
-    msg = ctx.author.mention + random.choice(possible_responses) + args[0]
-    for arg in args[1:]:
-        if arg == ' ':  # removes blank spaces
-            break
-        else:
-            msg += ' and {0}'.format(arg)
-    await ctx.send(msg)
+    mode = db_queries.check_mode(sv=ctx.guild.id)[0][0]   # returns dict of tuples, use double index to get actual values
+    if mode == 'sfw':
+        await ctx.send("You're not supposed to use this command.")
+    else:
+        possible_responses = [
+            ' raped ',
+            ' touched ',
+            ' molested ',
+            ' went to town with ',
+            " creepy uncle'd ",
+            ' filled the holes of ',
+            ' priested ',
+            ' step dadded '
+        ]
+        msg = ctx.author.mention + random.choice(possible_responses) + args[0]
+        for arg in args[1:]:
+            if arg == ' ':  # removes blank spaces
+                break
+            else:
+                msg += ' and {0}'.format(arg)
+        await ctx.send(msg)
 
 
 @bot.command()  # random ricardo gif or meme
@@ -178,7 +191,7 @@ async def bitchslap(ctx, *args):
     if args[0] == ctx.author.mention or args[0] == 'myself':
         await ctx.send('{0} bitchslapped themselves'.format(ctx.author.mention))
     # tag vegas bot
-    elif args[0] == vegasBotTag:
+    elif args[0] == vegas_bot_tag:
         await ctx.send('You cannot bitchslap the Vegas Bot.')
     else:
         msg = '{0} bitchslapped '.format(ctx.author.mention)
@@ -212,7 +225,7 @@ async def challenge(ctx, tag):
 
     outcome = random.choice(possible_outcomes)
 
-    if tag == vegasBotTag:
+    if tag == vegas_bot_tag:
         await ctx.send("You always lose against Vegas Bot.")
     else:
         if outcome == 'tagged':
@@ -237,9 +250,9 @@ async def invite(ctx):
     await ctx.send(INVITE)
 
 
-@bot.command()  # for lil gay boy arassii
-async def assi(ctx):
-    await ctx.send('fak u <@162966505430974464>')
+# @bot.command()  # for lil gay boy arassii
+# async def assi(ctx):
+#     await ctx.send('fak u <@162966505430974464>')
 
 
 @bot.command()  # wrong bot
@@ -253,37 +266,50 @@ async def pepo(ctx):
 
 
 @bot.command()
+async def dad(ctx):
+    await ctx.send("I'm dad")
+
+
+@bot.command()
 async def help(ctx, *args):
     commands = OrderedDict()
-    commands['rape'] = ["Non consensual sex with your preferred person/object (no judgin')", '[arg]']
-    commands['molest'] = ['Same as .rape, but different reply', '[arg]']
-    commands['touch'] = ['Same as .rape, but different reply', '[arg]']
-    commands['fill'] = [';))', '[arg]']
-    commands['succ'] = ['Give someone of your choosing dat good succ', '[arg]']
-    commands['banana'] = ['If you really need potassium', '']
-    commands['gangrape'] = ['When one is not enough', '[args...]']
-    commands['ricardo'] = ['Posts a random ricardo gif', '']
-    commands['ricardobear'] = ['Posts the mighty ricardo bear', '']
-    commands['bitchslap'] = ['Exactly what it sounds like', '']
-    commands['fuckoff'] = ['Just fuck off mate', '']
-    commands['pro'] = ['Professionals have standards', '']
-    commands['reee'] = ['Autistic screeching of the highest quality', '']
-    commands['challenge'] = ['Challenge another user', '[arg]']
-    commands['invite'] = ['Get the invite link', '']
-    commands['help'] = ["It's this command you dummy", '']
+    commands['rape'] = ["Non consensual sex with your preferred person/object (nsfw only)", '[arg]', 'nsfw']
+    commands['molest'] = ['Same as .rape, but different reply (nsfw only)', '[arg]', 'nsfw']
+    commands['touch'] = ['Touchy touchy', '[arg]', '']
+    commands['fill'] = [';))', '[arg]', '']
+    commands['succ'] = ['Give someone of your choosing dat good succ', '[arg]', '']
+    commands['banana'] = ['If you really need potassium', '', '']
+    commands['gangrape'] = ['When one is not enough (nsfw only)', '[args...]', 'nsfw']
+    commands['ricardo'] = ['Posts a random ricardo gif', '', '']
+    commands['ricardobear'] = ['Posts the mighty ricardo bear', '', '']
+    commands['bitchslap'] = ['Exactly what it sounds like', '', '']
+    commands['fuckoff'] = ['Just fuck off mate', '', '']
+    commands['pro'] = ['Professionals have standards', '', '']
+    commands['reee'] = ['Autistic screeching of the highest quality', '', '']
+    commands['challenge'] = ['Challenge another user', '[arg]', '']
+    commands['invite'] = ['Get the invite link', '', '']
+    commands['family_friendly'] = ['Turns nsfw mode on or off (admin only)', "'nsfw/'sfw'", '']
+    commands['check_mode'] = ['Checks if nsfw is enabled on this server or not', '', '']
+    commands['help'] = ["It's this command you dummy", '', '']
 
-    if len(args) == 0:
-        max_len = 0  # get longest command name, to have evenly spaced help message
+    mode = db_queries.check_mode(sv=ctx.guild.id)[0][0]   # returns dict of tuples, use double index to get actual values
+
+    if len(args) == 0:  # get longest command name, to have evenly spaced help message
+        max_len = 0
         for cmd in commands:
             if len(cmd) > max_len:
                 max_len = len(cmd)
 
         msg = '```'
+
         for command, desc in commands.items():  # for every command in the commands dict
+            if mode != 'nsfw' and desc[2] == 'nsfw':
+                continue
             msg += '.{0} '.format(command)  # command name
             for a in range(len(command), max_len):  # extra spaces
                 msg += ' '
             msg += '{0}\n'.format(desc[0])  # add the description
+
         msg += '\n\nType .help [command] for more info on a command.```'
 
     elif args[0] in commands:
@@ -307,7 +333,7 @@ async def ping(ctx):
 
 @bot.command()  # say args
 async def say(ctx, *args):
-    if ctx.author.mention == '<@249550049564950530>':
+    if ctx.author.mention == torp_tag:
         msg = ''
         for x in args:
             msg += ' {0}'.format(x)
@@ -318,7 +344,7 @@ async def say(ctx, *args):
 
 @bot.command()  # sends first word from message
 async def getargs(ctx, tag):
-    if ctx.author.mention == '<@249550049564950530>':
+    if ctx.author.mention == torp_tag:
         await ctx.send('`{0}`'.format(tag))
     else:
         await ctx.send('You do not have permission to use this command.')
@@ -326,7 +352,7 @@ async def getargs(ctx, tag):
 
 @bot.command()  # get current server id
 async def getguild(ctx):
-    if ctx.author.mention == '<@249550049564950530>':
+    if ctx.author.mention == torp_tag:
         await ctx.send(ctx.guild.id)
     else:
         await ctx.send('You do not have permission to use this command.')
@@ -334,26 +360,15 @@ async def getguild(ctx):
 
 @bot.command()  # emote testing
 async def testemote(ctx, tag):
-    if ctx.author.mention == '<@249550049564950530>':
+    if ctx.author.mention == torp_tag:
         await ctx.send('<a:Nig:557976066828926986>')
     else:
         await ctx.send('You do not have permission to use this command.')
 
 
-@bot.command()  # WIP
-async def getProfile(ctx):
-    accounts = ctx.author.profile.connected_accounts
-    msg = discord.Embed(title='Connected accounts', description='', color=0x0000ff)
-    for acc in accounts:
-        msg.add_field(name='Type', value=acc['type'], inline=True)
-        msg.add_field(name='ID', value=acc['id'], inline=True)
-        msg.add_field(name='Name', value=acc['name'], inline=True)
-    await ctx.send(embed=msg)
-
-
 @bot.command()  # leaves guild specified and prints in console
 async def leave(ctx, arg):
-    if ctx.author.mention == '<@249550049564950530>':
+    if ctx.author.mention == torp_tag:
         for server in bot.guilds:
             if str(server.id) == str(arg):
                 await server.leave()
@@ -362,19 +377,47 @@ async def leave(ctx, arg):
         await ctx.send('You do not have permission to use this command.')
 
 
+### mysql ###
+### please ignore, as this is all connected to a private database and haven't made it customizable yet ###
+
+@bot.command()  # changes nsfw on or off
+async def family_friendly(ctx, arg):
+    if ctx.author.mention == torp_tag:
+        db_queries.change_mode(sv=str(ctx.guild.id), md=arg)
+        if arg == 'nsfw':
+            await ctx.send("Gettin' extra naughty now :))")
+        else:
+            await ctx.send("Don't tell mommy")
+    else:
+        await ctx.send('You do not have permission to use this command.')
+
+
+@bot.command()  # manually adds server where command was called
+async def add_server_db(ctx):
+    db_queries.new_server(sv=ctx.guild.id, md='sfw')
+
+
+@bot.command()  # checks mode of server where command was called
+async def check_mode(ctx):
+    mode = db_queries.check_mode(sv=ctx.guild.id)[0][0]   # returns dict of tuples, use double index to get actual values
+    await ctx.send(mode)
+
+
 @bot.event  # prints message in console with name and id of guild joined
 async def on_guild_join(guild):
-    print('Joined "{0}": {1}'.format(guild.name, guild.id))
+    print('Joined "{0}": {1}\n'.format(guild.name, guild.id))
+    db_queries.new_server(sv=str(guild.id), md='sfw')
+    print("Added '{0}' to db\n\n".format(guild.id))
 
 
 @bot.event
 async def on_ready():
-    game = discord.Game("with Ricardo's schlong")
-    await bot.change_presence(status=discord.Status.online, activity=game)
+    game = discord.Game("idfk")
+    await bot.change_presence(status=discord.Status.dnd, activity=game)
     print("Logged in as {0}".format(bot.user.name))
     print("Current servers:")
     for server in bot.guilds:
         print('{0}: {1}'.format(server.name, server.id))
-    print('\n')
+    print('\n{0}\n\n'.format(db_queries.db))
 
 bot.run(TOKEN)
