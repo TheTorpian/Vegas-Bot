@@ -5,3 +5,5 @@ A discord bot I made for fun; gets its name from the server it was initally made
 # Use
 Make a bot app [here](https://discordapp.com/developers/applications/). 
 Make a file called `tokenfile.py` and add this line of code in it: `TOKEN = {}`; replace `{}` with the token from your bot app.
+# MySql
+Add `CONNECTION = mysql.connect(host="host", user="user" ,password="password", database="database")` to `tokenfile.py` and fill with your own database info.
