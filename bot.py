@@ -383,7 +383,7 @@ async def leave(ctx, arg):
 @bot.command()  # changes nsfw on or off
 async def family_friendly(ctx, arg):
     if ctx.author.mention == torp_tag:
-        db_queries.change_mode(sv=str(ctx.guild.id), md=arg)
+        db_queries.change_mode(sv=ctx.guild.id, md=arg)
         if arg == 'nsfw':
             await ctx.send("Gettin' extra naughty now :))")
         else:
@@ -403,6 +403,8 @@ async def check_mode(ctx):
     await ctx.send(mode)
 
 
+### bot stuff ###
+
 @bot.event  # prints message in console with name and id of guild joined
 async def on_guild_join(guild):
     print('Joined "{0}": {1}\n'.format(guild.name, guild.id))
@@ -412,8 +414,8 @@ async def on_guild_join(guild):
 
 @bot.event
 async def on_ready():
-    game = discord.Game("idfk")
-    await bot.change_presence(status=discord.Status.dnd, activity=game)
+    game = discord.Game("with the big boys")
+    await bot.change_presence(status=discord.Status.online, activity=game)
     print("Logged in as {0}".format(bot.user.name))
     print("Current servers:")
     for server in bot.guilds:
