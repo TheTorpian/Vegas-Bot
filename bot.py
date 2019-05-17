@@ -1,9 +1,9 @@
-from collections import OrderedDict
-from discord.ext import commands
-import discord
 import random
-from tokenfile import TOKEN
+from collections import OrderedDict
+import discord
+from discord.ext import commands
 import db_queries
+from tokenfile import TOKEN
 
 
 BOT_PREFIX = ('.', '$')  # not useless anymore
@@ -288,8 +288,8 @@ async def help(ctx, *args):
     commands['reee'] = ['Autistic screeching of the highest quality', '', '']
     commands['challenge'] = ['Challenge another user', '[arg]', '']
     commands['invite'] = ['Get the invite link', '', '']
-    commands['family_friendly'] = ['Turns nsfw mode on or off (admin only)', "'nsfw/'sfw'", '']
-    commands['check_mode'] = ['Checks if nsfw is enabled on this server or not', '', '']
+    commands['nsfw'] = ['Turns nsfw mode on or off (admin only)', "'on/'off'", '']
+    commands['check_nsfw'] = ['Checks if nsfw is enabled on this server or not', '', '']
     commands['help'] = ["It's this command you dummy", '', '']
 
     mode = db_queries.check_mode(sv=ctx.guild.id)[0][0]   # returns dict of tuples, use double index to get actual values
@@ -378,16 +378,18 @@ async def leave(ctx, arg):
 
 
 ### mysql ###
-### please ignore, as this is all connected to a private database and haven't made it customizable yet ###
 
 @bot.command()  # changes nsfw on or off
-async def family_friendly(ctx, arg):
+async def nsfw(ctx, arg):
     if ctx.author.mention == torp_tag:
-        db_queries.change_mode(sv=ctx.guild.id, md=arg)
-        if arg == 'nsfw':
+        if arg == 'on':
+            db_queries.change_mode(sv=ctx.guild.id, md='nsfw')
             await ctx.send("Gettin' extra naughty now :))")
-        else:
+        elif arg == 'off':
             await ctx.send("Don't tell mommy")
+            db_queries.change_mode(sv=ctx.guild.id, md='sfw')
+        else:
+            await ctx.send("Invalid argument")
     else:
         await ctx.send('You do not have permission to use this command.')
 
@@ -398,8 +400,12 @@ async def add_server_db(ctx):
 
 
 @bot.command()  # checks mode of server where command was called
-async def check_mode(ctx):
+async def check_nsfw(ctx):
     mode = db_queries.check_mode(sv=ctx.guild.id)[0][0]   # returns dict of tuples, use double index to get actual values
+    if mode == 'nsfw':
+        await ctx.send("I can be very naughty :))")
+    else:
+        await ctx.send("I'm innocent, I swear")
     await ctx.send(mode)
 
 
