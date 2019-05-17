@@ -1,22 +1,17 @@
 import random
-from collections import OrderedDict
 import discord
-from discord.ext import commands
 import db_queries
-from tokenfile import TOKEN
+from collections import OrderedDict
+from discord.ext import commands
+from tokenfile import Vars
 
 
 BOT_PREFIX = ('.', '$')  # not useless anymore
 INVITE = 'https://discordapp.com/api/oauth2/authorize?client_id=542697185339375616&permissions=67619904&scope=bot'  # bot invite link
-vegas_bot_tag = '<@542697185339375616>'
-torp_tag = '<@249550049564950530>'
-bigric = '''<a:Milosdance01:573166902159998996><a:Milosdance02:573166910460395522><a:Milosdance03:573166914629795840><a:Milosdance04:573166915498016778><a:Milosdance05:573166913589477419><a:Milosdance06:573166904500551720><a:Milosdance07:573166903934320666>
-<a:Milosdance08:573166906601635840><a:Milosdance09:573166914629533715><a:Milosdance10:573166918006210560><a:Milosdance11:573166918580699158><a:Milosdance12:573166915862659082><a:Milosdance13:573166913660780544><a:Milosdance14:573166905737871371>
-<a:Milosdance15:573166914105245717><a:Milosdance16:573166915413868564><a:Milosdance17:573166918333366275><a:Milosdance18:573166918815711252><a:Milosdance19:573166918136233993><a:Milosdance20:573166915376119838><a:Milosdance21:573166906387857415>
-<a:Milosdance22:573166914000388096><a:Milosdance23:573166916986732545><a:Milosdance24:573166918975094784><a:Milosdance25:573166918857654303><a:Milosdance26:573166918853197834><a:Milosdance27:573166915900669953><a:Milosdance28:573166907415461922>
-<a:Milosdance29:573166914897969182><a:Milosdance30:573166916034887700><a:Milosdance31:573166918899597315><a:Milosdance32:573166918123388930><a:Milosdance33:573166918861717514><a:Milosdance34:573166916596793350><a:Milosdance35:573166908032024586>
-<a:Milosdance36:573166908564701214><a:Milosdance37:573166914289795103><a:Milosdance38:573166919281147952><a:Milosdance39:573166919025295360><a:Milosdance40:573166918140297246><a:Milosdance41:573166915242033153><a:Milosdance42:573166907495153680>
-<a:Milosdance43:573166907952463882><a:Milosdance44:573166915019735060><a:Milosdance45:573166918337298436><a:Milosdance46:573166919172096032><a:Milosdance47:573166918425378846><a:Milosdance48:573166915997007919><a:Milosdance49:573166907264466954>'''
+TOKEN = Vars.TOKEN  # bot app token
+vegas_bot_tag = Vars.vegas_bot_tag  # vegas bot's discord tag
+torp_tag = Vars.torp_tag  # big torpo's discord tag
+bigric = Vars.bigric  # 49 fucking emotes
 
 bot = commands.Bot(command_prefix=BOT_PREFIX)
 bot.remove_command("help")  # removes default help command
@@ -169,9 +164,6 @@ async def ricardo(ctx):
         bigric
     ]
 
-    # if ctx.author.mention == '<@162966505430974464>':
-    #     await ctx.send('bad Arassii')
-    # else:
     await ctx.send(random.choice(possible_ricardos))
 
 
@@ -250,11 +242,6 @@ async def invite(ctx):
     await ctx.send(INVITE)
 
 
-# @bot.command()  # for lil gay boy arassii
-# async def assi(ctx):
-#     await ctx.send('fak u <@162966505430974464>')
-
-
 @bot.command()  # wrong bot
 async def fish(ctx):
     await ctx.send('Wrong bot, kiddo')
@@ -265,7 +252,7 @@ async def pepo(ctx):
     await ctx.send('Wrong bot, kiddo')
 
 
-@bot.command()
+@bot.command()  # wrong bot?
 async def dad(ctx):
     await ctx.send("I'm dad")
 
@@ -288,7 +275,7 @@ async def help(ctx, *args):
     commands['reee'] = ['Autistic screeching of the highest quality', '', '']
     commands['challenge'] = ['Challenge another user', '[arg]', '']
     commands['invite'] = ['Get the invite link', '', '']
-    commands['nsfw'] = ['Turns nsfw mode on or off (admin only)', "'on/'off'", '']
+    commands['nsfw'] = ['Turns nsfw mode on or off (admin only)', "$on/$off", '']
     commands['check_nsfw'] = ['Checks if nsfw is enabled on this server or not', '', '']
     commands['help'] = ["It's this command you dummy", '', '']
 
@@ -328,7 +315,7 @@ async def help(ctx, *args):
 
 @bot.command()  # ping command
 async def ping(ctx):
-    await ctx.send("why")
+    await ctx.send("pong")
 
 
 @bot.command()  # say args
