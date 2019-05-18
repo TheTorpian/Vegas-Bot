@@ -6,7 +6,7 @@ from discord.ext import commands
 from tokenfile import Vars
 
 
-BOT_PREFIX = ('.', '$')  # not useless anymore
+BOT_PREFIX = ('.', '$', 'v!')  # not useless anymore
 INVITE = 'https://discordapp.com/api/oauth2/authorize?client_id=542697185339375616&permissions=67619904&scope=bot'  # bot invite link
 TOKEN = Vars.TOKEN  # bot app token
 vegas_bot_tag = Vars.vegas_bot_tag  # vegas bot's discord tag
@@ -23,32 +23,35 @@ async def rape(ctx, *args):
     if mode == 'sfw':
         await ctx.send("You're not supposed to use this command.")
     else:
-        possible_responses = [
-            ' raped ',
-            ' went to town with ',
-            " creepy uncle'd ",
-            ' priested ',
-            ' step dadded '
-        ]
-        possible_responses_self = [
-            'ya nasty',
-            'ya nasty, but still raped yourself',
-            'future you came to, well, cum.',
-            'you went in the past to rape yourself',
-            'you went to the future, to come back in the present to fuck yourself.'
-        ]
-        # self rape
-        if args[0] == ctx.author.mention or args[0] == 'myself':
-            await ctx.send(random.choice(possible_responses_self))
-        # Vegas Bot rape
-        elif args[0] == vegas_bot_tag:
-            await ctx.send("You can't rape the Vegas Bot.")
-        # all other rapes
+        if not args:  # checks if arguments are passed or tuple is empty
+            await ctx.send('Who you gonna rape dumbass')
         else:
-            msg = ctx.author.mention + random.choice(possible_responses)
-            for arg in args:
-                msg += '{0} '.format(arg)
-            await ctx.send(msg)
+            possible_responses = [
+                ' raped ',
+                ' went to town with ',
+                " creepy uncle'd ",
+                ' priested ',
+                ' step dadded '
+            ]
+            possible_responses_self = [
+                'ya nasty',
+                'ya nasty, but still raped yourself',
+                'future you came to, well, cum.',
+                'you went in the past to rape yourself',
+                'you went to the future, to come back in the present to fuck yourself.'
+            ]
+            # self rape
+            if args[0] == ctx.author.mention or args[0] == 'myself':
+                await ctx.send(random.choice(possible_responses_self))
+            # Vegas Bot rape
+            elif args[0] == vegas_bot_tag:
+                await ctx.send("You can't rape the Vegas Bot.")
+            # all other rapes
+            else:
+                msg = ctx.author.mention + random.choice(possible_responses)
+                for arg in args:
+                    msg += '{0} '.format(arg)
+                await ctx.send(msg)
 
 
 @bot.command()  # rape command clone
@@ -57,67 +60,83 @@ async def molest(ctx, *args):
     if mode == 'sfw':
         await ctx.send("You're not supposed to use this command.")
     else:
+        if not args:
+            await ctx.send('Who you gonna molest dumbass')
+        else:
+            # tag self
+            if args[0] == ctx.author.mention or args[0] == 'myself':
+                await ctx.send('{0} tried to molest themselves.'.format(ctx.author.mention))
+            # tag vegas bot
+            elif args[0] == vegas_bot_tag:
+                await ctx.send('You cannot molest the Vegas Bot.')
+            else:
+                msg = '{0} molested '.format(ctx.author.mention)
+                for arg in args:
+                    msg += '{0} '.format(arg)
+                await ctx.send(msg)
+
+
+@bot.command()  # rape command clone
+async def touch(ctx, *args):
+    if not args:  # checks if arguments are passed or tuple is empty
+        await ctx.send('Who you gonna touch dumbass')
+    else:
         # tag self
         if args[0] == ctx.author.mention or args[0] == 'myself':
-            await ctx.send('{0} tried to molest themselves.'.format(ctx.author.mention))
+            await ctx.send('{0} touched themselves reaaaaaal good.'.format(ctx.author.mention))
         # tag vegas bot
         elif args[0] == vegas_bot_tag:
-            await ctx.send('You cannot molest the Vegas Bot.')
+            if ctx.author.mention == torp_tag:  # torp tag
+                await ctx.send('mmm yes daddy')
+            else:  # non-torp tags
+                await ctx.send('Only Torp can touch the Vegas Bot.')
         else:
-            msg = '{0} molested '.format(ctx.author.mention)
+            msg = '{0} touched '.format(ctx.author.mention)
             for arg in args:
                 msg += '{0} '.format(arg)
             await ctx.send(msg)
 
 
 @bot.command()  # rape command clone
-async def touch(ctx, *args):
-    # tag self
-    if args[0] == ctx.author.mention or args[0] == 'myself':
-        await ctx.send('{0} touched themselves reaaaaaal good.'.format(ctx.author.mention))
-    # tag vegas bot
-    elif args[0] == vegas_bot_tag:
-        if ctx.author.mention == torp_tag:  # torp tag
-            await ctx.send('mmm yes daddy')
-        else:  # non-torp tags
-            await ctx.send('Only Torp can touch the Vegas Bot.')
-    else:
-        msg = '{0} touched '.format(ctx.author.mention)
-        for arg in args:
-            msg += '{0} '.format(arg)
-        await ctx.send(msg)
-
-
-@bot.command()  # rape command clone
 async def fill(ctx, *args):
-    # tag self
-    if args[0] == ctx.author.mention or args[0] == 'myself':
-        await ctx.send('{0} filled... themselves up?'.format(ctx.author.mention))
-    # tag vegas bot
-    elif args[0] == vegas_bot_tag:
-        await ctx.send('You cannot fill the Vegas Bot.')
+    mode = db_queries.check_mode(sv=ctx.guild.id)[0][0]   # returns dict of tuples, use double index to get actual values
+    if mode == 'sfw':
+        await ctx.send("You're not supposed to use this command.")
     else:
-        msg = '{0} filled '.format(ctx.author.mention)
-        for arg in args:
-            msg += '{0} '.format(arg)
-        msg += ' all the way up ;))'
-        await ctx.send(msg)
+        if not args:  # checks if arguments are passed or tuple is empty
+            await ctx.send('Who you gonna fill dumbass')
+        else:
+            # tag self
+            if args[0] == ctx.author.mention or args[0] == 'myself':
+                await ctx.send('{0} filled... themselves up?'.format(ctx.author.mention))
+            # tag vegas bot
+            elif args[0] == vegas_bot_tag:
+                await ctx.send('You cannot fill the Vegas Bot.')
+            else:
+                msg = '{0} filled '.format(ctx.author.mention)
+                for arg in args:
+                    msg += '{0} '.format(arg)
+                msg += 'all the way up ;))'
+                await ctx.send(msg)
 
 
 @bot.command()  # rape command clone
 async def succ(ctx, *args):
-    # tag self
-    if args[0] == ctx.author.mention or args[0] == 'myself':
-        await ctx.send('{0} got their own succ'.format(ctx.author.mention))
-    # tag vegas bot
-    elif args[0] == vegas_bot_tag:
-        await ctx.send('The Vegas Bot gave you the succ.')
+    if not args:  # checks if arguments are passed or tuple is empty
+        await ctx.send('Who you gonna succ dumbass')
     else:
-        msg = '{0} gave '.format(ctx.author.mention)
-        for arg in args:
-            msg += '{0} '.format(arg)
-        msg += ' dat good succ'
-        await ctx.send(msg)
+        # tag self
+        if args[0] == ctx.author.mention or args[0] == 'myself':
+            await ctx.send('{0} got their own succ'.format(ctx.author.mention))
+        # tag vegas bot
+        elif args[0] == vegas_bot_tag:
+            await ctx.send('The Vegas Bot gave you the succ.')
+        else:
+            msg = '{0} gave '.format(ctx.author.mention)
+            for arg in args:
+                msg += '{0} '.format(arg)
+            msg += 'dat good succ'
+            await ctx.send(msg)
 
 
 @bot.command()  # banan
@@ -131,23 +150,26 @@ async def gangrape(ctx, *args):
     if mode == 'sfw':
         await ctx.send("You're not supposed to use this command.")
     else:
-        possible_responses = [
-            ' raped ',
-            ' touched ',
-            ' molested ',
-            ' went to town with ',
-            " creepy uncle'd ",
-            ' filled the holes of ',
-            ' priested ',
-            ' step dadded '
-        ]
-        msg = ctx.author.mention + random.choice(possible_responses) + args[0]
-        for arg in args[1:]:
-            if arg == ' ':  # removes blank spaces
-                break
-            else:
-                msg += ' and {0}'.format(arg)
-        await ctx.send(msg)
+        if not args or len(args) < 2:  # checks if arguments are passed or tuple is empty
+            await ctx.send('Who you gonna gangrape dumbass')
+        else:
+            possible_responses = [
+                ' raped ',
+                ' touched ',
+                ' molested ',
+                ' went to town with ',
+                " creepy uncle'd ",
+                ' filled the holes of ',
+                ' priested ',
+                ' step dadded '
+            ]
+            msg = ctx.author.mention + random.choice(possible_responses) + args[0]
+            for arg in args[1:]:
+                if arg == ' ':  # removes blank spaces
+                    break
+                else:
+                    msg += ' and {0}'.format(arg)
+            await ctx.send(msg)
 
 
 @bot.command()  # random ricardo gif or meme
@@ -179,17 +201,25 @@ async def bigricardo(ctx):
 
 @bot.command()  # bitchslaps the tagged user or whatever gets typed
 async def bitchslap(ctx, *args):
-    # tag self
-    if args[0] == ctx.author.mention or args[0] == 'myself':
-        await ctx.send('{0} bitchslapped themselves'.format(ctx.author.mention))
-    # tag vegas bot
-    elif args[0] == vegas_bot_tag:
-        await ctx.send('You cannot bitchslap the Vegas Bot.')
+    if not args:  # checks if arguments are passed or tuple is empty
+        await ctx.send('Who you gonna bitchslap dumbass')
     else:
-        msg = '{0} bitchslapped '.format(ctx.author.mention)
-        for arg in args:
-            msg += '{0} '.format(ctx.author.mention)
-        await ctx.send(msg)
+        possible_outcomes = [
+            ' bitchslapped ',
+            ' slapped the bitch '
+        ]
+
+        # tag self
+        if args[0] == ctx.author.mention or args[0] == 'myself':
+            await ctx.send('{0} bitchslapped themselves'.format(ctx.author.mention))
+        # tag vegas bot
+        elif args[0] == vegas_bot_tag:
+            await ctx.send('You cannot bitchslap the Vegas Bot.')
+        else:
+            msg = '{0} {1} '.format(ctx.author.mention, random.choice(possible_outcomes))
+            for arg in args:
+                msg += '{0} '.format(ctx.author.mention)
+            await ctx.send(msg)
 
 
 @bot.command()  # fuck off meme
@@ -209,32 +239,29 @@ async def reee(ctx):
 
 @bot.command()  # challenge the tagged user
 async def challenge(ctx, tag):
-    possible_outcomes = [
-        'tagged',
-        'tagger',
-        'no one'
-    ]
-
-    outcome = random.choice(possible_outcomes)
-
-    if tag == vegas_bot_tag:
-        await ctx.send("You always lose against Vegas Bot.")
+    if not tag:  # checks if arguments are passed or tuple is empty
+        await ctx.send('Who you gonna challenge dumbass')
     else:
-        if outcome == 'tagged':
-            if tag == ctx.author.mention:
-                await ctx.send('You lost against... yourself?')
-            else:
-                await ctx.send('{0} won!'.format(tag))
-                await ctx.send('{0} lost!'.format(ctx.author.mention))
-        if outcome == 'tagger':
-            if tag == ctx.author.mention:
-                await ctx.send('You won! But also lost...?')
-            else:
-                await ctx.send('{0} won!'.format(ctx.author.mention))
-                await ctx.send('{0} lost!'.format(tag))
-        if outcome == 'no one':
-            if tag == ctx.author.mention:
-                await ctx.send('Both {0} and {1} lost!'.format(ctx.author.mention, tag))
+        outcome = random.randint(0, 2)
+
+        if tag == vegas_bot_tag:
+            await ctx.send("You always lose against Vegas Bot.")
+        else:
+            if outcome == 0:
+                if tag == ctx.author.mention:
+                    await ctx.send('You lost against... yourself?')
+                else:
+                    await ctx.send('{0} won!'.format(tag))
+                    await ctx.send('{0} lost!'.format(ctx.author.mention))
+            if outcome == 1:
+                if tag == ctx.author.mention:
+                    await ctx.send('You won! But also lost...?')
+                else:
+                    await ctx.send('{0} won!'.format(ctx.author.mention))
+                    await ctx.send('{0} lost!'.format(tag))
+            if outcome == 2:
+                if tag == ctx.author.mention:
+                    await ctx.send('Both {0} and {1} lost!'.format(ctx.author.mention, tag))
 
 
 @bot.command()  # invite link
@@ -263,7 +290,7 @@ async def help(ctx, *args):
     commands['rape'] = ["Non consensual sex with your preferred person/object (nsfw only)", '[arg]', 'nsfw']
     commands['molest'] = ['Same as .rape, but different reply (nsfw only)', '[arg]', 'nsfw']
     commands['touch'] = ['Touchy touchy', '[arg]', '']
-    commands['fill'] = [';))', '[arg]', '']
+    commands['fill'] = [';)) (nsfw only)', '[arg]', 'nsfw']
     commands['succ'] = ['Give someone of your choosing dat good succ', '[arg]', '']
     commands['banana'] = ['If you really need potassium', '', '']
     commands['gangrape'] = ['When one is not enough (nsfw only)', '[args...]', 'nsfw']
@@ -281,14 +308,13 @@ async def help(ctx, *args):
 
     mode = db_queries.check_mode(sv=ctx.guild.id)[0][0]   # returns dict of tuples, use double index to get actual values
 
-    if len(args) == 0:  # get longest command name, to have evenly spaced help message
+    if not args:  # get longest command name, to have evenly spaced help message
         max_len = 0
         for cmd in commands:
             if len(cmd) > max_len:
                 max_len = len(cmd)
 
         msg = '```'
-
         for command, desc in commands.items():  # for every command in the commands dict
             if mode != 'nsfw' and desc[2] == 'nsfw':
                 continue
@@ -296,8 +322,7 @@ async def help(ctx, *args):
             for a in range(len(command), max_len):  # extra spaces
                 msg += ' '
             msg += '{0}\n'.format(desc[0])  # add the description
-
-        msg += '\n\nType .help [command] for more info on a command.```'
+        msg += '\n\nOther Prefixes are "$" and "v!".\nType .help [command] for more info on a command.```'
 
     elif args[0] in commands:
         msg = '```.{0} {1}\n\n{2}```'.format(args[0], commands[args[0]][1], commands[args[0]][0])  # command name and arguments (if needed)
