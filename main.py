@@ -21,7 +21,7 @@ initial_extensions = [
 TOKEN = Vars.TOKEN  # bot app token
 
 bot = commands.Bot(command_prefix=get_pref)
-bot.remove_command("help")  # removes default help command
+bot.remove_command('help')  # removes default help command
 
 if __name__ == '__main__':
     for extension in initial_extensions:
@@ -30,14 +30,14 @@ if __name__ == '__main__':
 
 @bot.event  # prints message in console with name and id of guild joined
 async def on_guild_join(guild):
-    print(f'Joined "{guild.name}": {guild.id}\n')
+    print(f'Joined \'{guild.name}\': {guild.id}\n')
     db_queries.new_server(sv=str(guild.id), md='sfw')
-    print(f"Added '{guild.id}' to db\n\n")
+    print(f'Added \'{guild.id}\' to db\n\n')
 
 
 @bot.event
 async def on_ready():
-    game = discord.Game("pretend I'm offline")
+    game = discord.Game('pretend I\'m offline')
     await bot.change_presence(status=discord.Status.dnd, activity=game)
     print(f'Logged in as {bot.user.name}')
     print('Current servers:')

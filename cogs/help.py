@@ -13,24 +13,26 @@ class HelpCog(commands.Cog):
     @commands.command()
     async def help(self, ctx, *args):
         commands = OrderedDict()
-        commands['rape'] = ["Non consensual sex with your preferred person/object (nsfw only)", '[arg]', 'nsfw']
-        commands['molest'] = ['Same as .rape, but different reply (nsfw only)', '[arg]', 'nsfw']
         commands['touch'] = ['Touchy touchy', '[arg]', '']
-        commands['fill'] = [';)) (nsfw only)', '[arg]', 'nsfw']
         commands['succ'] = ['Give someone of your choosing dat good succ', '[arg]', '']
-        commands['banana'] = ['If you really need potassium', '', '']
-        # commands['gangrape'] = ['When one is not enough (nsfw only)', '[args...]', 'nsfw']
-        commands['ricardo'] = ['Posts a random ricardo gif', '', '']
-        commands['ricardobear'] = ['Posts the mighty ricardo bear', '', '']
         commands['bitchslap'] = ['Exactly what it sounds like', '', '']
+        commands['challenge'] = ['Challenge another user', '[arg]', '']
+        commands['banana'] = ['If you really need potassium', '', '']
         commands['fuckoff'] = ['Just fuck off mate', '', '']
         commands['pro'] = ['Professionals have standards', '', '']
         commands['reee'] = ['Autistic screeching of the highest quality', '', '']
-        commands['challenge'] = ['Challenge another user', '[arg]', '']
-        commands['invite'] = ['Get the invite link', '', '']
-        commands['nsfw'] = ['Turns nsfw mode on or off (admin only)', "on/off", '']
+        commands['rape'] = ["Non consensual sex with your preferred person/object (nsfw only)", '[arg]', 'nsfw']
+        commands['molest'] = ['Same as .rape, but different reply (nsfw only)', '[arg]', 'nsfw']
+        commands['fill'] = [';)) (nsfw only)', '[arg]', 'nsfw']
+        # commands['gangrape'] = ['When one is not enough (nsfw only)', '[args...]', 'nsfw']
+        commands['ricardo'] = ['Posts a random ricardo gif', '', '']
+        commands['ricardobear'] = ['Posts the mighty ricardo bear', '', '']
+        commands['bigricardo'] = ['Summons big ricardo', '', '']
         commands['check_nsfw'] = ['Checks if nsfw is enabled on this server or not', '', '']
-        commands['help'] = ["It's this command you dummy", '', '']
+        commands['nsfw'] = ['Turns nsfw mode on or off (admin only)', "on/off", '']
+        commands['change_prefix'] = ['Changes the command prefix on this server (admin only)', '', '']
+        commands['help'] = ["It's this command", '', '']
+        commands['invite'] = ['Get the invite link', '', '']
 
         mode = db_queries.check_mode(sv=ctx.guild.id)[0][0]   # returns dict of tuples, use double index to get actual values
 
