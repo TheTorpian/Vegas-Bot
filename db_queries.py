@@ -1,6 +1,5 @@
 from tokenfile import CONNECTION
 
-
 db = CONNECTION
 
 
@@ -29,3 +28,18 @@ def check_mode(sv):  # checks and returns mode
     query = "SELECT mode FROM Servers WHERE server_id=%s"
     cursor.execute(query, (sv,))
     return cursor.fetchall()  # returns dict of tuples, use double index to get actual values
+
+
+def get_prefix(sv):
+    cursor = db.cursor()
+    query = "SELECT prefix FROM Servers WHERE server_id=%s"
+    cursor.execute(query, (sv,))
+    prefix = cursor.fetchall()  # returns dict of tuples, use double index to get actual values
+    return prefix[0][0]
+
+
+def change_prefix(sv, pf):
+    cursor = db.cursor()
+    query = "UPDATE Servers SET prefix=%s WHERE server_id=%s"
+    cursor.execute(query, (pf, sv))
+    db.commit()
