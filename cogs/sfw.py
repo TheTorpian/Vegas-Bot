@@ -75,7 +75,7 @@ class SfwCog(commands.Cog):
             outcome = random.randint(0, 2)
 
             if tag == vegas_bot_tag:
-                await ctx.send("You always lose against Vegas Bot.")
+                await ctx.send('You always lose against Vegas Bot.')
             else:
                 if outcome == 0:
                     if tag == ctx.author.mention:

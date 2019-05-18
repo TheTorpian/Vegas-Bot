@@ -1,6 +1,6 @@
-import db_queries
 from collections import OrderedDict
 from discord.ext import commands
+from sql import sql_modes
 from tokenfile import Vars
 
 INVITE = Vars.INVITE  # invite link
@@ -21,20 +21,22 @@ class HelpCog(commands.Cog):
         commands['fuckoff'] = ['Just fuck off mate', '', '']
         commands['pro'] = ['Professionals have standards', '', '']
         commands['reee'] = ['Autistic screeching of the highest quality', '', '']
-        commands['rape'] = ["Non consensual sex with your preferred person/object (nsfw only)", '[arg]', 'nsfw']
+        commands['rape'] = ['Non consensual sex with your preferred person/object (nsfw only)', '[arg]', 'nsfw']
         commands['molest'] = ['Same as .rape, but different reply (nsfw only)', '[arg]', 'nsfw']
         commands['fill'] = [';)) (nsfw only)', '[arg]', 'nsfw']
         # commands['gangrape'] = ['When one is not enough (nsfw only)', '[args...]', 'nsfw']
+        commands['quote'] = ['Posts a random quote from this server', '', '']
+        commands['add_quote'] = ['Adds the specified quote', '"quote" <user>', '']
         commands['ricardo'] = ['Posts a random ricardo gif', '', '']
         commands['ricardobear'] = ['Posts the mighty ricardo bear', '', '']
         commands['bigricardo'] = ['Summons big ricardo', '', '']
         commands['check_nsfw'] = ['Checks if nsfw is enabled on this server or not', '', '']
-        commands['nsfw'] = ['Turns nsfw mode on or off (admin only)', "on/off", '']
+        commands['nsfw'] = ['Turns nsfw mode on or off (admin only)', '<on>/<off>', '']
         commands['change_prefix'] = ['Changes the command prefix on this server (admin only)', '', '']
-        commands['help'] = ["It's this command", '', '']
+        commands['help'] = ['It\'s this command', '', '']
         commands['invite'] = ['Get the invite link', '', '']
 
-        mode = db_queries.check_mode(sv=ctx.guild.id)[0][0]   # returns dict of tuples, use double index to get actual values
+        mode = sql_modes.check_mode(sv=ctx.guild.id)[0][0]   # returns dict of tuples, use double index to get actual values
 
         if not args:  # get longest command name, to have evenly spaced help message
             max_len = 0

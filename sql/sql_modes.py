@@ -3,12 +3,6 @@ from tokenfile import CONNECTION
 db = CONNECTION
 
 
-def select_all():  # selects all from table
-    cursor = db.cursor()
-    cursor.execute("SELECT * FROM Servers")
-    return cursor.fetchall()
-
-
 def new_server(sv, md):  # adds new server to db, defaults to sfw
     cursor = db.cursor()
     query = "INSERT INTO Servers (server_id, mode) VALUES (%s, %s)"
@@ -42,4 +36,11 @@ def change_prefix(sv, pf):
     cursor = db.cursor()
     query = "UPDATE Servers SET prefix=%s WHERE server_id=%s"
     cursor.execute(query, (pf, sv))
+    db.commit()
+
+
+def truncate(table):
+    cursor = db.cursor()
+    query = "TRUNCATE TABLE %s"
+    cursor.execute(query, (table,))
     db.commit()

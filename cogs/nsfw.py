@@ -1,6 +1,6 @@
 import random
 from discord.ext import commands
-import db_queries
+from sql import sql_modes
 from tokenfile import Vars
 
 vegas_bot_tag = Vars.vegas_bot_tag  # vegas bot's discord tag
@@ -12,9 +12,9 @@ class NsfwCog(commands.Cog):
 
     @commands.command()  # rapes the tagged user or whatever gets typed
     async def rape(self, ctx, *args):
-        mode = db_queries.check_mode(sv=ctx.guild.id)[0][0]   # returns dict of tuples, use double index to get actual values
+        mode = sql_modes.check_mode(sv=ctx.guild.id)[0][0]   # returns dict of tuples, use double index to get actual values
         if mode == 'sfw':
-            await ctx.send("You're not supposed to use this command.")
+            await ctx.send('You\'re not supposed to use this command.')
         else:
             if not args:  # checks if arguments are passed or tuple is empty
                 await ctx.send('Who you gonna rape dumbass')
@@ -22,7 +22,7 @@ class NsfwCog(commands.Cog):
                 possible_responses = [
                     ' raped ',
                     ' went to town with ',
-                    " creepy uncle'd ",
+                    ' creepy uncle\'d ',
                     ' priested ',
                     ' step dadded '
                 ]
@@ -31,7 +31,7 @@ class NsfwCog(commands.Cog):
                     await ctx.send('ya nasty')
                 # Vegas Bot rape
                 elif args[0] == vegas_bot_tag:
-                    await ctx.send("You can't rape the Vegas Bot.")
+                    await ctx.send('You can\'t rape the Vegas Bot.')
                 # all other rapes
                 else:
                     msg = ctx.author.mention + random.choice(possible_responses)
@@ -40,9 +40,9 @@ class NsfwCog(commands.Cog):
 
     @commands.command()  # rape command clone
     async def molest(self, ctx, *args):
-        mode = db_queries.check_mode(sv=ctx.guild.id)[0][0]   # returns dict of tuples, use double index to get actual values
+        mode = sql_modes.check_mode(sv=ctx.guild.id)[0][0]   # returns dict of tuples, use double index to get actual values
         if mode == 'sfw':
-            await ctx.send("You're not supposed to use this command.")
+            await ctx.send('You\'re not supposed to use this command.')
         else:
             if not args:
                 await ctx.send('Who you gonna molest dumbass')
@@ -60,9 +60,9 @@ class NsfwCog(commands.Cog):
 
     @commands.command()  # rape command clone
     async def fill(self, ctx, *args):
-        mode = db_queries.check_mode(sv=ctx.guild.id)[0][0]   # returns dict of tuples, use double index to get actual values
+        mode = sql_modes.check_mode(sv=ctx.guild.id)[0][0]   # returns dict of tuples, use double index to get actual values
         if mode == 'sfw':
-            await ctx.send("You're not supposed to use this command.")
+            await ctx.send('You\'re not supposed to use this command.')
         else:
             if not args:  # checks if arguments are passed or tuple is empty
                 await ctx.send('Who you gonna fill dumbass')
@@ -81,7 +81,7 @@ class NsfwCog(commands.Cog):
 
     # @commands.command()  # rape for 2 tags
     # async def gangrape(self, ctx, *args):
-    #     mode = db_queries.check_mode(sv=ctx.guild.id)[0][0]   # returns dict of tuples, use double index to get actual values
+    #     mode = sql_modes.check_mode(sv=ctx.guild.id)[0][0]   # returns dict of tuples, use double index to get actual values
     #     if mode == 'sfw':
     #         await ctx.send("You're not supposed to use this command.")
     #     else:

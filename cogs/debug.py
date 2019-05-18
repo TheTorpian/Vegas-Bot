@@ -1,3 +1,4 @@
+import re
 from discord.ext import commands
 from tokenfile import Vars
 
@@ -10,7 +11,7 @@ class DebugCog(commands.Cog):
 
     @commands.command()  # ping command
     async def ping(self, ctx):
-        await ctx.send("pong")
+        await ctx.send('pong')
 
     @commands.command()  # say args
     async def say(self, ctx, *args):
@@ -20,8 +21,9 @@ class DebugCog(commands.Cog):
             await ctx.send('You do not have permission to use this command.')
 
     @commands.command()  # sends first word from message
-    async def getargs(self, ctx, tag):
+    async def getargs(self, ctx, *args):
         if ctx.author.mention == torp_tag:
+            tag = ' '.join(args)
             await ctx.send(f'`{tag}`')
         else:
             await ctx.send('You do not have permission to use this command.')
@@ -40,13 +42,24 @@ class DebugCog(commands.Cog):
         else:
             await ctx.send('You do not have permission to use this command.')
 
+    @commands.command()
+    async def test_regex(self, ctx):
+        msg = ctx.message.content
+        author = re.findall(r'(\s[^"]*$)', msg)
+        quote = re.findall(r'".*"', msg)
+        if not author or not quote:
+            await ctx.send('Wrong format')
+        else:
+            await ctx.send(quote[0])
+            await ctx.send(author[0])
+
     @commands.command()  # leaves guild specified and prints in console
     async def leave(self, ctx, arg):
         if ctx.author.mention == torp_tag:
             for server in self.bot.guilds:
                 if str(server.id) == str(arg):
                     await server.leave()
-                    print(f'Left "{server.name}": {server.id}')
+                    print(f'Left \'{server.name}\': {server.id}')
         else:
             await ctx.send('You do not have permission to use this command.')
 

@@ -1,17 +1,18 @@
-import db_queries
 import discord
 from discord.ext import commands
+from sql import sql_modes
 from tokenfile import Vars
 
 
 def get_pref(bot, message):
-    prefix = db_queries.get_prefix(message.guild.id)
+    prefix = sql_modes.get_prefix(message.guild.id)
     return prefix
 
 
 initial_extensions = [
     'cogs.sfw',
     'cogs.nsfw',
+    'cogs.quotes',
     'cogs.ricardo',
     'cogs.help',
     'cogs.debug',
@@ -31,7 +32,7 @@ if __name__ == '__main__':
 @bot.event  # prints message in console with name and id of guild joined
 async def on_guild_join(guild):
     print(f'Joined \'{guild.name}\': {guild.id}\n')
-    db_queries.new_server(sv=str(guild.id), md='sfw')
+    sql_modes.new_server(sv=str(guild.id), md='sfw')
     print(f'Added \'{guild.id}\' to db\n\n')
 
 
@@ -43,6 +44,6 @@ async def on_ready():
     print('Current servers:')
     for server in bot.guilds:
         print(f'{server.name}: {server.id}')
-    print(f'\n{db_queries.db}\n\n')
+    print(f'\n{sql_modes.db}\n\n')
 
 bot.run(TOKEN)
