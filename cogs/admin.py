@@ -22,22 +22,6 @@ class AdminCog(commands.Cog):
         else:
             await ctx.send("Invalid argument")
 
-    @commands.command()  # checks mode of server where command was called
-    async def check_nsfw(self, ctx):
-        mode = sql_modes.check_mode(sv=ctx.guild.id)[0][0]   # returns dict of tuples, use double index to get actual values
-        if mode == 'nsfw':
-            await ctx.send('I can be very naughty :))')
-        else:
-            await ctx.send('I\'m innocent, I swear')
-
-    @commands.command()  # manually adds server where command was called
-    async def add_server_db(self, ctx):
-        if ctx.author.mention == torp_tag:
-            sql_modes.new_server(sv=ctx.guild.id, md='sfw')
-            print(f'Added \'{ctx.guild.id}\' to db\n\n')
-        else:
-            await ctx.send('You do not have permission to use this command.')
-
     @commands.command()  # changes prefix for server where it was called
     @has_permissions(administrator=True)
     async def change_prefix(self, ctx, prefix):

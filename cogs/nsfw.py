@@ -12,7 +12,7 @@ class NsfwCog(commands.Cog):
 
     @commands.command()  # rapes the tagged user or whatever gets typed
     async def rape(self, ctx, *args):
-        mode = sql_modes.check_mode(sv=ctx.guild.id)[0][0]   # returns dict of tuples, use double index to get actual values
+        mode = sql_modes.check_mode(sv=ctx.guild.id)[0][0]   # returns list of tuples, use double index to get actual values
         if mode == 'sfw':
             await ctx.send('You\'re not supposed to use this command.')
         else:
@@ -40,7 +40,7 @@ class NsfwCog(commands.Cog):
 
     @commands.command()  # rape command clone
     async def molest(self, ctx, *args):
-        mode = sql_modes.check_mode(sv=ctx.guild.id)[0][0]   # returns dict of tuples, use double index to get actual values
+        mode = sql_modes.check_mode(sv=ctx.guild.id)[0][0]   # returns list of tuples, use double index to get actual values
         if mode == 'sfw':
             await ctx.send('You\'re not supposed to use this command.')
         else:
@@ -60,7 +60,7 @@ class NsfwCog(commands.Cog):
 
     @commands.command()  # rape command clone
     async def fill(self, ctx, *args):
-        mode = sql_modes.check_mode(sv=ctx.guild.id)[0][0]   # returns dict of tuples, use double index to get actual values
+        mode = sql_modes.check_mode(sv=ctx.guild.id)[0][0]   # returns list of tuples, use double index to get actual values
         if mode == 'sfw':
             await ctx.send('You\'re not supposed to use this command.')
         else:

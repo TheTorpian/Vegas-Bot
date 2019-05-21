@@ -36,7 +36,7 @@ class HelpCog(commands.Cog):
         commands['help'] = ['It\'s this command', '', '']
         commands['invite'] = ['Get the invite link', '', '']
 
-        mode = sql_modes.check_mode(sv=ctx.guild.id)[0][0]   # returns dict of tuples, use double index to get actual values
+        mode = sql_modes.check_mode(sv=ctx.guild.id)[0][0]   # returns list of tuples, use double index to get actual values
         prefix = sql_modes.get_prefix(ctx.guild.id)
 
         if not args:  # get longest command name, to have evenly spaced help message

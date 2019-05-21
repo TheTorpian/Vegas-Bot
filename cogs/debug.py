@@ -48,6 +48,14 @@ class DebugCog(commands.Cog):
             else:
                 await ctx.send('Wrong format')
 
+    @commands.command()  # manually adds server where command was called
+    async def add_server_db(self, ctx):
+        if ctx.author.mention == torp_tag:
+            sql_modes.new_server(sv=ctx.guild.id, md='sfw')
+            print(f'Added \'{ctx.guild.id}\' to db\n\n')
+        else:
+            await ctx.send('You do not have permission to use this command.')
+
     @commands.command()  # sends query
     async def query(self, ctx, *args):
         if ctx.author.id == torp_tag:
