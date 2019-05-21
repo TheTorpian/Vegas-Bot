@@ -38,3 +38,10 @@ def change_prefix(sv, pf):  # changes prefix for current server
     query = "UPDATE Servers SET prefix=%s WHERE server_id=%s"
     cursor.execute(query, (pf, sv))
     db.commit()
+
+
+def send_query(q):  # sends query q
+    cursor = tokenfile.get_cursor(connection)
+    query = q
+    cursor.execute(query)
+    db.commit()
