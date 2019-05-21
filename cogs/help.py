@@ -37,9 +37,9 @@ class HelpCog(commands.Cog):
         commands['invite'] = ['Get the invite link', '', '']
 
         mode = sql_modes.check_mode(sv=ctx.guild.id)[0][0]   # returns dict of tuples, use double index to get actual values
+        prefix = sql_modes.get_prefix(ctx.guild.id)
 
         if not args:  # get longest command name, to have evenly spaced help message
-            prefix = sql_modes.get_prefix(ctx.guild.id)
             max_len = 0
             for cmd in commands:
                 if len(cmd) > max_len:
@@ -56,7 +56,7 @@ class HelpCog(commands.Cog):
             msg += f"\n\nThis server's prefix is {prefix}.\nType .help [command] for more info on a command.```"
 
         elif args[0] in commands:
-            msg = f'```.{args[0]} {commands[args[0]][1]}\n\n{commands[args[0]][0]}```'  # command name and arguments (if needed)
+            msg = f'```Use: {prefix}{args[0]} {commands[args[0]][1]}\n\n{commands[args[0]][0]}```'  # command name and arguments (if needed)
 
         else:
             msg = 'No command called "'

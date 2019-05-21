@@ -11,10 +11,13 @@ class QuotesCog(commands.Cog):
 
     @commands.command()
     async def quote(self, ctx):
-        quote = sql_quotes.rand_quote(ctx.guild.id)
-        time = quote[3].strftime(tformat)
-        str_quote = f'Quote #{quote[0]}: {quote[2]} -{quote[1]} ({time})'
-        await ctx.send(str_quote)
+        try:
+            quote = sql_quotes.rand_quote(ctx.guild.id)
+            time = quote[3].strftime(tformat)
+            str_quote = f'Quote #{quote[0]}: {quote[2]} -{quote[1]} ({time})'
+            await ctx.send(str_quote)
+        except IndexError:
+            await ctx.send('No quote found')
 
     @commands.command()
     async def add_quote(self, ctx):
