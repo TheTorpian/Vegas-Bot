@@ -3,7 +3,7 @@ from discord.ext import commands
 from sql import sql_modes
 from tokenfile import Vars
 
-INVITE = Vars.INVITE  # invite link
+INVITE = Vars.INVITE
 
 
 class HelpCog(commands.Cog):
@@ -26,7 +26,7 @@ class HelpCog(commands.Cog):
         commands['fill'] = [';)) (nsfw only)', '[arg]', 'nsfw']
         # commands['gangrape'] = ['When one is not enough (nsfw only)', '[args...]', 'nsfw']
         commands['quote'] = ['Posts a random quote from this server', '', '']
-        commands['add_quote'] = ['Adds the specified quote', '"quote" <user>', '']
+        commands['add_quote'] = ['Adds the specified quote', '"quote" - <user>', '']
         commands['ricardo'] = ['Posts a random ricardo gif', '', '']
         commands['ricardobear'] = ['Posts the mighty ricardo bear', '', '']
         commands['bigricardo'] = ['Summons big ricardo', '', '']
@@ -39,6 +39,7 @@ class HelpCog(commands.Cog):
         mode = sql_modes.check_mode(sv=ctx.guild.id)[0][0]   # returns dict of tuples, use double index to get actual values
 
         if not args:  # get longest command name, to have evenly spaced help message
+            prefix = sql_modes.get_prefix(ctx.guild.id)
             max_len = 0
             for cmd in commands:
                 if len(cmd) > max_len:
@@ -52,7 +53,7 @@ class HelpCog(commands.Cog):
                 for _ in range(len(command), max_len):  # extra spaces
                     msg += ' '
                 msg += f'{desc[0]}\n'  # add the description
-            msg += "\n\nThis server's prefix is {get_prefix}.\nType .help [command] for more info on a command.```"
+            msg += f"\n\nThis server's prefix is {prefix}.\nType .help [command] for more info on a command.```"
 
         elif args[0] in commands:
             msg = f'```.{args[0]} {commands[args[0]][1]}\n\n{commands[args[0]][0]}```'  # command name and arguments (if needed)

@@ -2,7 +2,7 @@ import random
 from discord.ext import commands
 from tokenfile import Vars
 
-bigric = Vars.bigric  # 49 fucking emotes
+bigric = Vars.bigric
 
 
 class RicardoCog(commands.Cog):

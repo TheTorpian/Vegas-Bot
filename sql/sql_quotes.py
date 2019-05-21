@@ -1,17 +1,17 @@
 import random
-from tokenfile import CONNECTION
+from tokenfile import connection
 
-db = CONNECTION
+db = connection
 
 
-def add_quote(tag, quote, sv):
+def add_quote(tag, quote, sv):  # adds quote to db
     cursor = db.cursor()
     query = 'INSERT INTO Quotes (quoted_tag, quote, server_id_e) VALUES (%s, %s, %s)'
     cursor.execute(query, (tag, quote, sv))
     db.commit()
 
 
-def rand_quote(sv):
+def rand_quote(sv):  # gets a random quote from current server
     cursor = db.cursor()
     query = 'SELECT quote_id, quoted_tag, quote, tstamp FROM Quotes WHERE server_id_e=%s'
     cursor.execute(query, (sv,))

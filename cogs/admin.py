@@ -3,7 +3,7 @@ from discord.ext.commands import has_permissions
 from sql import sql_modes
 from tokenfile import Vars
 
-torp_tag = Vars.torp_tag  # big torpo's discord tag
+torp_tag = Vars.torp_tag
 
 
 class AdminCog(commands.Cog):

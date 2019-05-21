@@ -13,13 +13,13 @@ class QuotesCog(commands.Cog):
     async def quote(self, ctx):
         quote = sql_quotes.rand_quote(ctx.guild.id)
         time = quote[3].strftime(tformat)
-        str_quote = f'Quote #{quote[0]}: {quote[2]} {quote[1]} ({time})'
+        str_quote = f'Quote #{quote[0]}: {quote[2]} -{quote[1]} ({time})'
         await ctx.send(str_quote)
 
     @commands.command()
     async def add_quote(self, ctx):
         msg = ctx.message.content
-        author = re.findall(r'(\s[^"]*$)', msg)
+        author = re.findall(r'(\s[^-]*$)', msg)
         quote = re.findall(r'".*"', msg)
         if not author or not quote:
             await ctx.send('Wrong format')

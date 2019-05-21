@@ -3,7 +3,7 @@ from discord.ext import commands
 from sql import sql_modes
 from tokenfile import Vars
 
-vegas_bot_tag = Vars.vegas_bot_tag  # vegas bot's discord tag
+vegas_bot_tag = Vars.vegas_bot_tag
 
 
 class NsfwCog(commands.Cog):

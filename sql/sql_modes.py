@@ -1,6 +1,6 @@
-from tokenfile import CONNECTION
+from tokenfile import connection
 
-db = CONNECTION
+db = connection
 
 
 def new_server(sv, md):  # adds new server to db, defaults to sfw
@@ -24,7 +24,7 @@ def check_mode(sv):  # checks and returns mode
     return cursor.fetchall()  # returns dict of tuples, use double index to get actual values
 
 
-def get_prefix(sv):
+def get_prefix(sv):  # gets prefix for current server
     cursor = db.cursor()
     query = "SELECT prefix FROM Servers WHERE server_id=%s"
     cursor.execute(query, (sv,))
@@ -32,15 +32,8 @@ def get_prefix(sv):
     return prefix[0][0]
 
 
-def change_prefix(sv, pf):
+def change_prefix(sv, pf):  # changes prefix for current server
     cursor = db.cursor()
     query = "UPDATE Servers SET prefix=%s WHERE server_id=%s"
     cursor.execute(query, (pf, sv))
-    db.commit()
-
-
-def truncate(table):
-    cursor = db.cursor()
-    query = "TRUNCATE TABLE %s"
-    cursor.execute(query, (table,))
     db.commit()

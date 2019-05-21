@@ -2,8 +2,8 @@ import random
 from discord.ext import commands
 from tokenfile import Vars
 
-vegas_bot_tag = Vars.vegas_bot_tag  # vegas bot's discord tag
-torp_tag = Vars.torp_tag  # big torpo's discord tag
+vegas_bot_tag = Vars.vegas_bot_tag
+torp_tag = Vars.torp_tag
 
 
 class SfwCog(commands.Cog):

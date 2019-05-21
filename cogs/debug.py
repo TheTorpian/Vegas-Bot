@@ -2,7 +2,7 @@ import re
 from discord.ext import commands
 from tokenfile import Vars
 
-torp_tag = Vars.torp_tag  # big torpo's discord tag
+torp_tag = Vars.torp_tag
 
 
 class DebugCog(commands.Cog):
