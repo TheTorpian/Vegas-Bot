@@ -21,11 +21,10 @@ class QuotesCog(commands.Cog):
 
     @commands.command()
     async def add_quote(self, ctx):
-        msg = ctx.message.content
-        author = re.findall(r'(\s[^-"]*$)', msg)
-        quote = re.findall(r'"[^"]*"', msg)
-        if len(author) == 1 and len(quote) == 1:
-            sql_quotes.add_quote(author[0][1:], quote[0], ctx.guild.id)
+        author = re.search(r'(\s[^-"]*$)', ctx.message.content)
+        quote = re.search(r'"[^"]*"', ctx.message.content)
+        if author and quote:
+            sql_quotes.add_quote(author.group(0)[1:], quote.group(0), ctx.guild.id)
             await ctx.send('Quote added')
         else:
             await ctx.send('Wrong format')

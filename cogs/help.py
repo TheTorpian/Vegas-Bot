@@ -53,7 +53,7 @@ class HelpCog(commands.Cog):
                 for _ in range(len(command), max_len):  # extra spaces
                     msg += ' '
                 msg += f'{desc[0]}\n'  # add the description
-            msg += f"\n\nThis server's prefix is {prefix}.\nType .help [command] for more info on a command.```"
+            msg += f'\n\nThis server\'s prefix is {prefix}\nType {prefix}help [command] for more info on a command.```'
 
         elif args[0] in commands:
             msg = f'```Use: {prefix}{args[0]} {commands[args[0]][1]}\n\n{commands[args[0]][0]}```'  # command name and arguments (if needed)

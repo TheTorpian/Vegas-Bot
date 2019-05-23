@@ -19,32 +19,31 @@ class DebugCog(commands.Cog):
         if ctx.author.mention == torp_tag:
             await ctx.send(' '.join(args))
 
-    @commands.command()  # sends first word from message
-    async def getargs(self, ctx, *args):
+    @commands.command()  # says args in code block
+    async def get_args(self, ctx, *args):
         if ctx.author.mention == torp_tag:
             tag = ' '.join(args)
             await ctx.send(f'`{tag}`')
 
     @commands.command()  # get current server id
-    async def getguild(self, ctx):
+    async def get_guild(self, ctx):
         if ctx.author.mention == torp_tag:
             await ctx.send(ctx.guild.id)
 
     @commands.command()  # emote testing
-    async def testemote(self, ctx, tag):
+    async def test_emote(self, ctx, tag):
         if ctx.author.mention == torp_tag:
             await ctx.send('<a:Nig:557976066828926986>')
 
     @commands.command()  # testing for regex functions
     async def test_regex(self, ctx):
         if ctx.author.mention == torp_tag:
-            msg = ctx.message.content
-            author = re.findall(r'(\s[^-"]*$)', msg)
-            quote = re.findall(r'"[^"]*"', msg)
-            if len(author) == 1 and len(quote) == 1:
+            author = re.search(r'(\s[^-"]*$)', ctx.message.content)
+            quote = re.search(r'("[^"]*")', ctx.message.content)
+            if author and quote:
                 await ctx.send(ctx.message.content)
-                await ctx.send(quote[0])
-                await ctx.send(author[0][1:])
+                await ctx.send(quote.group(0))
+                await ctx.send(author.group(0)[1:])
             else:
                 await ctx.send('Wrong format')
 

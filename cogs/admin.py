@@ -13,12 +13,19 @@ class AdminCog(commands.Cog):
     @commands.command()  # changes nsfw on or off
     @has_permissions(administrator=True)
     async def nsfw(self, ctx, arg):
+        mode = sql_modes.get_prefix(ctx.guild.id)
         if arg == 'on':
-            sql_modes.change_mode(sv=ctx.guild.id, md='nsfw')
-            await ctx.send('Gettin\' extra naughty now :))')
+            if mode == 'on':
+                await ctx.send('Nsfw is already on')
+            else:
+                sql_modes.change_mode(sv=ctx.guild.id, md='nsfw')
+                await ctx.send('Gettin\' extra naughty now :))')
         elif arg == 'off':
-            await ctx.send('Don\'t tell mommy')
-            sql_modes.change_mode(sv=ctx.guild.id, md='sfw')
+            if mode == 'off':
+                await ctx.send('Nsfw is already off')
+            else:
+                sql_modes.change_mode(sv=ctx.guild.id, md='sfw')
+                await ctx.send('Don\'t tell mommy')
         else:
             await ctx.send("Invalid argument")
 

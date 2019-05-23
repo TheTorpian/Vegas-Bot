@@ -1,3 +1,4 @@
+import re
 import random
 from discord.ext import commands
 from tokenfile import Vars
@@ -54,7 +55,7 @@ class SfwCog(commands.Cog):
         else:
             possible_outcomes = [
                 'bitchslapped',
-                'slapped the bitch out of'
+                'slapped the fuck out of'
             ]
 
             # tag self
@@ -70,7 +71,7 @@ class SfwCog(commands.Cog):
 
     @commands.command()  # challenge the tagged user
     async def challenge(self, ctx, tag):
-        if not tag:  # checks if arguments are passed or tuple is empty
+        if not tag:  # checks if tag arg is empty
             await ctx.send('Who you gonna challenge dumbass')
         else:
             outcome = random.randint(0, 2)
@@ -90,9 +91,8 @@ class SfwCog(commands.Cog):
                     else:
                         await ctx.send(f'{ctx.author.mention} won!')
                         await ctx.send(f'{tag} lost!')
-                if outcome == 2:
-                    if tag == ctx.author.mention:
-                        await ctx.send(f'Both {ctx.author.mention} and {tag} lost!')
+                else:
+                    await ctx.send(f'Both {ctx.author.mention} and {tag} lost!')
 
     @commands.command()  # checks mode of server where command was called
     async def check_nsfw(self, ctx):
@@ -117,6 +117,19 @@ class SfwCog(commands.Cog):
     @commands.command()  # reeeeeeee
     async def reee(self, ctx):
         await ctx.send('https://imgur.com/a/0QeJEHa')
+
+    @commands.Cog.listener()
+    async def on_message(self, message):
+        x = random.choice(range(0, 69))
+        if x >= 60 and not message.author.bot:
+            await dadjoke(message)
+
+
+async def dadjoke(message):
+    words = re.search(r'\b(i\'?m|i\sam)\s+(.*)', message.content, re.IGNORECASE)
+    if words is not None:
+        words = words.group(2)
+        await message.channel.send(f'Hi {words}, I\'m dad!')
 
 
 def setup(bot):
