@@ -85,7 +85,7 @@ class SfwCog(commands.Cog):
                     else:
                         await ctx.send(f'{tag} won!')
                         await ctx.send(f'{ctx.author.mention} lost!')
-                if outcome == 1:
+                elif outcome == 1:
                     if tag == ctx.author.mention:
                         await ctx.send('You won! But also lost...?')
                     else:
