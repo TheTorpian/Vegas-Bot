@@ -13,17 +13,17 @@ class HelpCog(commands.Cog):
     @commands.command()
     async def help(self, ctx, *args):
         commands = OrderedDict()
-        commands['touch'] = ['Touchy touchy', '[arg]', '']
-        commands['succ'] = ['Give someone of your choosing dat good succ', '[arg]', '']
-        commands['bitchslap'] = ['Exactly what it sounds like', '', '']
-        commands['challenge'] = ['Challenge another user', '[arg]', '']
+        commands['touch'] = ['Touchy touchy', '<args...>', '']
+        commands['succ'] = ['Give someone of your choosing dat good succ', '<args...>', '']
+        commands['bitchslap'] = ['Exactly what it sounds like', '<args...>', '']
+        commands['challenge'] = ['Challenge another user', '<arg>', '']
         commands['banana'] = ['If you really need potassium', '', '']
         commands['fuckoff'] = ['Just fuck off mate', '', '']
         commands['pro'] = ['Professionals have standards', '', '']
         commands['reee'] = ['Autistic screeching of the highest quality', '', '']
-        commands['rape'] = ['Non consensual sex with your preferred person/object (nsfw only)', '[arg]', 'nsfw']
-        commands['molest'] = ['Same as .rape, but different reply (nsfw only)', '[arg]', 'nsfw']
-        commands['fill'] = [';)) (nsfw only)', '[arg]', 'nsfw']
+        commands['rape'] = ['Non consensual sex with your preferred person/object (nsfw only)', '<args...>', 'nsfw']
+        commands['molest'] = ['Same as .rape, but different reply (nsfw only)', '<args...>', 'nsfw']
+        commands['fill'] = [';)) (nsfw only)', '<args...>', 'nsfw']
         # commands['gangrape'] = ['When one is not enough (nsfw only)', '[args...]', 'nsfw']
         commands['quote'] = ['Posts a random quote from this server', '', '']
         commands['add_quote'] = ['Adds the specified quote', '"quote" - <user>', '']
@@ -31,9 +31,9 @@ class HelpCog(commands.Cog):
         commands['ricardobear'] = ['Posts the mighty ricardo bear', '', '']
         commands['bigricardo'] = ['Summons big ricardo', '', '']
         commands['check_nsfw'] = ['Checks if nsfw is enabled on this server or not', '', '']
-        commands['nsfw'] = ['Turns nsfw mode on or off (admin only)', '<on>/<off>', '']
-        commands['change_prefix'] = ['Changes the command prefix on this server (admin only)', '', '']
-        commands['help'] = ['It\'s this command', '', '']
+        commands['nsfw'] = ['Turns nsfw mode on or off (admin only)', '<on|off>', '']
+        commands['change_prefix'] = ['Changes the command prefix on this server (admin only)', '<prefix>', '']
+        commands['help'] = ['It\'s this command', '[command]', '']
         commands['invite'] = ['Get the invite link', '', '']
 
         mode = sql_modes.check_mode(sv=ctx.guild.id)[0][0]   # returns list of tuples, use double index to get actual values
@@ -53,10 +53,12 @@ class HelpCog(commands.Cog):
                 for _ in range(len(command), max_len):  # extra spaces
                     msg += ' '
                 msg += f'{desc[0]}\n'  # add the description
-            msg += f'\n\nThis server\'s prefix is {prefix}\nType {prefix}help [command] for more info on a command.```'
+            msg += f'''\n\n<required parameter>; [optional parameter]; \'...\' variable number of parameters; \'|\' OR operator\n
+This server\'s prefix is "{prefix}"
+Type {prefix}help [command] for more info on a command.```'''
 
         elif args[0] in commands:
-            msg = f'```Use: {prefix}{args[0]} {commands[args[0]][1]}\n\n{commands[args[0]][0]}```'  # command name and arguments (if needed)
+            msg = f'```{prefix}{args[0]} {commands[args[0]][1]}\n\n{commands[args[0]][0]}```'  # command name and arguments (if needed)
 
         else:
             msg = 'No command called "'
