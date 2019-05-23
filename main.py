@@ -1,5 +1,4 @@
 import discord
-# import asyncio
 from discord.ext import commands
 from sql import sql_modes
 from tokenfile import Vars
@@ -52,37 +51,3 @@ async def on_ready():
     print(f'\n{sql_modes.db}\n\n')
 
 bot.run(TOKEN, reconnect=True)
-
-
-# def handle_exit():
-#     print("Handling")
-#     bot.loop.run_until_complete(bot.logout())
-#     for t in asyncio.Task.all_tasks(loop=bot.loop):
-#         if t.done():
-#             t.exception()
-#             continue
-#         t.cancel()
-#         try:
-#             bot.loop.run_until_complete(asyncio.wait_for(t, 5, loop=bot.loop))
-#             t.exception()
-#         except asyncio.InvalidStateError:
-#             pass
-#         except asyncio.TimeoutError:
-#             pass
-#         except asyncio.CancelledError:
-#             pass
-
-
-# while True:
-#     try:
-#         bot.loop.run_until_complete(bot.start(TOKEN))
-#     except SystemExit:
-#         handle_exit()
-#     except KeyboardInterrupt:
-#         handle_exit()
-#         bot.loop.close()
-#         print("Program ended")
-#         break
-
-#     print("Bot restarting")
-#     bot = discord.Client(loop=bot.loop)
