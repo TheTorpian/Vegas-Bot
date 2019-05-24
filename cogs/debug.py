@@ -12,7 +12,8 @@ class DebugCog(commands.Cog):
 
     @commands.command()  # ping command
     async def ping(self, ctx):
-        await ctx.send('pong')
+        if ctx.author.mention == torp_tag:
+            await ctx.send('pong')
 
     @commands.command()  # say args
     async def say(self, ctx, *args):
