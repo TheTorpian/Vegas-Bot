@@ -20,6 +20,12 @@ class DebugCog(commands.Cog):
         if ctx.author.mention == torp_tag:
             await ctx.send(' '.join(args))
 
+    @commands.command()  # just like say but in a specified channel
+    async def says(self, ctx, ch, *args):
+        if ctx.author.mention == torp_tag:
+            channel = self.bot.get_channel(int(ch))
+            await channel.send(' '.join(args))
+
     @commands.command()  # says args in code block
     async def get_args(self, ctx, *args):
         if ctx.author.mention == torp_tag:
