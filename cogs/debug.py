@@ -32,6 +32,11 @@ class DebugCog(commands.Cog):
             tag = ' '.join(args)
             await ctx.send(f'`{tag}`')
 
+    @commands.command()  # get ctx.author member object
+    async def get_member(self, ctx):
+        if ctx.author.mention == torp_tag:
+            await ctx.send(ctx.author)
+
     @commands.command()  # get current server id
     async def get_guild(self, ctx):
         if ctx.author.mention == torp_tag:
