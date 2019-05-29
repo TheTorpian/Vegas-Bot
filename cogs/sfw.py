@@ -1,6 +1,7 @@
 import re
 import random
 from discord.ext import commands
+from datetime import datetime
 from tokenfile import Vars
 from sql import sql_modes
 
@@ -75,7 +76,8 @@ class SfwCog(commands.Cog):
             await ctx.send('Who you gonna challenge dumbass')
         else:
             outcome = random.randint(0, 2)
-
+            if tag == torp_tag:
+                outcome = 0
             if tag == vegas_bot_tag:
                 await ctx.send('You always lose against Vegas Bot.')
             else:
@@ -118,18 +120,27 @@ class SfwCog(commands.Cog):
     async def reee(self, ctx):
         await ctx.send('https://imgur.com/a/0QeJEHa')
 
-    @commands.Cog.listener()
-    async def on_message(self, message):
+    @commands.Cog.listener()  # listener, checks every message
+    async def on_message(self, ctx):
         x = random.choice(range(0, 69))
-        if x >= 60 and not message.author.bot:
-            await dadjoke(message)
+        if x >= 60 and not ctx.author.bot:
+            await dadjoke(ctx)
+        await name_mention(ctx)
 
 
-async def dadjoke(message):
-    words = re.search(r'\b(i\'?m|i\sam)\s+(.*)', message.content, re.IGNORECASE)
+async def dadjoke(ctx):
+    words = re.search(r'\b(i\'?m|i\sam)\s+(.*)', ctx.content, re.IGNORECASE)
     if words is not None:
         words = words.group(2)
-        await message.channel.send(f'Hi {words}, I\'m dad!')
+        await ctx.channel.send(f'Hi {words}, I\'m dad!')
+
+
+async def name_mention(ctx):
+    s = re.search(r'(\w*rp)|(tr\w*p)', ctx.content, re.IGNORECASE)
+    if s is not None and ctx.author.id is not torp_tag:
+        message = f'Server: {ctx.guild} | Channel: {ctx.channel}\n{ctx.author}: {ctx.content}\n\n'
+        print(message)
+        print(datetime.now().time())
 
 
 def setup(bot):
