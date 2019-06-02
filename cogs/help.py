@@ -10,7 +10,7 @@ class HelpCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command()
+    @commands.command(when_mentioned=True)
     async def help(self, ctx, *args):
         commands = OrderedDict()
         commands['touch'] = ['Touchy touchy', '<args...>', '']
@@ -21,6 +21,7 @@ class HelpCog(commands.Cog):
         commands['fuckoff'] = ['Just fuck off mate', '', '']
         commands['pro'] = ['Professionals have standards', '', '']
         commands['reee'] = ['Autistic screeching of the highest quality', '', '']
+        commands['yw'] = ['What can I say except you\'re welcome!', '', '']
         commands['rape'] = ['Non consensual sex with your preferred person/object (nsfw only)', '<args...>', 'nsfw']
         commands['molest'] = ['Same as .rape, but different reply (nsfw only)', '<args...>', 'nsfw']
         commands['fill'] = [';)) (nsfw only)', '<args...>', 'nsfw']
@@ -64,6 +65,11 @@ Type {prefix}help [command] for more info on a command.```'''
             msg += ' '.join(args)
             msg += '" found.'
         await ctx.send(msg)
+
+    @commands.command(when_mentioned=True)
+    async def prefix(self, ctx):  # get the prefix for this server
+        prefix = sql_modes.get_prefix(ctx.guild.id)
+        await ctx.send(f'This server\'s prefix is "{prefix}"\nType {prefix}help to see a list of commands.')
 
     @commands.command()  # invite link
     async def invite(self, ctx):

@@ -59,7 +59,6 @@ class SfwCog(commands.Cog):
                 'bitchslapped',
                 'slapped the fuck out of'
             ]
-
             # tag self
             if args[0] == ctx.author.mention or args[0] == 'myself':
                 await ctx.send(f'{ctx.author.mention} bitchslapped themselves')
@@ -76,33 +75,32 @@ class SfwCog(commands.Cog):
         torp_user = ctx.guild.get_member(torp_tag)
         vegas_bot_user = ctx.guild.get_member(vegas_bot_tag)
         outcome = random.randint(0, 2)
-        if torp_user.mentioned_in(ctx.message) or ctx.author == torp_user:
-            outcome = 0
-        if tag == vegas_bot_user:
+        if tag == vegas_bot_user:  # Vegas Bot never loses
             await ctx.send('You always lose against Vegas Bot.')
         else:
-            if outcome == 0:
-                if tag == ctx.author.mention:
-                    await ctx.send('You lost against... yourself?')
-                else:
+            if tag == ctx.author:  # user tags themselves
+                await ctx.send('You lost against... yourself?')
+            else:
+                if torp_user.mentioned_in(ctx.message):  # I win if I get challenged
+                    outcome = 0
+                if torp_user == ctx.author:  # I win if I challenge
+                    outcome = 1
+                if outcome == 0:  # tagged user wins
                     await ctx.send(f'{tag.display_name} won!')
                     await ctx.send(f'{ctx.author.display_name} lost!')
-            elif outcome == 1:
-                if tag == ctx.author.mention:
-                    await ctx.send('You won! But also lost...?')
-                else:
+                elif outcome == 1:  # author wins
                     await ctx.send(f'{ctx.author.display_name} won!')
                     await ctx.send(f'{tag.display_name} lost!')
-            else:
-                await ctx.send(f'Both {ctx.author.mention} and {tag.display_name} lost!')
+                else:  # both lose
+                    await ctx.send(f'Both {ctx.author.mention} and {tag.display_name} lost!')
 
-    @commands.command()
-    async def enable(self, ctx, tag):
-        await ctx.send(f'Congrats {tag.display_name}, you\'re not disabled anymore!')
+    @commands.command()  # WIP
+    async def enable(self, ctx, user: discord.Member):
+        await ctx.send(f'Congrats {user.display_name}, you\'re not disabled anymore!')
 
-    @commands.command()
-    async def disable(self, ctx, tag):
-        await ctx.send(f'I\'m sorry {tag.display_name}, but you\'re now disabled.')
+    @commands.command()  # WIP
+    async def disable(self, ctx, user: discord.Member):
+        await ctx.send(f'I\'m sorry {user.display_name}, but you\'re now disabled.')
 
     @commands.command()  # checks mode of server where command was called
     async def check_nsfw(self, ctx):

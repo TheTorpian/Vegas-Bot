@@ -10,7 +10,7 @@ class AdminCog(commands.Cog):
     @commands.command()  # changes nsfw on or off
     @has_permissions(administrator=True)
     async def nsfw(self, ctx, arg):
-        mode = sql_modes.check_mode(sv=ctx.guild.id)[0][0]
+        mode = sql_modes.check_mode(sv=ctx.guild.id)[0][0]  # returns list of tuples, use double index to get actual values
         if arg == 'on':
             if mode == 'nsfw':
                 await ctx.send('Nsfw is already on')
