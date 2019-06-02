@@ -79,33 +79,6 @@ class NsfwCog(commands.Cog):
                     msg += ' all the way up ;))'
                     await ctx.send(msg)
 
-    # @commands.command()  # rape for 2 tags
-    # async def gangrape(self, ctx, *args):
-    #     mode = sql_modes.check_mode(sv=ctx.guild.id)[0][0]   # returns dict of tuples, use double index to get actual values
-    #     if mode == 'sfw':
-    #         await ctx.send("You're not supposed to use this command.")
-    #     else:
-    #         if not args or len(args) < 2:  # checks if arguments are passed or tuple is empty
-    #             await ctx.send('Who you gonna gangrape dumbass')
-    #         else:
-    #             possible_responses = [
-    #                 ' raped ',
-    #                 ' touched ',
-    #                 ' molested ',
-    #                 ' went to town with ',
-    #                 " creepy uncle'd ",
-    #                 ' filled the holes of ',
-    #                 ' priested ',
-    #                 ' step dadded '
-    #             ]
-    #             msg = ctx.author.mention + random.choice(possible_responses) + args[0]
-    #             for arg in args[1:]:
-    #                 if arg == ' ':  # removes blank spaces
-    #                     break
-    #                 else:
-    #                     msg += f' and {arg}'
-    #             await ctx.send(msg)
-
 
 def setup(bot):
     bot.add_cog(NsfwCog(bot))

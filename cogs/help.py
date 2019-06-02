@@ -24,7 +24,6 @@ class HelpCog(commands.Cog):
         commands['rape'] = ['Non consensual sex with your preferred person/object (nsfw only)', '<args...>', 'nsfw']
         commands['molest'] = ['Same as .rape, but different reply (nsfw only)', '<args...>', 'nsfw']
         commands['fill'] = [';)) (nsfw only)', '<args...>', 'nsfw']
-        # commands['gangrape'] = ['When one is not enough (nsfw only)', '[args...]', 'nsfw']
         commands['quote'] = ['Posts a random quote from this server', '', '']
         commands['add_quote'] = ['Adds the specified quote', '"quote" - <user>', '']
         commands['ricardo'] = ['Posts a random ricardo gif', '', '']

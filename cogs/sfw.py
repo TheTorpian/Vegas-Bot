@@ -1,7 +1,8 @@
 import re
 import random
-from discord.ext import commands
+import discord
 from datetime import datetime
+from discord.ext import commands
 from tokenfile import Vars
 from sql import sql_modes
 
@@ -71,30 +72,37 @@ class SfwCog(commands.Cog):
                 await ctx.send(msg)
 
     @commands.command()  # challenge the tagged user
-    async def challenge(self, ctx, tag):
-        if not tag:  # checks if tag arg is empty
-            await ctx.send('Who you gonna challenge dumbass')
+    async def challenge(self, ctx, tag: discord.Member):
+        torp_user = ctx.guild.get_member(torp_tag)
+        vegas_bot_user = ctx.guild.get_member(vegas_bot_tag)
+        outcome = random.randint(0, 2)
+        if torp_user.mentioned_in(ctx.message) or ctx.author == torp_user:
+            outcome = 0
+        if tag == vegas_bot_user:
+            await ctx.send('You always lose against Vegas Bot.')
         else:
-            outcome = random.randint(0, 2)
-            if tag == torp_tag:
-                outcome = 0
-            if tag == vegas_bot_tag:
-                await ctx.send('You always lose against Vegas Bot.')
-            else:
-                if outcome == 0:
-                    if tag == ctx.author.mention:
-                        await ctx.send('You lost against... yourself?')
-                    else:
-                        await ctx.send(f'{tag} won!')
-                        await ctx.send(f'{ctx.author.mention} lost!')
-                elif outcome == 1:
-                    if tag == ctx.author.mention:
-                        await ctx.send('You won! But also lost...?')
-                    else:
-                        await ctx.send(f'{ctx.author.mention} won!')
-                        await ctx.send(f'{tag} lost!')
+            if outcome == 0:
+                if tag == ctx.author.mention:
+                    await ctx.send('You lost against... yourself?')
                 else:
-                    await ctx.send(f'Both {ctx.author.mention} and {tag} lost!')
+                    await ctx.send(f'{tag.display_name} won!')
+                    await ctx.send(f'{ctx.author.display_name} lost!')
+            elif outcome == 1:
+                if tag == ctx.author.mention:
+                    await ctx.send('You won! But also lost...?')
+                else:
+                    await ctx.send(f'{ctx.author.display_name} won!')
+                    await ctx.send(f'{tag.display_name} lost!')
+            else:
+                await ctx.send(f'Both {ctx.author.mention} and {tag.display_name} lost!')
+
+    @commands.command()
+    async def enable(self, ctx, tag):
+        await ctx.send(f'Congrats {tag.display_name}, you\'re not disabled anymore!')
+
+    @commands.command()
+    async def disable(self, ctx, tag):
+        await ctx.send(f'I\'m sorry {tag.display_name}, but you\'re now disabled.')
 
     @commands.command()  # checks mode of server where command was called
     async def check_nsfw(self, ctx):
@@ -120,6 +128,10 @@ class SfwCog(commands.Cog):
     async def reee(self, ctx):
         await ctx.send('https://imgur.com/a/0QeJEHa')
 
+    @commands.command()  # sends you're welcome gif
+    async def yw(self, ctx):
+        await ctx.send('https://tenor.com/view/youre-welcome-maui-moana-gif-8323041')
+
     @commands.Cog.listener()  # listener, checks every message
     async def on_message(self, ctx):
         x = random.choice(range(0, 69))
@@ -138,9 +150,10 @@ async def dadjoke(ctx):
 async def name_mention(ctx):
     s = re.search(r'(\w*rp)|(tr\w*p)', ctx.content, re.IGNORECASE)
     if s is not None and ctx.author.id is not torp_tag:
-        message = f'Server: {ctx.guild} | Channel: {ctx.channel}\n{ctx.author}: {ctx.content}\n\n'
+        message = f'Server: {ctx.guild} | Channel: {ctx.channel}\n{ctx.author}: {ctx.content}'
+        print(f'\'{s.group(0)}\'')
         print(message)
-        print(datetime.now().time())
+        print(f'{datetime.now().time()}\n\n')
 
 
 def setup(bot):

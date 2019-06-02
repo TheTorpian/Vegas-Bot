@@ -4,6 +4,7 @@ from sql import sql_modes
 from tokenfile import Vars
 
 TOKEN = Vars.TOKEN
+torp_tag = Vars.torp_tag
 
 
 def get_pref(bot, message):
@@ -18,7 +19,8 @@ initial_extensions = [
     'cogs.ricardo',
     'cogs.help',
     'cogs.debug',
-    'cogs.admin'
+    'cogs.admin',
+    'cogs.error_handler'
 ]
 
 bot = commands.Bot(command_prefix=get_pref)
