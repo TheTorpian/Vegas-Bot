@@ -14,7 +14,6 @@ class HelpCog(commands.Cog):
     async def help(self, ctx, *args):
         commands = OrderedDict()
         commands['touch'] = ['Touchy touchy', '<mention>', '']
-        commands['succ'] = ['Give someone of your choosing dat good succ', '<mention>', '']
         commands['bitchslap'] = ['Exactly what it sounds like', '<mention>', '']
         commands['challenge'] = ['Challenge another user', '<mention>', '']
         commands['banana'] = ['If you really need potassium', '', '']
@@ -23,6 +22,7 @@ class HelpCog(commands.Cog):
         commands['reee'] = ['Autistic screeching of the highest quality', '', '']
         commands['yw'] = ['What can I say except you\'re welcome!', '', '']
         commands['rape, molest'] = ['Non consensual sex with your preferred person/object (nsfw only)', '<mention>', 'nsfw']
+        commands['succ'] = ['Give someone of your choosing dat good succ (nsfw only)', '<mention>', 'nsfw']
         commands['fill'] = [';)) (nsfw only)', '<mention>', 'nsfw']
         commands['quote'] = ['Posts a random quote from this server', '', '']
         commands['add_quote'] = ['Adds the specified quote', '<"quote" - user>', '']

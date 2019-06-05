@@ -28,7 +28,7 @@ class CommandErrorHandler(commands.Cog):
                 fmt = f'{"**, **".join(missing[:-1])}, and {missing[-1]}'
             else:
                 fmt = ' and '.join(missing)
-            _message = f'You need the **{fmt}** permission(s) to use this command.'
+            _message = f'You talk a lotta shit for someone who doesn\'t have the {fmt} permission(s).'
             await ctx.send(_message)
 
         print(f'Ignoring exception in command {ctx.command}:', file=sys.stderr)

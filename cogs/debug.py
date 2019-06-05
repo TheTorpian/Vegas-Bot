@@ -65,14 +65,13 @@ class DebugCog(commands.Cog):
         if ctx.author == ctx.guild.get_member(torp_tag):
             sql_modes.new_server(sv=ctx.guild.id, md='sfw')
             print(f'Added \'{ctx.guild.id}\' to db\n\n')
-        else:
-            await ctx.send('You do not have permission to use this command.')
 
     @commands.command()  # sends query
     async def query(self, ctx, *args):
         if ctx.author == ctx.guild.get_member(torp_tag):
             query = ' '.join(args)
             sql_modes.send_query(query)
+            await ctx.send(f'Query `{query}` sent')
 
     @commands.command()  # leaves guild specified and prints in console
     async def leave(self, ctx, arg):
@@ -81,8 +80,6 @@ class DebugCog(commands.Cog):
                 if str(server.id) == str(arg):
                     await server.leave()
                     print(f'Left \'{server.name}\': {server.id}')
-        else:
-            await ctx.send('You do not have permission to use this command.')
 
 
 def setup(bot):

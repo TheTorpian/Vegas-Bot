@@ -22,7 +22,8 @@ def check_mode(sv):  # checks and returns mode
     cursor = tokenfile.get_cursor(connection)
     query = "SELECT mode FROM Servers WHERE server_id=%s"
     cursor.execute(query, (sv,))
-    return cursor.fetchall()  # returns list of tuples, use double index to get actual values
+    mode = cursor.fetchall()  # returns list of tuples, use double index to get actual values
+    return mode[0][0]
 
 
 def get_prefix(sv):  # gets prefix for current server
@@ -40,8 +41,7 @@ def change_prefix(sv, pf):  # changes prefix for current server
     db.commit()
 
 
-def send_query(q):  # sends query q
+def send_query(q):  # executes query q
     cursor = tokenfile.get_cursor(connection)
-    query = q
-    cursor.execute(query)
+    cursor.execute(q)
     db.commit()

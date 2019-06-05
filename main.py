@@ -26,6 +26,10 @@ cogs = [
 bot = commands.Bot(command_prefix=get_prefix)
 bot.remove_command('help')  # removes default help command
 
+if __name__ == '__main__':
+    for cog in cogs:
+        bot.load_extension(cog)
+
 
 @bot.event  # prints message in console with name and id of guild joined
 async def on_guild_join(guild):
@@ -40,8 +44,6 @@ async def on_guild_join(guild):
 
 @bot.event
 async def on_ready():
-    for cog in cogs:
-        bot.load_extension(cog)
     game = discord.Game('with the big boys')
     await bot.change_presence(status=discord.Status.online, activity=game)
     print(f'Logged in as {bot.user.name}')

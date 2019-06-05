@@ -34,22 +34,6 @@ class SfwCog(commands.Cog):
                 msg = f'{ctx.author.display_name} touched {tag.display_name}'
                 await ctx.send(msg)
 
-    @commands.command()  # rape command clone
-    async def succ(self, ctx, tag: discord.member):
-        vegas_bot_user = ctx.guild.get_member(vegas_bot_tag)
-        if not tag:  # checks for tag
-            await ctx.send('Who you gonna succ dumbass')
-        else:
-            # tag self
-            if tag == ctx.author:
-                await ctx.send(f'{ctx.author.display_name} got their own succ')
-            # tag is Vegas Bot
-            elif tag == vegas_bot_user:
-                await ctx.send('The Vegas Bot gave you the succ.')
-            else:
-                msg = f'{ctx.author.display_name} gave {tag.display_name} dat good succ'
-                await ctx.send(msg)
-
     @commands.command()  # bitchslaps the tagged user
     async def bitchslap(self, ctx, tag: discord.member):
         vegas_bot_user = ctx.guild.get_member(vegas_bot_tag)
@@ -93,14 +77,6 @@ class SfwCog(commands.Cog):
                     await ctx.send(f'{tag.display_name} lost!')
                 else:  # both lose
                     await ctx.send(f'Both {ctx.author.display_name} and {tag.display_name} lost!')
-
-    @commands.command()  # WIP
-    async def enable(self, ctx, user: discord.Member):
-        await ctx.send(f'Congrats {user.display_name}, you\'re not disabled anymore!')
-
-    @commands.command()  # WIP
-    async def disable(self, ctx, user: discord.Member):
-        await ctx.send(f'I\'m sorry {user.display_name}, but you\'re now disabled.')
 
     @commands.command()  # checks mode of server where command was called
     async def check_nsfw(self, ctx):
