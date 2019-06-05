@@ -1,4 +1,5 @@
 import random
+import discord
 from discord.ext import commands
 from sql import sql_modes
 from tokenfile import Vars
@@ -10,73 +11,55 @@ class NsfwCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command()  # rapes the tagged user or whatever gets typed
-    async def rape(self, ctx, *args):
+    @commands.command(aliases=['molest'])  # rapes the tagged user
+    async def rape(self, ctx, tag: discord.Member):
         mode = sql_modes.check_mode(sv=ctx.guild.id)[0][0]   # returns list of tuples, use double index to get actual values
+        vegas_bot_user = ctx.guild.get_member(vegas_bot_tag)
         if mode == 'sfw':
             await ctx.send('You\'re not supposed to use this command.')
         else:
-            if not args:  # checks if arguments are passed or tuple is empty
+            if not tag:  # checks for tag
                 await ctx.send('Who you gonna rape dumbass')
             else:
                 possible_responses = [
-                    ' raped ',
-                    ' went to town with ',
-                    ' creepy uncle\'d ',
-                    ' priested ',
-                    ' step dadded '
+                    f'raped {tag.display_name}',
+                    f'molested {tag.display_name}',
+                    f'went to town with {tag.display_name}',
+                    f'creepy uncle\'d {tag.display_name}',
+                    f'priested {tag.display_name}',
+                    f'step dadded {tag.display_name}',
+                    f'tore {tag.display_name} a new one',
+                    f'went into {tag.display_name}\'s every hole'
                 ]
                 # self rape
-                if args[0] == ctx.author.mention or args[0] == 'myself':
+                if tag == ctx.author:
                     await ctx.send('ya nasty')
-                # Vegas Bot rape
-                elif args[0] == vegas_bot_tag:
+                # tag is Vegas Bot
+                elif tag == vegas_bot_user:
                     await ctx.send('You can\'t rape the Vegas Bot.')
                 # all other rapes
                 else:
-                    msg = ctx.author.mention + random.choice(possible_responses)
-                    msg += ' '.join(args)
+                    msg = f'{ctx.author.display_name} {random.choice(possible_responses)}'
                     await ctx.send(msg)
 
     @commands.command()  # rape command clone
-    async def molest(self, ctx, *args):
+    async def fill(self, ctx, tag: discord.Member):
         mode = sql_modes.check_mode(sv=ctx.guild.id)[0][0]   # returns list of tuples, use double index to get actual values
+        vegas_bot_user = ctx.guild.get_member(vegas_bot_tag)
         if mode == 'sfw':
             await ctx.send('You\'re not supposed to use this command.')
         else:
-            if not args:
-                await ctx.send('Who you gonna molest dumbass')
-            else:
-                # tag self
-                if args[0] == ctx.author.mention or args[0] == 'myself':
-                    await ctx.send(f'{ctx.author.mention} tried to molest themselves.')
-                # tag vegas bot
-                elif args[0] == vegas_bot_tag:
-                    await ctx.send('You cannot molest the Vegas Bot.')
-                else:
-                    msg = f'{ctx.author.mention} molested '
-                    msg += ' '.join(args)
-                    await ctx.send(msg)
-
-    @commands.command()  # rape command clone
-    async def fill(self, ctx, *args):
-        mode = sql_modes.check_mode(sv=ctx.guild.id)[0][0]   # returns list of tuples, use double index to get actual values
-        if mode == 'sfw':
-            await ctx.send('You\'re not supposed to use this command.')
-        else:
-            if not args:  # checks if arguments are passed or tuple is empty
+            if not tag:  # checks for tag
                 await ctx.send('Who you gonna fill dumbass')
             else:
                 # tag self
-                if args[0] == ctx.author.mention or args[0] == 'myself':
-                    await ctx.send(f'{ctx.author.mention} filled... themselves up?')
-                # tag vegas bot
-                elif args[0] == vegas_bot_tag:
+                if tag == ctx.author:
+                    await ctx.send(f'{ctx.author.display_name} filled... themselves up?')
+                # tag is Vegas Bot
+                elif tag == vegas_bot_user:
                     await ctx.send('You cannot fill the Vegas Bot.')
                 else:
-                    msg = f'{ctx.author.mention} filled '
-                    msg += ' '.join(args)
-                    msg += ' all the way up ;))'
+                    msg = f'{ctx.author.display_name} filled {tag.display_name} all the way up ;))'
                     await ctx.send(msg)
 
 

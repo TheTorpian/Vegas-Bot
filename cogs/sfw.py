@@ -15,44 +15,45 @@ class SfwCog(commands.Cog):
         self.bot = bot
 
     @commands.command()  # rape command clone
-    async def touch(self, ctx, *args):
-        if not args:  # checks if arguments are passed or tuple is empty
+    async def touch(self, ctx, tag: discord.Member):
+        torp_user = ctx.guild.get_member(torp_tag)
+        vegas_bot_user = ctx.guild.get_member(vegas_bot_tag)
+        if not tag:  # checks for tag
             await ctx.send('Who you gonna touch dumbass')
         else:
             # tag self
-            if args[0] == ctx.author.mention or args[0] == 'myself':
-                await ctx.send(f'{ctx.author.mention} touched themselves reaaaaaal good.')
-            # tag vegas bot
-            elif args[0] == vegas_bot_tag:
-                if ctx.author.mention == torp_tag:  # torp tag
+            if tag == ctx.author:
+                await ctx.send(f'{ctx.author.display_name} touched themselves reaaaaaal good.')
+            # tag is Vegas Bot
+            elif tag == vegas_bot_user:
+                if ctx.author == torp_user:  # torp tag
                     await ctx.send('mmm yes daddy')
                 else:  # non-torp tags
                     await ctx.send('Only Torp can touch the Vegas Bot.')
             else:
-                msg = f'{ctx.author.mention} touched '
-                msg += ' '.join(args)
+                msg = f'{ctx.author.display_name} touched {tag.display_name}'
                 await ctx.send(msg)
 
     @commands.command()  # rape command clone
-    async def succ(self, ctx, *args):
-        if not args:  # checks if arguments are passed or tuple is empty
+    async def succ(self, ctx, tag: discord.member):
+        vegas_bot_user = ctx.guild.get_member(vegas_bot_tag)
+        if not tag:  # checks for tag
             await ctx.send('Who you gonna succ dumbass')
         else:
             # tag self
-            if args[0] == ctx.author.mention or args[0] == 'myself':
-                await ctx.send(f'{ctx.author.mention} got their own succ')
-            # tag vegas bot
-            elif args[0] == vegas_bot_tag:
+            if tag == ctx.author:
+                await ctx.send(f'{ctx.author.display_name} got their own succ')
+            # tag is Vegas Bot
+            elif tag == vegas_bot_user:
                 await ctx.send('The Vegas Bot gave you the succ.')
             else:
-                msg = f'{ctx.author.mention} gave '
-                msg += ' '.join(args)
-                msg += ' dat good succ'
+                msg = f'{ctx.author.display_name} gave {tag.display_name} dat good succ'
                 await ctx.send(msg)
 
-    @commands.command()  # bitchslaps the tagged user or whatever gets typed
-    async def bitchslap(self, ctx, *args):
-        if not args:  # checks if arguments are passed or tuple is empty
+    @commands.command()  # bitchslaps the tagged user
+    async def bitchslap(self, ctx, tag: discord.member):
+        vegas_bot_user = ctx.guild.get_member(vegas_bot_tag)
+        if not tag:  # checks for tag
             await ctx.send('Who you gonna bitchslap dumbass')
         else:
             possible_outcomes = [
@@ -60,14 +61,13 @@ class SfwCog(commands.Cog):
                 'slapped the fuck out of'
             ]
             # tag self
-            if args[0] == ctx.author.mention or args[0] == 'myself':
-                await ctx.send(f'{ctx.author.mention} bitchslapped themselves')
-            # tag vegas bot
-            elif args[0] == vegas_bot_tag:
+            if tag == ctx.author:
+                await ctx.send(f'{ctx.author.display_name} bitchslapped themselves')
+            # tag is Vegas Bot
+            elif tag == vegas_bot_user:
                 await ctx.send('You cannot bitchslap the Vegas Bot.')
             else:
-                msg = f'{ctx.author.mention} {random.choice(possible_outcomes)} '
-                msg += ' '.join(args)
+                msg = f'{ctx.author.display_name} {random.choice(possible_outcomes)} {tag.display_name}'
                 await ctx.send(msg)
 
     @commands.command()  # challenge the tagged user
@@ -92,7 +92,7 @@ class SfwCog(commands.Cog):
                     await ctx.send(f'{ctx.author.display_name} won!')
                     await ctx.send(f'{tag.display_name} lost!')
                 else:  # both lose
-                    await ctx.send(f'Both {ctx.author.mention} and {tag.display_name} lost!')
+                    await ctx.send(f'Both {ctx.author.display_name} and {tag.display_name} lost!')
 
     @commands.command()  # WIP
     async def enable(self, ctx, user: discord.Member):
@@ -138,14 +138,14 @@ class SfwCog(commands.Cog):
         await name_mention(ctx)
 
 
-async def dadjoke(ctx):
+async def dadjoke(ctx):  # it's a fuckin dad joke
     words = re.search(r'\b(i\'?m|i\sam)\s+(.*)', ctx.content, re.IGNORECASE)
     if words is not None:
         words = words.group(2)
         await ctx.channel.send(f'Hi {words}, I\'m dad!')
 
 
-async def name_mention(ctx):
+async def name_mention(ctx):  # prints to console when my name is said
     s = re.search(r'(\w*rp)|(tr\w*p)', ctx.content, re.IGNORECASE)
     if s is not None and ctx.author.id is not torp_tag:
         message = f'Server: {ctx.guild} | Channel: {ctx.channel}\n{ctx.author}: {ctx.content}'
