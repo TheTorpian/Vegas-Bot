@@ -93,17 +93,18 @@ class NsfwCog(commands.Cog):
                 await ctx.send('You can\'t enable yourself')
             else:
                 hcap = sql_handicap.select_handicap(user=tag.id)
-                if hcap is None:
+                try:
                     sql_handicap.insert_handicap(user=tag.id, handicap='disabled')
                     await ctx.send('They haven\'t been disabled yet, so I just went ahead and did it for you.')
-                elif hcap == 'enabled':
-                    await ctx.send('User isn\'t disabled yet.')
-                elif hcap == 'disabled':
-                    sql_handicap.change_handicap(user=tag.id, handicap='enabled')
-                    responses = [
-                        f'Congrats {tag.display_name}, you\'re not disabled!'
-                    ]
-                    await ctx.send(random.choice(responses))
+                except mysql.errors.IntegrityError:
+                    if hcap == 'enabled':
+                        await ctx.send('User isn\'t disabled yet.')
+                    elif hcap == 'disabled':
+                        sql_handicap.change_handicap(user=tag.id, handicap='enabled')
+                        responses = [
+                            f'Congrats {tag.display_name}, you\'re not disabled!'
+                        ]
+                        await ctx.send(random.choice(responses))
 
     @commands.command()  # disables the tagged user
     async def disable(self, ctx, tag: discord.Member):
@@ -115,18 +116,19 @@ class NsfwCog(commands.Cog):
                 await ctx.send('You can\'t disable yourself.')
             else:
                 hcap = sql_handicap.select_handicap(user=tag.id)
-                if hcap is None:
+                try:
                     sql_handicap.insert_handicap(user=tag.id, handicap='disabled')
                     await ctx.send(f'{tag.display_name}, you just got disabled!')
-                if hcap == 'disabled':
-                    await ctx.send('Can\'t get more disabled than they already are.')
-                elif hcap == 'enabled':
-                    sql_handicap.change_handicap(user=tag.id, handicap='disabled')
-                    responses = [
-                        f'Enjoy your free parking spot, {tag.display_name}.',
-                        f'Enjoy your disability checks, {tag.display_name}.'
-                    ]
-                    await ctx.send(random.choice(responses))
+                except mysql.errors.IntegrityError:
+                    if hcap == 'disabled':
+                        await ctx.send('Can\'t get more disabled than they already are.')
+                    elif hcap == 'enabled':
+                        sql_handicap.change_handicap(user=tag.id, handicap='disabled')
+                        responses = [
+                            f'Enjoy your free parking spot, {tag.display_name}.',
+                            f'Enjoy your disability checks, {tag.display_name}.'
+                        ]
+                        await ctx.send(random.choice(responses))
 
 
 def setup(bot):
