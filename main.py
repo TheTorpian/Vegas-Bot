@@ -1,4 +1,5 @@
 import discord
+from datetime import datetime
 from discord.ext import commands
 from sql import sql_modes
 from tokenfile import Vars
@@ -46,6 +47,7 @@ async def on_guild_join(guild):
 async def on_ready():
     game = discord.Game('with the big boys')
     await bot.change_presence(status=discord.Status.online, activity=game)
+    print(f'{datetime.now()}')
     print(f'Logged in as {bot.user.name}')
     print('Current servers:')
     for server in bot.guilds:
