@@ -35,24 +35,24 @@ class SfwCog(commands.Cog):
                 await ctx.send(msg)
 
     @commands.command()  # bitchslaps the tagged user
-    async def bitchslap(self, ctx, tag: discord.member):
+    async def bitchslap(self, ctx, tag: discord.Member):
         vegas_bot_user = ctx.guild.get_member(vegas_bot_tag)
-        if not tag:  # checks for tag
-            await ctx.send('Who you gonna bitchslap dumbass')
+        # if not tag.mentioned_in(ctx.content):  # checks for tag
+        #     await ctx.send('Who you gonna bitchslap dumbass')
+        # else:
+        possible_outcomes = [
+            'bitchslapped',
+            'slapped the fuck out of'
+        ]
+        # tag self
+        if tag == ctx.author:
+            await ctx.send(f'{ctx.author.display_name} bitchslapped themselves')
+        # tag is Vegas Bot
+        elif tag == vegas_bot_user:
+            await ctx.send('You cannot bitchslap the Vegas Bot.')
         else:
-            possible_outcomes = [
-                'bitchslapped',
-                'slapped the fuck out of'
-            ]
-            # tag self
-            if tag == ctx.author:
-                await ctx.send(f'{ctx.author.display_name} bitchslapped themselves')
-            # tag is Vegas Bot
-            elif tag == vegas_bot_user:
-                await ctx.send('You cannot bitchslap the Vegas Bot.')
-            else:
-                msg = f'{ctx.author.display_name} {random.choice(possible_outcomes)} {tag.display_name}'
-                await ctx.send(msg)
+            msg = f'{ctx.author.display_name} {random.choice(possible_outcomes)} {tag.display_name}'
+            await ctx.send(msg)
 
     @commands.command()  # challenge the tagged user
     async def challenge(self, ctx, tag: discord.Member):
@@ -127,7 +127,7 @@ async def name_mention(ctx):  # prints to console when my name is said
         message = f'Server: {ctx.guild} | Channel: {ctx.channel}\n{ctx.author}: {ctx.content}'
         print(f'\'{s.group(0)}\'')
         print(message)
-        print(f'{datetime.now().time()}\n\n')
+        print(f'{datetime.now()}\n\n')
 
 
 def setup(bot):
