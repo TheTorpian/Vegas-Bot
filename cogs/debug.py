@@ -1,10 +1,13 @@
 import re
+import requests
+import random
 from discord.ext import commands
 from tokenfile import Vars
 from sql import sql_modes
 
 vegas_bot_tag = Vars.vegas_bot_tag
 torp_tag = Vars.torp_tag
+apikey = Vars.apikey
 
 
 class DebugCog(commands.Cog):
@@ -59,6 +62,28 @@ class DebugCog(commands.Cog):
                 await ctx.send(author.group(0)[1:])
             else:
                 await ctx.send('Wrong format')
+
+    @commands.command()  # tests tenor gif
+    async def test_tenor(self, ctx):
+        if ctx.author == ctx.guild.get_member(torp_tag):
+            search = f'https://api.tenor.com/v1/search?q=ricardo&key={apikey}'  # searches tenor for ricardo with my apikey
+            get = requests.get(search)
+            if get.status_code == 200:  # get successful
+                json_search = get.json()
+                json_check = json_search['next']  # number of results, is string
+                if json_check == '0':
+                    await ctx.send('No gifs found.')
+                else:
+                    gif = random.randint(1, int(json_check))  # random gif from those found
+                    json_s = json_search['results']  # get the results
+                    table = json_s[gif]  # get the random gif
+                    table = table.get('media')  # go into media, various file types etc
+                    table = table[0]  # has to get the first element
+                    table = table.get('gif')  # get the gif element
+                    table = table.get('url')  # get url of gif
+                    await ctx.send(table)
+            elif get.status_code == 404:
+                await ctx.send('Error 404!')
 
     @commands.command()  # manually adds server where command was called
     async def add_server_db(self, ctx):
