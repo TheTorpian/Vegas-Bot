@@ -122,8 +122,9 @@ async def dadjoke(ctx):  # it's a fuckin dad joke
 
 
 async def name_mention(ctx):  # prints to console when my name is said
-    s = re.search(r'(\w*rp)|(tr\w*p)', ctx.content, re.IGNORECASE)
-    if s is not None and ctx.author.id is not torp_tag:
+    s = re.search(r'(t\w*rp)|(tr\w*p)', ctx.content, re.IGNORECASE)
+    torp_user = ctx.guild.get_member(torp_tag)
+    if s is not None and ctx.author is not torp_user:
         message = f'Server: {ctx.guild} | Channel: {ctx.channel}\n{ctx.author}: {ctx.content}'
         print(f'\'{s.group(0)}\'')
         print(message)
