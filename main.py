@@ -45,7 +45,7 @@ async def on_guild_join(guild):
 
 @bot.event
 async def on_ready():
-    game = discord.Game('with the boys')
+    game = discord.Activity(name='you', type=discord.ActivityType.watching)
     await bot.change_presence(status=discord.Status.online, activity=game)
     print(f'{datetime.now()}')
     print(f'Logged in as {bot.user.name}')
