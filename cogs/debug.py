@@ -14,97 +14,97 @@ class DebugCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command()  # ping command
+    @commands.command(pass_context=True)  # ping command
+    @commands.check(Vars.user_is_me)
     async def ping(self, ctx):
-        if ctx.author == ctx.guild.get_member(torp_tag):
-            await ctx.send('pong')
+        await ctx.send('pong')
 
     @commands.command()  # say args
+    @commands.check(Vars.user_is_me)
     async def say(self, ctx, *args):
-        if ctx.author == ctx.guild.get_member(torp_tag):
-            await ctx.send(' '.join(args))
+        await ctx.send(' '.join(args))
 
     @commands.command()  # just like say but in a specified channel
+    @commands.check(Vars.user_is_me)
     async def says(self, ctx, ch, *args):
-        if ctx.author == ctx.guild.get_member(torp_tag):
-            channel = self.bot.get_channel(int(ch))
-            await channel.send(' '.join(args))
+        channel = self.bot.get_channel(int(ch))
+        await channel.send(' '.join(args))
 
     @commands.command()  # says args in code block
+    @commands.check(Vars.user_is_me)
     async def get_args(self, ctx, *args):
-        if ctx.author == ctx.guild.get_member(torp_tag):
-            tag = ' '.join(args)
-            await ctx.send(f'`{tag}`')
+        tag = ' '.join(args)
+        await ctx.send(f'`{tag}`')
 
     @commands.command()  # get ctx.author member object
+    @commands.check(Vars.user_is_me)
     async def get_member(self, ctx):
-        if ctx.author == ctx.guild.get_member(torp_tag):
-            await ctx.send(ctx.author)
+        await ctx.send(ctx.author)
 
     @commands.command()  # get current server id
+    @commands.check(Vars.user_is_me)
     async def get_guild(self, ctx):
-        if ctx.author == ctx.guild.get_member(torp_tag):
-            await ctx.send(ctx.guild.id)
+        await ctx.send(ctx.guild.id)
 
     @commands.command()  # emote testing
+    @commands.check(Vars.user_is_me)
     async def test_emote(self, ctx, tag):
-        if ctx.author == ctx.guild.get_member(torp_tag):
-            await ctx.send('<a:Nig:557976066828926986>')
+        await ctx.send('<a:Nig:557976066828926986>')
 
     @commands.command()  # testing for regex functions
+    @commands.check(Vars.user_is_me)
     async def test_regex(self, ctx):
-        if ctx.author == ctx.guild.get_member(torp_tag):
-            author = re.search(r'(\s[^-"]*$)', ctx.message.content)
-            quote = re.search(r'("[^"]*")', ctx.message.content)
-            if author and quote:
-                await ctx.send(ctx.message.content)
-                await ctx.send(quote.group(0))
-                await ctx.send(author.group(0)[1:])
-            else:
-                await ctx.send('Wrong format')
+        author = re.search(r'(\s[^-"]*$)', ctx.message.content)
+        quote = re.search(r'("[^"]*")', ctx.message.content)
+        if author and quote:
+            await ctx.send(ctx.message.content)
+            await ctx.send(quote.group(0))
+            await ctx.send(author.group(0)[1:])
+        else:
+            await ctx.send('Wrong format')
 
     @commands.command()  # tests tenor gif
+    @commands.check(Vars.user_is_me)
     async def test_tenor(self, ctx):
-        if ctx.author == ctx.guild.get_member(torp_tag):
-            search = f'https://api.tenor.com/v1/search?q=ricardo&key={apikey}'  # searches tenor for ricardo with my apikey
-            get = requests.get(search)
-            if get.status_code == 200:  # get successful
-                json_search = get.json()
-                json_check = json_search['next']  # number of results, is string
-                if json_check == '0':
-                    await ctx.send('No gifs found.')
-                else:
-                    gif = random.randint(1, int(json_check))  # random gif from those found
-                    json_s = json_search['results']  # get the results
-                    table = json_s[gif]  # get the random gif
-                    table = table.get('media')  # go into media, various file types etc
-                    table = table[0]  # has to get the first element
-                    table = table.get('gif')  # get the gif element
-                    table = table.get('url')  # get url of gif
-                    await ctx.send(table)
-            elif get.status_code == 404:
-                await ctx.send('Error 404!')
+        search = f'https://api.tenor.com/v1/search?q=ricardo&key={apikey}'  # searches tenor for ricardo with my apikey
+        get = requests.get(search)
+        if get.status_code == 200:  # get successful
+            json_search = get.json()
+            json_check = json_search['next']  # number of results, is string
+            if json_check == '0':
+                await ctx.send('No gifs found.')
+            else:
+                gif = random.randint(1, int(json_check))  # random gif from those found
+                json_s = json_search['results']  # get the results
+                table = json_s[gif]  # get the random gif
+                table = table.get('media')  # go into media, various file types etc
+                table = table[0]  # has to get the first element
+                table = table.get('gif')  # get the gif element
+                table = table.get('url')  # get url of gif
+                await ctx.send(table)
+        elif get.status_code == 404:
+            await ctx.send('Error 404!')
 
     @commands.command()  # manually adds server where command was called
+    @commands.check(Vars.user_is_me)
     async def add_server_db(self, ctx):
-        if ctx.author == ctx.guild.get_member(torp_tag):
-            sql_modes.new_server(sv=ctx.guild.id, md='sfw')
-            print(f'Added \'{ctx.guild.id}\' to db\n\n')
+        sql_modes.new_server(sv=ctx.guild.id, md='sfw')
+        print(f'Added \'{ctx.guild.id}\' to db\n\n')
 
     @commands.command()  # sends query
+    @commands.check(Vars.user_is_me)
     async def query(self, ctx, *args):
-        if ctx.author == ctx.guild.get_member(torp_tag):
-            query = ' '.join(args)
-            sql_modes.send_query(query)
-            await ctx.send(f'Query `{query}` sent')
+        query = ' '.join(args)
+        sql_modes.send_query(query)
+        await ctx.send(f'Query `{query}` sent')
 
     @commands.command()  # leaves guild specified and prints in console
+    @commands.check(Vars.user_is_me)
     async def leave(self, ctx, arg):
-        if ctx.author == ctx.guild.get_member(torp_tag):
-            for server in self.bot.guilds:
-                if str(server.id) == str(arg):
-                    await server.leave()
-                    print(f'Left \'{server.name}\': {server.id}')
+        for server in self.bot.guilds:
+            if str(server.id) == str(arg):
+                await server.leave()
+                print(f'Left \'{server.name}\': {server.id}')
 
 
 def setup(bot):
