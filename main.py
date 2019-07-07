@@ -32,6 +32,24 @@ if __name__ == '__main__':
         bot.load_extension(cog)
 
 
+@bot.command(name='reload', hidden=True)
+# @checks.is_owner()
+async def _reload(ctx):
+    try:
+        for cog in cogs:
+            bot.unload_extension(cog)
+            bot.load_extension(cog)
+        await ctx.send('Cogs reloaded successfully!')
+    except Exception:
+        await ctx.send('An error occurred')
+
+
+# @commands.command()
+# async def reload_cogs(ctx):
+#     for cog in cogs:
+#         await _reload.invoke(cog)
+
+
 @bot.event  # prints message in console with name and id of guild joined
 async def on_guild_join(guild):
     print(f'Joined \'{guild.name}\': {guild.id}\n')
