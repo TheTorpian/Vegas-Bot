@@ -8,6 +8,7 @@ from sql import sql_modes
 
 vegas_bot_tag = Vars.vegas_bot_tag
 torp_tag = Vars.torp_tag
+f_dict = Vars.f_dict
 
 
 class SfwCog(commands.Cog):
@@ -104,6 +105,11 @@ class SfwCog(commands.Cog):
     @commands.command()  # sends you're welcome gif
     async def yw(self, ctx):
         await ctx.send('https://tenor.com/view/youre-welcome-maui-moana-gif-8323041')
+
+    @commands.command()  # sends a random f ascii art
+    async def f(self, ctx):
+        f = random.choice(list(f_dict))
+        await ctx.send(f_dict[f])
 
     @commands.Cog.listener()  # listener, checks every message
     async def on_message(self, ctx):
