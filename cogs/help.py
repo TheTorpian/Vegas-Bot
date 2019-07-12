@@ -21,6 +21,7 @@ class HelpCog(commands.Cog):
         commands['pro'] = ['Professionals have standards', '', '']
         commands['reee'] = ['Autistic screeching of the highest quality', '', '']
         commands['yw'] = ['What can I say except you\'re welcome!', '', '']
+        commands['f'] = ['Press F to pay respects', '', '']
         commands['rape, molest'] = ['Non consensual sex with your preferred person/object (nsfw only)', '<mention>', 'nsfw']
         commands['succ'] = ['Give someone of your choosing dat good succ (nsfw only)', '<mention>', 'nsfw']
         commands['fill'] = [';)) (nsfw only)', '<mention>', 'nsfw']
@@ -55,7 +56,7 @@ class HelpCog(commands.Cog):
                     msg += ' '
                 msg += f'{desc[0]}\n'  # add the description
             msg += f'''\n\n<required parameter>; [optional parameter]; \'...\' variable number of parameters; \'|\' OR operator\n
-This server\'s prefix is "{prefix}"
+This server\'s prefix is {prefix}
 Type {prefix}help [command] for more info on a command.```'''
 
         elif args[0] in commands:
@@ -70,7 +71,7 @@ Type {prefix}help [command] for more info on a command.```'''
     @commands.command(when_mentioned=True)
     async def prefix(self, ctx):  # get the prefix for this server
         prefix = sql_modes.get_prefix(ctx.guild.id)
-        await ctx.send(f'This server\'s prefix is "{prefix}"\nType {prefix}help to see a list of commands.')
+        await ctx.send(f'This server\'s prefix is `{prefix}`\nType {prefix}help to see a list of commands.')
 
     @commands.command()  # invite link
     async def invite(self, ctx):
