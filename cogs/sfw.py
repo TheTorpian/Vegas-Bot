@@ -66,17 +66,16 @@ class SfwCog(commands.Cog):
                 await ctx.send('You lost against... yourself?')
             else:
                 if torp_user.mentioned_in(ctx.message):  # I win if I get challenged
-                    outcome = 0
-                if torp_user == ctx.author:  # I win if I challenge
-                    outcome = 1
-                if outcome == 0:  # tagged user wins
-                    await ctx.send(f'{tag.display_name} won!')
-                    await ctx.send(f'{ctx.author.display_name} lost!')
-                elif outcome == 1:  # author wins
-                    await ctx.send(f'{ctx.author.display_name} won!')
-                    await ctx.send(f'{tag.display_name} lost!')
-                else:  # both lose
-                    await ctx.send(f'Both {ctx.author.display_name} and {tag.display_name} lost!')
+                    await ctx.send('dude it\'s rigged lmao')
+                else:
+                    if outcome == 0:  # tagged user wins
+                        await ctx.send(f'{tag.display_name} won!')
+                        await ctx.send(f'{ctx.author.display_name} lost!')
+                    elif outcome == 1:  # author wins
+                        await ctx.send(f'{ctx.author.display_name} won!')
+                        await ctx.send(f'{tag.display_name} lost!')
+                    else:  # both lose
+                        await ctx.send(f'Both {ctx.author.display_name} and {tag.display_name} lost!')
 
     @commands.command()  # checks mode of server where command was called
     async def check_nsfw(self, ctx):
