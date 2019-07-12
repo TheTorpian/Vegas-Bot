@@ -3,9 +3,11 @@ from datetime import datetime
 from discord.ext import commands
 from sql import sql_modes
 from tokenfile import Vars
+import subprocess
 
 TOKEN = Vars.TOKEN
 torp_tag = Vars.torp_tag
+restart_bat = Vars.restart_bat
 
 
 def get_prefix(bot, message):
@@ -32,8 +34,8 @@ if __name__ == '__main__':
         bot.load_extension(cog)
 
 
-@bot.command(name='reload', hidden=True)
-# @checks.is_owner()
+@bot.command(name='reload', pass_context=True)
+@commands.check(Vars.user_is_me)
 async def _reload(ctx):
     try:
         for cog in cogs:
@@ -44,10 +46,12 @@ async def _reload(ctx):
         await ctx.send('An error occurred')
 
 
-# @commands.command()
-# async def reload_cogs(ctx):
-#     for cog in cogs:
-#         await _reload.invoke(cog)
+@bot.command(name='restart', pass_context=True)
+@commands.check(Vars.user_is_me)
+async def _restart(ctx):
+    print('Logging out...\n')
+    subprocess.call(restart_bat)
+    await bot.logout()
 
 
 @bot.event  # prints message in console with name and id of guild joined
@@ -63,7 +67,7 @@ async def on_guild_join(guild):
 
 @bot.event
 async def on_ready():
-    game = discord.Activity(name='you', type=discord.ActivityType.watching)
+    game = discord.Activity(name='frag montages', type=discord.ActivityType.watching)
     await bot.change_presence(status=discord.Status.online, activity=game)
     print(f'{datetime.now()}')
     print(f'Logged in as {bot.user.name}')
@@ -72,4 +76,4 @@ async def on_ready():
         print(f'{server.name}: {server.id}')
     print(f'\n{sql_modes.db}\n\n')
 
-bot.run(TOKEN, reconnect=True)
+bot.run(TOKEN, bot=True, reconnect=True)
