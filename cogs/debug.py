@@ -19,39 +19,39 @@ class DebugCog(commands.Cog):
     async def ping(self, ctx):
         await ctx.send('pong')
 
-    @commands.command()  # say args
+    @commands.command(pass_context=True)  # say args
     @commands.check(Vars.user_is_me)
     async def say(self, ctx, *args):
         await ctx.send(' '.join(args))
 
-    @commands.command()  # just like say but in a specified channel
+    @commands.command(pass_context=True)  # just like say but in a specified channel
     @commands.check(Vars.user_is_me)
     async def says(self, ctx, ch, *args):
         channel = self.bot.get_channel(int(ch))
         await channel.send(' '.join(args))
 
-    @commands.command()  # says args in code block
+    @commands.command(pass_context=True)  # says args in code block
     @commands.check(Vars.user_is_me)
     async def get_args(self, ctx, *args):
         tag = ' '.join(args)
         await ctx.send(f'`{tag}`')
 
-    @commands.command()  # get ctx.author member object
+    @commands.command(pass_context=True)  # get ctx.author member object
     @commands.check(Vars.user_is_me)
     async def get_member(self, ctx):
         await ctx.send(ctx.author)
 
-    @commands.command()  # get current server id
+    @commands.command(pass_context=True)  # get current server id
     @commands.check(Vars.user_is_me)
     async def get_guild(self, ctx):
         await ctx.send(ctx.guild.id)
 
-    @commands.command()  # emote testing
+    @commands.command(pass_context=True)  # emote testing
     @commands.check(Vars.user_is_me)
     async def test_emote(self, ctx, tag):
         await ctx.send('<a:Nig:557976066828926986>')
 
-    @commands.command()  # testing for regex functions
+    @commands.command(pass_context=True)  # testing for regex functions
     @commands.check(Vars.user_is_me)
     async def test_regex(self, ctx):
         author = re.search(r'(\s[^-"]*$)', ctx.message.content)
@@ -63,7 +63,7 @@ class DebugCog(commands.Cog):
         else:
             await ctx.send('Wrong format')
 
-    @commands.command()  # tests tenor gif
+    @commands.command(pass_context=True)  # tests tenor gif
     @commands.check(Vars.user_is_me)
     async def test_tenor(self, ctx):
         search = f'https://api.tenor.com/v1/search?q=ricardo&key={apikey}'  # searches tenor for ricardo with my apikey
@@ -85,20 +85,20 @@ class DebugCog(commands.Cog):
         elif get.status_code == 404:
             await ctx.send('Error 404!')
 
-    @commands.command()  # manually adds server where command was called
+    @commands.command(pass_context=True)  # manually adds server where command was called
     @commands.check(Vars.user_is_me)
     async def add_server_db(self, ctx):
         sql_modes.new_server(sv=ctx.guild.id, md='sfw')
         print(f'Added \'{ctx.guild.id}\' to db\n\n')
 
-    @commands.command()  # sends query
+    @commands.command(pass_context=True)  # sends query
     @commands.check(Vars.user_is_me)
     async def query(self, ctx, *args):
         query = ' '.join(args)
         sql_modes.send_query(query)
         await ctx.send(f'Query `{query}` sent')
 
-    @commands.command()  # leaves guild specified and prints in console
+    @commands.command(pass_context=True)  # leaves guild specified and prints in console
     @commands.check(Vars.user_is_me)
     async def leave(self, ctx, arg):
         for server in self.bot.guilds:
