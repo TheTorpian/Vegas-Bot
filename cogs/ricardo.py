@@ -23,12 +23,7 @@ class RicardoCog(commands.Cog):
             else:
                 rand_gif = random.randint(1, int(json_check))  # random gif from those found
                 json_s = json_search['results']  # get the results
-                # gif = json_s[rand_gif]  # get the random gif
-                # gif = gif.get('media')  # go into media, various file types etc
-                # gif = gif[0]  # has to get the first element
-                # gif = gif.get('gif')  # get the gif element
-                # gif = gif.get('url')  # get url of gif
-                gif = json_s[rand_gif].get('media')[0].get('gif').get('url')  # same thing but one line
+                gif = json_s[rand_gif].get('media')[0].get('gif').get('url')  # get the actual gif
                 await ctx.send(gif)  # finally send the fuckin thing
         elif get.status_code == 404:
             await ctx.send('Error 404!')
