@@ -34,7 +34,7 @@ if __name__ == '__main__':
         bot.load_extension(cog)
 
 
-@bot.command(name='reload', pass_context=True)
+@bot.command(name='reload', pass_context=True)  # reloads all cogs
 @commands.check(Vars.user_is_me)
 async def _reload(ctx):
     try:
@@ -46,12 +46,12 @@ async def _reload(ctx):
         await ctx.send('An error occurred')
 
 
-@bot.command(name='restart', pass_context=True)
+@bot.command(name='restart', pass_context=True)  # restarts bot app
 @commands.check(Vars.user_is_me)
 async def _restart(ctx):
     print('Logging out...\n')
-    subprocess.call(restart_bat)
-    await bot.logout()
+    subprocess.call(restart_bat)  # calls batch file (it runs the main .py file)
+    await bot.logout()  # logs out the app
 
 
 @bot.event  # prints message in console with name and id of guild joined
@@ -67,7 +67,7 @@ async def on_guild_join(guild):
 
 @bot.event
 async def on_ready():
-    game = discord.Activity(name='frag montages', type=discord.ActivityType.watching)
+    game = discord.Activity(name='Torp wasting his life', type=discord.ActivityType.watching)
     await bot.change_presence(status=discord.Status.online, activity=game)
     print(f'{datetime.now()}')
     print(f'Logged in as {bot.user.name}')
