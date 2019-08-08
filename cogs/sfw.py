@@ -1,5 +1,6 @@
 import re
 import random
+import requests
 import discord
 from datetime import datetime
 from discord.ext import commands
@@ -8,6 +9,7 @@ from sql import sql_modes
 
 vegas_bot_tag = Vars.vegas_bot_tag
 torp_tag = Vars.torp_tag
+apikey = Vars.apikey
 f_dict = Vars.f_dict
 
 
@@ -110,6 +112,27 @@ class SfwCog(commands.Cog):
     async def f(self, ctx):
         f = random.choice(list(f_dict))
         await ctx.send(f_dict[f])
+
+    @commands.command()
+    async def lee_banned(self, ctx):
+        await ctx.send('https://giphy.com/gifs/S451Y846IMnWwKDKug')
+
+    @commands.command()  # random banned gif
+    async def banned(self, ctx):
+        search = f'https://api.tenor.com/v1/search?q=banned&key={apikey}'  # searches tenor for banned gifs with my apikey
+        get = requests.get(search)
+        if get.status_code == 200:  # get successful
+            json_search = get.json()
+            json_check = json_search['next']  # number of results, is string
+            if json_check == '0':
+                await ctx.send('No gifs found.')
+            else:
+                rand_gif = random.randint(1, int(json_check))  # random gif from those found
+                json_s = json_search['results']  # get the results
+                gif = json_s[rand_gif].get('media')[0].get('gif').get('url')  # get the actual gif
+                await ctx.send(gif)  # finally send the fuckin thing
+        elif get.status_code == 404:
+            await ctx.send('Error 404!')
 
     @commands.Cog.listener()  # listener, checks every message
     async def on_message(self, ctx):
