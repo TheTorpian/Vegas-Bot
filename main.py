@@ -49,6 +49,8 @@ async def _reload(ctx):
 @bot.command(name='restart', pass_context=True)  # restarts bot app
 @commands.check(Vars.user_is_me)
 async def _restart(ctx):
+    channel = bot.get_channel(581478717046521880)
+    await channel.send('Restarting...')
     print('Logging out...\n')
     subprocess.call(restart_bat)  # calls batch file (it runs the main .py file)
     await bot.logout()  # logs out the app
@@ -75,5 +77,7 @@ async def on_ready():
     for server in bot.guilds:
         print(f'{server.name}: {server.id}')
     print(f'\n{sql_modes.db}\n\n')
+    channel = bot.get_channel(581478717046521880)
+    await channel.send('Ready!')
 
 bot.run(TOKEN, bot=True, reconnect=True)
