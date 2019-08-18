@@ -20,11 +20,9 @@ class QuotesCog(commands.Cog):
                 quote_nr -= 1
             quote = quotes[quote_nr]
             time = quote[3].strftime(tformat)
-            await ctx.send(quote_nr)
             str_quote = f'Quote #{quote_nr+1}: {quote[2]} - {quote[1]} ({time})'
             await ctx.send(str_quote)
         except IndexError:
-            await ctx.send(quote_nr)
             await ctx.send('No quote found')
 
     @commands.command()  # adds quote for server
