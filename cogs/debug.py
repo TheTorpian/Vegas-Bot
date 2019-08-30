@@ -3,7 +3,7 @@ import requests
 import random
 from discord.ext import commands
 from tokenfile import Vars
-from sql import sql_modes
+# from sql import sql_modes
 
 vegas_bot_tag = Vars.vegas_bot_tag
 torp_tag = Vars.torp_tag
@@ -74,29 +74,25 @@ class DebugCog(commands.Cog):
             if json_check == '0':
                 await ctx.send('No gifs found.')
             else:
-                gif = random.randint(1, int(json_check))  # random gif from those found
+                rand_gif = random.randint(1, int(json_check))  # random gif from those found
                 json_s = json_search['results']  # get the results
-                table = json_s[gif]  # get the random gif
-                table = table.get('media')  # go into media, various file types etc
-                table = table[0]  # has to get the first element
-                table = table.get('gif')  # get the gif element
-                table = table.get('url')  # get url of gif
-                await ctx.send(table)
+                gif = json_s[rand_gif].get('media')[0].get('gif').get('url')  # get the actual gif
+                await ctx.send(gif)  # finally send the fuckin thing
         elif get.status_code == 404:
             await ctx.send('Error 404!')
 
-    @commands.command(pass_context=True)  # manually adds server where command was called
-    @commands.check(Vars.user_is_me)
-    async def add_server_db(self, ctx):
-        sql_modes.new_server(sv=ctx.guild.id, md='sfw')
-        print(f'Added \'{ctx.guild.id}\' to db\n\n')
+    # @commands.command(pass_context=True)  # manually adds server where command was called
+    # @commands.check(Vars.user_is_me)
+    # async def add_server_db(self, ctx):
+    #     sql_modes.new_server(sv=ctx.guild.id, md='sfw')
+    #     print(f'Added \'{ctx.guild.id}\' to db\n\n')
 
-    @commands.command(pass_context=True)  # sends query
-    @commands.check(Vars.user_is_me)
-    async def query(self, ctx, *args):
-        query = ' '.join(args)
-        sql_modes.send_query(query)
-        await ctx.send(f'Query `{query}` sent')
+    # @commands.command(pass_context=True)  # sends query
+    # @commands.check(Vars.user_is_me)
+    # async def query(self, ctx, *args):
+    #     query = ' '.join(args)
+    #     sql_modes.send_query(query)
+    #     await ctx.send(f'Query `{query}` sent')
 
     @commands.command(pass_context=True)  # leaves guild specified and prints in console
     @commands.check(Vars.user_is_me)

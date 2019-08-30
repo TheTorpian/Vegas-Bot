@@ -5,7 +5,7 @@ import discord
 from datetime import datetime
 from discord.ext import commands
 from tokenfile import Vars
-from sql import sql_modes
+# from sql import sql_modes
 
 vegas_bot_tag = Vars.vegas_bot_tag
 torp_tag = Vars.torp_tag
@@ -80,13 +80,13 @@ class SfwCog(commands.Cog):
                     else:  # both lose
                         await ctx.send(f'Both {ctx.author.display_name} and {tag.display_name} lost!')
 
-    @commands.command()  # checks mode of server where command was called
-    async def check_nsfw(self, ctx):
-        mode = sql_modes.check_mode(sv=ctx.guild.id)[0][0]   # returns list of tuples, use double index to get actual values
-        if mode == 'nsfw':
-            await ctx.send('I can be very naughty :))')
-        else:
-            await ctx.send('I\'m innocent, I swear')
+    # @commands.command()  # checks mode of server where command was called
+    # async def check_nsfw(self, ctx):
+    #     mode = sql_modes.check_mode(sv=ctx.guild.id)[0][0]   # returns list of tuples, use double index to get actual values
+    #     if mode == 'nsfw':
+    #         await ctx.send('I can be very naughty :))')
+    #     else:
+    #         await ctx.send('I\'m innocent, I swear')
 
     @commands.command()  # banan
     async def banana(self, ctx):

@@ -11,7 +11,7 @@ class QuotesCog(commands.Cog):
         self.bot = bot
 
     @commands.command()  # gets a random or selected quote from server
-    async def quote(self, ctx, quote_nr = 0):
+    async def quote(self, ctx, quote_nr=0):
         try:
             quotes = sql_quotes.get_quote(ctx.guild.id)
             if quote_nr == 0:  # if arg is 0 or is command is called without args
