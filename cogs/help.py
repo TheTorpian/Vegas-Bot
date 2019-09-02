@@ -10,7 +10,7 @@ class HelpCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(when_mentioned=True)
+    @commands.command(when_mentioned=True, aliases=['commands'])
     async def help(self, ctx, *args):
         commands = OrderedDict()
         commands['touch'] = ['Touchy touchy', '<mention>', '']
@@ -38,7 +38,7 @@ class HelpCog(commands.Cog):
         # commands['check_nsfw'] = ['Checks if nsfw is enabled on this server or not', '', '']
         # commands['nsfw'] = ['Turns nsfw mode on or off (admin only)', '<on|off>', '']
         # commands['change_prefix'] = ['Changes the command prefix on this server (admin only)', '<prefix>', '']
-        commands['help'] = ['It\'s this command', '[command]', '']
+        commands['help, commands'] = ['It\'s this command', '[command]', '']
         commands['invite'] = ['Get the invite link', '', '']
 
         # mode = sql_modes.check_mode(sv=ctx.guild.id)[0][0]   # returns list of tuples, use double index to get actual values
@@ -77,7 +77,7 @@ Database is down, idk when it's gonna be back up, some functionality won't be av
     @commands.command(when_mentioned=True)
     async def prefix(self, ctx):  # get the prefix for this server
         # prefix = sql_modes.get_prefix(ctx.guild.id)
-        prefix = '.'
+        prefix = 'v!'
         await ctx.send(f'This server\'s prefix is `{prefix}`\nType {prefix}help to see a list of commands.')
 
     @commands.command()  # invite link
