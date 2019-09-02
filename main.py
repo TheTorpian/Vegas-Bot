@@ -12,7 +12,7 @@ restart_bat = Vars.restart_bat
 
 def get_prefix(bot, message):
     # prefix = sql_modes.get_prefix(message.guild.id)
-    prefix = '.'
+    prefix = 'v!'
     return commands.when_mentioned_or(prefix)(bot, message)
 
 
@@ -50,8 +50,8 @@ async def _reload(ctx):
 @bot.command(name='restart', pass_context=True)  # restarts bot app
 @commands.check(Vars.user_is_me)
 async def _restart(ctx):
-    channel = bot.get_channel(581478717046521880)
-    await channel.send('Restarting...')
+    # channel = bot.get_channel(581478717046521880)
+    await ctx.send('Restarting...')
     print('Logging out...\n')
     subprocess.call(restart_bat)  # calls batch file (it runs the main .py file)
     await bot.logout()  # logs out the app
@@ -70,7 +70,7 @@ async def on_guild_join(guild):
 
 @bot.event
 async def on_ready():
-    game = discord.Activity(name='Database is down pls be pacient', type=discord.ActivityType.watching)
+    game = discord.Activity(name='I\'m half broken pls be pacient', type=discord.ActivityType.playing)
     await bot.change_presence(status=discord.Status.online, activity=game)
     print(f'{datetime.now()}')
     print(f'Logged in as {bot.user.name}')
