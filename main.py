@@ -1,7 +1,7 @@
 import discord
 from datetime import datetime
 from discord.ext import commands
-# from sql import sql_modes
+from sql import sql_modes
 from tokenfile import Vars
 import subprocess
 
@@ -11,18 +11,18 @@ restart_bat = Vars.restart_bat
 
 
 def get_prefix(bot, message):
-    # prefix = sql_modes.get_prefix(message.guild.id)
+    prefix = sql_modes.get_prefix(message.guild.id)
     prefix = 'v!'
     return commands.when_mentioned_or(prefix)(bot, message)
 
 
 cogs = [
     'cogs.sfw',
-    # 'cogs.nsfw',
-    # 'cogs.quotes',
+    'cogs.nsfw',
+    'cogs.quotes',
     'cogs.ricardo',
     'cogs.help',
-    # 'cogs.admin',
+    'cogs.admin',
     'cogs.debug',
     'cogs.error_handler'
 ]
@@ -50,8 +50,8 @@ async def _reload(ctx):
 @bot.command(name='restart', pass_context=True)  # restarts bot app
 @commands.check(Vars.user_is_me)
 async def _restart(ctx):
-    # channel = bot.get_channel(581478717046521880)
-    await ctx.send('Restarting...')
+    channel = bot.get_channel(581478717046521880)
+    await channel.send('Restarting...')
     print('Logging out...\n')
     subprocess.call(restart_bat)  # calls batch file (it runs the main .py file)
     await bot.logout()  # logs out the app
@@ -60,7 +60,7 @@ async def _restart(ctx):
 @bot.event  # prints message in console with name and id of guild joined
 async def on_guild_join(guild):
     print(f'Joined \'{guild.name}\': {guild.id}\n')
-    # sql_modes.new_server(sv=str(guild.id), md='sfw')
+    sql_modes.new_server(sv=str(guild.id), md='sfw')
     print(f'Added \'{guild.id}\' to db\n')
     print('Current servers:')
     for server in bot.guilds:
